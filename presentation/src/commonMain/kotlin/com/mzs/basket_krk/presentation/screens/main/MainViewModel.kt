@@ -1,7 +1,7 @@
 package com.mzs.basket_krk.presentation.screens.main
 
 import androidx.lifecycle.ViewModel
-import com.mzs.basket_krk.domain.model.MainTab
+import com.mzs.basket_krk.presentation.navigation.MainTab
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 

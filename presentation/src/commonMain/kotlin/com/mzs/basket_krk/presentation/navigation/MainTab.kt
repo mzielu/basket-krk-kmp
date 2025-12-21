@@ -1,4 +1,4 @@
-package com.mzs.basket_krk.domain.model
+package com.mzs.basket_krk.presentation.navigation
 
 enum class MainTab {
     MATCHES,

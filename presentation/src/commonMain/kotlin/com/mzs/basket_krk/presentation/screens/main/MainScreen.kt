@@ -23,7 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import com.mzs.basket_krk.domain.model.MainTab
+import com.mzs.basket_krk.presentation.navigation.MainTab
 import com.mzs.basket_krk.presentation.base.ui.ActionBar
 import com.mzs.basket_krk.presentation.screens.main.matches.MatchesScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -31,9 +31,6 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MainScreen(
-    onNavigateToDummyScreen: (String) -> Unit,
-    onNavigateToSettings: () -> Unit,
-    onNavigateToAlerts: () -> Unit,
     viewModel: MainViewModel = koinViewModel(),
 ) {
     val selectedTab by viewModel.selectedTab.collectAsState()
@@ -49,8 +46,6 @@ fun MainScreen(
                 MainTab.MORE -> Text("HELP_CENTER()")
             }
         },
-        onSettingsClick = onNavigateToSettings,
-        onAlertsClick = onNavigateToAlerts,
     )
 }
 
@@ -59,8 +54,6 @@ fun MainContent(
     selectedTab: MainTab,
     onTabSelected: (MainTab) -> Unit,
     contentFactory: @Composable (MainTab) -> Unit,
-    onSettingsClick: () -> Unit,
-    onAlertsClick: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
@@ -68,13 +61,13 @@ fun MainContent(
             ActionBar(
                 titleText = "test",
                 actions = {
-                    IconButton(onClick = onAlertsClick) {
+                    IconButton(onClick = {  }) {
                         Icon(
                             Icons.Outlined.Notifications,
                             contentDescription = "test",
                         )
                     }
-                    IconButton(onClick = onSettingsClick) {
+                    IconButton(onClick = {  }) {
                         Icon(
                             Icons.Outlined.AccountCircle,
                             contentDescription = "test",
@@ -116,8 +109,6 @@ fun MainContentPreview() {
     MainContent(
         selectedTab = MainTab.MATCHES,
         onTabSelected = {},
-        onSettingsClick = {},
-        onAlertsClick = {},
         contentFactory = { tab ->
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text("Fake content for: ${tab.name}")

@@ -1,6 +1,7 @@
 package com.mzs.basket_krk.shared.di
 
 import com.mzs.basket_krk.data.di.dataModule
+import com.mzs.basket_krk.presentation.di.presentationModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
@@ -9,5 +10,5 @@ fun initKoin(
 ) = startKoin {
     appDeclaration()
 
-    modules(dataModule)
+    modules(dataModule, presentationModule)
 }
