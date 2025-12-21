@@ -23,6 +23,9 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+            // kotlinx datetime
+            implementation(libs.kotlinx.datetime)
+
             // koin
             implementation(libs.koin.compose.viewmodel)
 
