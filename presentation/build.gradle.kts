@@ -37,6 +37,8 @@ kotlin {
 
             // navigation
             implementation(libs.navigation.compose)
+
+            implementation("co.touchlab:kermit:2.0.8")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

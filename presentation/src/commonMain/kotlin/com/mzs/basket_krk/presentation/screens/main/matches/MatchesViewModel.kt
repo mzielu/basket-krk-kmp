@@ -3,6 +3,7 @@ package com.mzs.basket_krk.presentation.screens.main.matches
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import com.mzs.basket_krk.domain.base.onSuspendGeneralError
 import com.mzs.basket_krk.domain.base.onSuspendSuccess
 import com.mzs.basket_krk.domain.model.Failure
@@ -58,6 +59,7 @@ class MatchesViewModel(
                         )
                     }
                 }.onSuspendGeneralError { error ->
+                    Logger.e("Error when fetching data", error)
                     _viewState.update { it.copy(error = error, fullScreenLoading = false) }
                 }
         }

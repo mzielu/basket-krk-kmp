@@ -71,7 +71,7 @@ fun MatchesContent(
 @Preview
 fun MatchesScreenPreview() {
         MatchesContent(
-            viewState = MatchesViewState(),
+            viewState = MatchesViewState(fullScreenLoading = true),
             onRefresh = {},
         )
 }

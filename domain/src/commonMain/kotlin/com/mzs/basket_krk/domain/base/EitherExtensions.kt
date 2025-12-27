@@ -35,4 +35,6 @@ fun <L : Error, R> Either<L, R>.rightOrThrow(): R =
     )
 
 inline fun <T> Either.Companion.catchWithError(f: () -> T): Either<Failure, T> =
-    catch(f).mapLeft { it as? Failure ?: Failure.UnknownError }
+    catch(f).mapLeft {
+        it as? Failure ?: Failure.UnknownError(it)
+    }

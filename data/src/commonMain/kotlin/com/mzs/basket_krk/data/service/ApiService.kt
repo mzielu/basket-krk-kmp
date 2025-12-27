@@ -23,6 +23,6 @@ class ApiService(
     }
 
     companion object {
-        const val BASE_URL = "https://example.com"
+        const val BASE_URL = "http://130.61.230.255:8000/"
     }
 }

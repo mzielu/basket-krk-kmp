@@ -1,13 +1,14 @@
 package com.mzs.basket_krk.domain.model
 
 sealed class Failure : Throwable() {
-    data object UnknownError : Failure()
+    data class UnknownError(val throwable: Throwable) : Failure()
 
-    sealed class ApiError : Failure() {
-        data object NetworkError : ApiError()
+    data object OldVersionError : Failure()
 
-        data object UnknownApiError : ApiError()
+    data object NoDataAvailableError : Failure()
 
-        data class HttpError(val code: Int, val errorBody: String) : ApiError()
-    }
+    data class ApiError(val errorType: String) : Failure()
+
+    data object NetworkConnectionError : Failure()
+
 }
