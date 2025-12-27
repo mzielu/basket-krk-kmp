@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.presentation.base.ui.DropdownFormField
+import com.mzs.basket_krk.presentation.screens.main.matches.components.MatchListItem
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -91,34 +93,41 @@ fun MatchesContent(
                             )
                         }
 
-                    }
 
+                        LazyColumn {
+                            items(viewState.matches.size) { index ->
+                                val match = viewState.matches[index]
+                                MatchListItem(match = match, onClick = {})
+                            }
+                        }
+
+                    }
                 }
             }
         }
     }
-}
 
 
-@Composable
-@Preview
-fun MatchesScreenPreview() {
-    val selectedSeason = Season(id = 1, num = 23)
-    val selectedRound = Round(id = 1, name = "Round 1", date = LocalDate(2025, 1, 1))
-    MatchesContent(
-        viewState = MatchesViewState(
-            rounds = listOf(
-                selectedRound,
-                Round(id = 2, name = "Round 2", date = LocalDate(2025, 1, 15))
+    @Composable
+    @Preview
+    fun MatchesScreenPreview() {
+        val selectedSeason = Season(id = 1, num = 23)
+        val selectedRound = Round(id = 1, name = "Round 1", date = LocalDate(2025, 1, 1))
+        MatchesContent(
+            viewState = MatchesViewState(
+                rounds = listOf(
+                    selectedRound,
+                    Round(id = 2, name = "Round 2", date = LocalDate(2025, 1, 15))
+                ),
+                selectedRound = selectedRound,
+                seasons = listOf(
+                    selectedSeason
+                ),
+                selectedSeason = selectedSeason
             ),
-            selectedRound = selectedRound,
-            seasons = listOf(
-                selectedSeason
-            ),
-            selectedSeason = selectedSeason
-        ),
-        onRefresh = {},
-        onRoundSelected = {},
-        onSeasonSelected = {}
-    )
+            onRefresh = {},
+            onRoundSelected = {},
+            onSeasonSelected = {}
+        )
+    }
 }

@@ -7,8 +7,10 @@ import co.touchlab.kermit.Logger
 import com.mzs.basket_krk.domain.base.onSuspendGeneralError
 import com.mzs.basket_krk.domain.base.onSuspendSuccess
 import com.mzs.basket_krk.domain.model.Failure
+import com.mzs.basket_krk.domain.model.Match
 import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
+import com.mzs.basket_krk.domain.usecase.GetMatches
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfo
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,6 +29,7 @@ import kotlin.time.ExperimentalTime
 
 class MatchesViewModel(
     private val getSeasonsInfo: GetSeasonsInfo,
+    private val getMatches: GetMatches
 ) : ViewModel() {
     private val _viewState: MutableStateFlow<MatchesViewState> =
         MutableStateFlow(MatchesViewState())
@@ -60,18 +63,43 @@ class MatchesViewModel(
 
                     val sortedSeasons = info.seasons.sortedByDescending { it.num }
                     val sortedRounds = info.rounds.sortedByDescending { it.date }
+                    val selectedRound = getClosestRound(info.rounds)
 
                     _viewState.update {
                         it.copy(
                             seasons = sortedSeasons,
                             rounds = sortedRounds,
                             selectedSeason = sortedSeasons.firstOrNull(),
-                            selectedRound = getClosestRound(info.rounds),
+                            selectedRound = selectedRound,
+                            fullScreenLoading = false
+                        )
+                    }
+
+                    selectedRound?.let {
+                        getMatchesForRound(it.id)
+                    }
+
+                }.onSuspendGeneralError { error ->
+                    Logger.e("Error when fetching data", error)
+                    _viewState.update { it.copy(error = error, fullScreenLoading = false) }
+                }
+        }
+    }
+
+    private fun getMatchesForRound(roundId: Int) {
+        _viewState.update { it.copy(fullScreenLoading = true, matches = emptyList()) }
+
+        viewModelScope.launch {
+            getMatches(roundId)
+                .onSuspendSuccess { matches ->
+                    _viewState.update {
+                        it.copy(
+                            matches = matches,
                             fullScreenLoading = false
                         )
                     }
                 }.onSuspendGeneralError { error ->
-                    Logger.e("Error when fetching data", error)
+                    Logger.e("Error when fetching matches for round $roundId", error)
                     _viewState.update { it.copy(error = error, fullScreenLoading = false) }
                 }
         }
@@ -94,6 +122,7 @@ data class MatchesViewState(
     val fullScreenLoading: Boolean = false,
     val seasons: List<Season> = emptyList(),
     val rounds: List<Round> = emptyList(),
+    val matches: List<Match> = emptyList(),
     val selectedSeason: Season? = null,
     val selectedRound: Round? = null,
     val error: Failure? = null

@@ -39,6 +39,10 @@ kotlin {
             implementation(libs.navigation.compose)
 
             implementation("co.touchlab:kermit:2.0.8")
+
+            // coil
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor3)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -1,5 +1,7 @@
 package com.mzs.basket_krk.presentation.di
 
+import com.mzs.basket_krk.domain.usecase.GetMatches
+import com.mzs.basket_krk.domain.usecase.GetMatchesUseCase
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfo
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfoUseCase
 import com.mzs.basket_krk.presentation.screens.main.MainViewModel
@@ -10,6 +12,7 @@ import org.koin.dsl.module
 val presentationModule = module {
     // use cases
     single<GetSeasonsInfo> { GetSeasonsInfoUseCase(get()) }
+    single<GetMatches> { GetMatchesUseCase(get()) }
 
     // view models
     viewModelOf(::MainViewModel)
