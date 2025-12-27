@@ -21,10 +21,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.mzs.basket_krk.domain.model.Match
 import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.presentation.base.ui.DropdownFormField
 import com.mzs.basket_krk.presentation.screens.main.matches.components.MatchListItem
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -32,9 +37,11 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun MatchesScreen(viewModel: MatchesViewModel = koinViewModel()) {
     val viewState by viewModel.viewState.collectAsState()
+    val matchesPagingItems = viewModel.pagingFlow.collectAsLazyPagingItems()
 
     MatchesContent(
-        viewState,
+        viewState = viewState,
+        matchesPagingItems = matchesPagingItems,
         onRoundSelected = viewModel::onRoundSelected,
         onSeasonSelected = viewModel::onSeasonSelected,
         onRefresh = viewModel::onRefresh
@@ -44,6 +51,7 @@ fun MatchesScreen(viewModel: MatchesViewModel = koinViewModel()) {
 @Composable
 fun MatchesContent(
     viewState: MatchesViewState,
+    matchesPagingItems: LazyPagingItems<Match>,
     onRoundSelected: (Round) -> Unit,
     onSeasonSelected: (Season) -> Unit,
     onRefresh: () -> Unit,
@@ -93,14 +101,13 @@ fun MatchesContent(
                             )
                         }
 
-
-                        LazyColumn {
-                            items(viewState.matches.size) { index ->
-                                val match = viewState.matches[index]
-                                MatchListItem(match = match, onClick = {})
+                        LazyColumn(Modifier.fillMaxSize()) {
+                            items(matchesPagingItems.itemCount) { index ->
+                                matchesPagingItems[index]?.let { match ->
+                                    MatchListItem(match = match, onClick = {})
+                                }
                             }
                         }
-
                     }
                 }
             }
@@ -111,6 +118,9 @@ fun MatchesContent(
     @Composable
     @Preview
     fun MatchesScreenPreview() {
+        val pagingData = PagingData.from(emptyList<Match>())
+        val lazyPagingItems = MutableStateFlow(pagingData).collectAsLazyPagingItems()
+
         val selectedSeason = Season(id = 1, num = 23)
         val selectedRound = Round(id = 1, name = "Round 1", date = LocalDate(2025, 1, 1))
         MatchesContent(
@@ -127,7 +137,8 @@ fun MatchesContent(
             ),
             onRefresh = {},
             onRoundSelected = {},
-            onSeasonSelected = {}
+            onSeasonSelected = {},
+            matchesPagingItems = lazyPagingItems
         )
     }
 }

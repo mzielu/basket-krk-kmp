@@ -6,10 +6,16 @@ import com.mzs.basket_krk.domain.model.Failure
 import com.mzs.basket_krk.domain.model.Match
 import com.mzs.basket_krk.domain.repository.MatchRepository
 
-interface GetMatches : SuspendInOutUseCase<Int, Either<Failure, List<Match>>>
+interface GetMatches : SuspendInOutUseCase<GetMatchesUseCase.Input, Either<Failure, List<Match>>>
 
 class GetMatchesUseCase(private val matchRepository: MatchRepository) : GetMatches {
-    override suspend fun invoke(input: Int): Either<Failure, List<Match>> {
-        return matchRepository.getMatches(input)
+    override suspend fun invoke(input: Input): Either<Failure, List<Match>> {
+        return matchRepository.getMatches(input.roundId)
     }
+
+    data class Input(
+        val roundId: Int,
+        val page: Int,
+        val pageSize: Int
+    )
 }

@@ -3,6 +3,10 @@ package com.mzs.basket_krk.presentation.screens.main.matches
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import co.touchlab.kermit.Logger
 import com.mzs.basket_krk.domain.base.onSuspendGeneralError
 import com.mzs.basket_krk.domain.base.onSuspendSuccess
@@ -12,6 +16,8 @@ import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.domain.usecase.GetMatches
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfo
+import com.mzs.basket_krk.presentation.screens.main.matches.pagination.BaseMatchesPagingSourceFactory
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -29,7 +35,7 @@ import kotlin.time.ExperimentalTime
 
 class MatchesViewModel(
     private val getSeasonsInfo: GetSeasonsInfo,
-    private val getMatches: GetMatches
+    private val matchesPagingSourceFactory: BaseMatchesPagingSourceFactory
 ) : ViewModel() {
     private val _viewState: MutableStateFlow<MatchesViewState> =
         MutableStateFlow(MatchesViewState())
@@ -37,6 +43,15 @@ class MatchesViewModel(
 
     private val _effect: MutableSharedFlow<MatchesEffect> = MutableSharedFlow()
     val effect: SharedFlow<MatchesEffect> = _effect.asSharedFlow()
+
+    val pagingFlow: Flow<PagingData<Match>> by lazy {
+        Pager(
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = {
+                matchesPagingSourceFactory.create(10, 580)
+            },
+        ).flow.cachedIn(viewModelScope)
+    }
 
     init {
         fetchData()
@@ -74,32 +89,8 @@ class MatchesViewModel(
                             fullScreenLoading = false
                         )
                     }
-
-                    selectedRound?.let {
-                        getMatchesForRound(it.id)
-                    }
-
                 }.onSuspendGeneralError { error ->
                     Logger.e("Error when fetching data", error)
-                    _viewState.update { it.copy(error = error, fullScreenLoading = false) }
-                }
-        }
-    }
-
-    private fun getMatchesForRound(roundId: Int) {
-        _viewState.update { it.copy(fullScreenLoading = true, matches = emptyList()) }
-
-        viewModelScope.launch {
-            getMatches(roundId)
-                .onSuspendSuccess { matches ->
-                    _viewState.update {
-                        it.copy(
-                            matches = matches,
-                            fullScreenLoading = false
-                        )
-                    }
-                }.onSuspendGeneralError { error ->
-                    Logger.e("Error when fetching matches for round $roundId", error)
                     _viewState.update { it.copy(error = error, fullScreenLoading = false) }
                 }
         }
