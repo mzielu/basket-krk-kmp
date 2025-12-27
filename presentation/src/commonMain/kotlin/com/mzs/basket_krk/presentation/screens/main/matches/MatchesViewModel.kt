@@ -43,17 +43,29 @@ class MatchesViewModel(
         fetchData()
     }
 
+    fun onRoundSelected(newRound: Round) {
+        _viewState.update { it.copy(selectedRound = newRound) }
+    }
+
+    fun onSeasonSelected(newSeason: Season) {
+        _viewState.update { it.copy(selectedSeason = newSeason) }
+    }
+
     private fun fetchData() {
         viewModelScope.launch {
             _viewState.update { it.copy(fullScreenLoading = true, error = null) }
 
             getSeasonsInfo()
                 .onSuspendSuccess { info ->
+
+                    val sortedSeasons = info.seasons.sortedByDescending { it.num }
+                    val sortedRounds = info.rounds.sortedByDescending { it.date }
+
                     _viewState.update {
                         it.copy(
-                            seasons = info.seasons,
-                            rounds = info.rounds,
-                            selectedSeason = info.seasons.firstOrNull(),
+                            seasons = sortedSeasons,
+                            rounds = sortedRounds,
+                            selectedSeason = sortedSeasons.firstOrNull(),
                             selectedRound = getClosestRound(info.rounds),
                             fullScreenLoading = false
                         )
