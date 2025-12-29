@@ -30,5 +30,5 @@ val presentationModule = module {
     // view models
     viewModelOf(::MainViewModel)
     viewModelOf(::MatchesViewModel)
-    viewModel { (matchId: Int) -> MatchDetailsViewModel(matchId) }
+    viewModel { (matchId: Int) -> MatchDetailsViewModel(matchId, get()) }
 }
