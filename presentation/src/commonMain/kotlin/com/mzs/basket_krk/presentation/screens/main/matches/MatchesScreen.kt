@@ -1,6 +1,5 @@
 package com.mzs.basket_krk.presentation.screens.main.matches
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,8 +21,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -34,7 +32,13 @@ import com.mzs.basket_krk.domain.model.MatchTeam
 import com.mzs.basket_krk.domain.model.MatchType
 import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
+import com.mzs.basket_krk.presentation.base.isEmpty
+import com.mzs.basket_krk.presentation.base.isError
+import com.mzs.basket_krk.presentation.base.isLoading
 import com.mzs.basket_krk.presentation.base.ui.DropdownFormField
+import com.mzs.basket_krk.presentation.base.ui.ErrorView
+import com.mzs.basket_krk.presentation.base.ui.PaginationErrorItem
+import com.mzs.basket_krk.presentation.base.ui.PaginationLoadingIndicator
 import com.mzs.basket_krk.presentation.screens.main.matches.components.MatchListItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.datetime.LocalDate
@@ -72,20 +76,12 @@ fun MatchesContent(
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
 
-                viewState.error != null -> {
-                    Column(
-                        modifier = Modifier.align(Alignment.Center),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Button(onClick = onRefresh) {
-                            Text("Try Again")
-                        }
-                    }
+                viewState.error != null || matchesPagingItems.isError -> {
+                    ErrorView(error = viewState.error, retryAction = { onRefresh() })
                 }
 
                 else -> {
                     Column(modifier = Modifier.fillMaxSize()) {
-
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(8.dp),
                             horizontalArrangement = Arrangement.SpaceAround
@@ -111,14 +107,43 @@ fun MatchesContent(
                             )
                         }
 
-                        LazyColumn(Modifier.fillMaxSize()) {
-                            items(matchesPagingItems.itemCount) { index ->
-                                matchesPagingItems[index]?.let { match ->
-                                    MatchListItem(
-                                        match = match,
-                                        onClick = {},
-                                        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-                                    )
+                        if (matchesPagingItems.isEmpty) {
+                            if (matchesPagingItems.isLoading) {
+                                CircularProgressIndicator()
+                            } else {
+                                Text("No matches found")
+                            }
+                        } else {
+                            LazyColumn(Modifier.fillMaxSize()) {
+                                items(matchesPagingItems.itemCount) { index ->
+                                    matchesPagingItems[index]?.let { match ->
+                                        MatchListItem(
+                                            match = match,
+                                            onClick = {},
+                                            modifier = Modifier.padding(
+                                                vertical = 4.dp,
+                                                horizontal = 8.dp
+                                            )
+                                        )
+                                    }
+                                }
+
+                                with(matchesPagingItems) {
+                                    when {
+                                        loadState.refresh is LoadState.Error -> item {
+                                            PaginationErrorItem(
+                                                onRetryClick = matchesPagingItems::retry
+                                            )
+                                        }
+
+                                        loadState.append is LoadState.Error -> item {
+                                            PaginationErrorItem(
+                                                onRetryClick = matchesPagingItems::retry
+                                            )
+                                        }
+
+                                        isLoading -> item { PaginationLoadingIndicator() }
+                                    }
                                 }
                             }
                         }

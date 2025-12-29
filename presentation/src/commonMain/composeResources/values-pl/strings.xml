@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="bottom_bar_matches">Mecze</string>
     <string name="bottom_bar_players">Zawodnicy</string>
     <string name="bottom_bar_teams">Drużyny</string>
@@ -8,33 +7,21 @@
     <string name="bottom_bar_more">Więcej</string>
     <string name="bottom_bar_search">Szukaj</string>
     <string name="bottom_bar_stats">Liderzy</string>
-
     <string name="players_search">Znajdź zawodnika</string>
     <string name="teams_search">Znajdź zespół</string>
-
-    <string name="error_description">
-        Podczas pobierania danych wystąpił nieznany błąd. Proszę spróbuj ponownie 🙏
-    </string>
-    <string name="error_network_description">
-        Błąd połączenia internetowego. Sprawdź swoje połączenie i spróbuj ponownie 🙏
-    </string>
-    <string name="error_old_version_description">
-        W tym momencie używasz nieaktualnej wersji aplikacji. Zaktualizuj ją do najnowszej wersji 🙏
-    </string>
-
+    <string name="error_description">Podczas pobierania danych wystąpił nieznany błąd. Proszę spróbuj ponownie 🙏</string>
+    <string name="error_network_description">Błąd połączenia internetowego. Sprawdź swoje połączenie i spróbuj ponownie 🙏</string>
+    <string name="error_old_version_description">W tym momencie używasz nieaktualnej wersji aplikacji. Zaktualizuj ją do najnowszej wersji 🙏</string>
     <string name="error_try_again">Spróbuj ponownie</string>
     <string name="error_update">Aktualizuj</string>
-
     <string name="label_playoffs">Playoffs</string>
     <string name="label_reg_season">Sezon regularny</string>
     <string name="label_open_in_web">Szczegóły</string>
-
     <string name="label_match_not_played_yet">Mecz jeszcze nie był rozgrywany</string>
     <string name="label_match_about_start">Mecz zaraz się zacznie</string>
     <string name="label_match_wo_in_favor_of">Mecz zweryfikowany jako walkower na korzyść</string>
     <string name="label_match_wo_two_way">Mecz zakończony obustronnym walkowerem</string>
     <string name="label_match_no_stats">Statystyki niedostępne dla tego meczu</string>
-
     <string name="pts_record_description">Najwięcej punktów w meczu</string>
     <string name="fgm_record_description">Najwięcej trafionych rzutów z gry</string>
     <string name="fga_record_description">Najwięcej oddanych rzutów z gry</string>
@@ -47,48 +34,36 @@
     <string name="blk_record_description">Najwięcej bloków w meczu</string>
     <string name="stl_record_description">Najwięcej przechwytów w meczu</string>
     <string name="eff_record_description">Najwyższa wartość EFF w meczu</string>
-
     <string name="label_time">raz</string>
     <string name="label_times">razy</string>
     <string name="label_last_time">ostatnio</string>
-
     <string name="seasons_played">Rozegrane sezony:</string>
     <string name="team_current">Obecna drużyna:</string>
-
     <string name="team_results_tab">WYNIKI</string>
     <string name="team_roster_tab">SKŁAD</string>
     <string name="team_records_tab">REKORDY</string>
-
     <string name="player_game_logs_tab">MECZE</string>
     <string name="player_stats_tab">STATYSTYKI</string>
     <string name="player_records_tab">REKORDY</string>
-
     <string name="season_input_hint">Sezon</string>
     <string name="round_input_hint">Runda</string>
     <string name="range_input_hint">Zakres</string>
     <string name="category_input_hint">Kategoria</string>
     <string name="team_input_hint">Drużyna</string>
     <string name="league_input_hint">Liga</string>
-
     <string name="team_league_info">Liga</string>
-
-    <string name="team_roster_empty">
-        Skład drużyny na dany sezon będzie dostępny po rozegraniu pierwszego meczu.
-    </string>
+    <string name="team_roster_empty">Skład drużyny na dany sezon będzie dostępny po rozegraniu pierwszego meczu.</string>
     <string name="team_records_empty">Rekordy drużyny w tym momencie nie są dostępne.</string>
     <string name="team_records_explanation">Tylko mecze sezonu regularnego</string>
     <string name="team_records_info">Sekcja rekordów będzie dostępna już niedługo!</string>
-
     <string name="table_corner_player">ZAWODNIK</string>
     <string name="table_corner_result">WYNIK</string>
     <string name="table_corner_tot">SUM</string>
     <string name="table_corner_avg">ŚR</string>
-
     <string name="choose_trnmnt">Wybierz aktywne rozgrywki</string>
     <string name="trnmnt_mba">Liga MBA (Mężczyźni)</string>
     <string name="trnmnt_mbaw">Liga MBA (Kobiety)</string>
     <string name="trnmnt_knba">Liga KNBA</string>
-
     <string name="more_change_trnmt">Zmień rozgrywki</string>
     <string name="more_about_us">O autorze</string>
     <string name="more_donate">Wesprzyj projekt</string>
@@ -98,55 +73,29 @@
     <string name="more_write_to_us">Napisz do nas!</string>
     <string name="more_check_fb">Sprawdź nas na Facebooku</string>
     <string name="more_check_ig">Sprawdź nas na Instagramie</string>
-
     <string name="live_label">TRWA</string>
     <string name="league_label">Liga</string>
-
     <string name="premium_account">Konto Premium</string>
     <string name="subscribe_button">Subskrybuj</string>
     <string name="subscribe_active_button">Subskrypcja aktywna</string>
     <string name="manage_subscription_button">Zarządzaj subskrypcją</string>
-
-    <string name="premium_active_label">
-        Twoje konto Premium jest aktywne. Dziękujemy za wsparcie!
-    </string>
-
-    <string name="premium_description">
-        Usuń reklamy i wspieraj nasz rozwój! Kup subskrypcję i pomóż nam ulepszać aplikację!
-    </string>
-
+    <string name="premium_active_label">Twoje konto Premium jest aktywne. Dziękujemy za wsparcie!</string>
+    <string name="premium_description">Usuń reklamy i wspieraj nasz rozwój! Kup subskrypcję i pomóż nam ulepszać aplikację!</string>
     <string name="price_label">Cena</string>
-
     <string name="month_1_period">1 miesiąc</string>
     <string name="month_3_period">3 miesiące</string>
     <string name="month_6_period">6 miesięcy</string>
     <string name="year_1_period">1 rok</string>
-
-    <string name="premium_google_play_legal_info">
-        Klikając "Subskrybuj", autoryzujesz Google Play do obciążenia Twojego konta na początku każdego cyklu rozliczeniowego. Subskrypcja będzie odnawiana automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu. Subskrypcja jest opcjonalna i nie jest wymagana do korzystania z aplikacji. Subskrypcja nie podlega zwrotom. Możesz ją anulować w dowolnym momencie na stronie subskrypcji Google Play.
-    </string>
-
+    <string name="premium_google_play_legal_info">Klikając "Subskrybuj", autoryzujesz Google Play do obciążenia Twojego konta na początku każdego cyklu rozliczeniowego. Subskrypcja będzie odnawiana automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu. Subskrypcja jest opcjonalna i nie jest wymagana do korzystania z aplikacji. Subskrypcja nie podlega zwrotom. Możesz ją anulować w dowolnym momencie na stronie subskrypcji Google Play.</string>
     <string name="premium_google_play_page">stronie subskrypcji Google Play</string>
-
-    <string name="premium_app_store_legal_info">
-        Klikając "Subskrybuj", potwierdzasz zakup i autoryzujesz Apple do obciążenia Twojego konta na początku każdego cyklu rozliczeniowego. Subskrypcja będzie odnawiana automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu w ustawieniach Apple ID. Subskrypcja jest opcjonalna i nie jest wymagana do korzystania z aplikacji. Subskrypcja nie podlega zwrotom. Możesz ją anulować w dowolnym momencie na stronie subskrypcji App Store.
-    </string>
-
+    <string name="premium_app_store_legal_info">Klikając "Subskrybuj", potwierdzasz zakup i autoryzujesz Apple do obciążenia Twojego konta na początku każdego cyklu rozliczeniowego. Subskrypcja będzie odnawiana automatycznie, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu w ustawieniach Apple ID. Subskrypcja jest opcjonalna i nie jest wymagana do korzystania z aplikacji. Subskrypcja nie podlega zwrotom. Możesz ją anulować w dowolnym momencie na stronie subskrypcji App Store.</string>
     <string name="premium_app_store_page">stronie subskrypcji App Store</string>
-
-    <string name="premium_delay_explanation">
-        Dostęp Premium jest aktywowany od razu po zakupie. Zmiany statusu, takie jak anulowanie subskrypcji, mogą być widoczne z opóźnieniem — czasem nawet do kilku godzin.
-    </string>
-
+    <string name="premium_delay_explanation">Dostęp Premium jest aktywowany od razu po zakupie. Zmiany statusu, takie jak anulowanie subskrypcji, mogą być widoczne z opóźnieniem — czasem nawet do kilku godzin.</string>
     <string name="season_leaders">Liderzy sezonowi</string>
     <string name="all_time_leaders">Liderzy all-time</string>
-
     <string name="pagination_premium_item_title">Chcesz zobaczyć ranking TOP 100?</string>
-    <string name="pagination_premium_item_description">
-        Wesprzyj projekt poprzez przejście na wersję Premium.
-    </string>
+    <string name="pagination_premium_item_description">Wesprzyj projekt poprzez przejście na wersję Premium.</string>
     <string name="pagination_premium_item_button">Przejdź na Premium</string>
-
     <string name="all_time_category_points">Klasyfikacja all-time: Punkty</string>
     <string name="all_time_category_rebounds">Klasyfikacja all-time: Zbiórki</string>
     <string name="all_time_category_assists">Klasyfikacja all-time: Asysty</string>
@@ -159,24 +108,15 @@
     <string name="all_time_category_dd">Klasyfikacja all-time: Mecze z Double-Double</string>
     <string name="all_time_category_td">Klasyfikacja all-time: Mecze z Triple-Double</string>
     <string name="all_time_category_qd">Klasyfikacja all-time: Mecze z Quadruple-Double</string>
-
     <string name="premium_dialog_title">Konto Premium?</string>
     <string name="premium_dialog_description_1">🚀 Korzystaj bez reklam</string>
     <string name="premium_dialog_description_2">❤️ Wspieraj projekt</string>
     <string name="premium_dialog_upgrade">Przejdź na Premium</string>
     <string name="premium_dialog_later">Może później</string>
-
-    <string name="stats_empty_message">
-        Statystyki będą dostępne po rozegraniu pierwszego meczu.
-    </string>
-
+    <string name="stats_empty_message">Statystyki będą dostępne po rozegraniu pierwszego meczu.</string>
     <string name="terms_of_use_dialog_title">Regulamin i Polityka Prywatności</string>
-    <string name="terms_of_use_dialog_description">
-        Korzystanie z aplikacji oznacza, że zapoznałeś się i akceptujesz Regulamin oraz Politykę Prywatności, które zostały zaktualizowane 20.05.2025 roku.
-    </string>
-
+    <string name="terms_of_use_dialog_description">Korzystanie z aplikacji oznacza, że zapoznałeś się i akceptujesz Regulamin oraz Politykę Prywatności, które zostały zaktualizowane 20.05.2025 roku.</string>
     <string name="terms_of_use_dialog_read_terms_of_use">Przeczytaj Regulamin</string>
     <string name="terms_of_use_dialog_read_privacy_policy">Przeczytaj Politykę Prywatności</string>
     <string name="terms_of_use_dialog_accept">Akceptuję</string>
-
 </resources>

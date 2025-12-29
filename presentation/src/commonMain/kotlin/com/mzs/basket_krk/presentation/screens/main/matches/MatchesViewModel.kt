@@ -16,6 +16,7 @@ import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.domain.usecase.GetRoundsForSeason
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfo
+import com.mzs.basket_krk.presentation.base.BasePagingSource
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.BaseMatchesPagingSourceFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -52,6 +53,9 @@ class MatchesViewModel(
     private val _effect: MutableSharedFlow<MatchesEffect> = MutableSharedFlow()
     val effect: SharedFlow<MatchesEffect> = _effect.asSharedFlow()
 
+
+    private lateinit var pagingSource: BasePagingSource<Match>
+
     private val roundFlow: StateFlow<Round?> by lazy {
         _viewState
             .map { it.selectedRound }
@@ -70,6 +74,7 @@ class MatchesViewModel(
                     config = PagingConfig(pageSize = 10),
                     pagingSourceFactory = {
                         matchesPagingSourceFactory.create(10, round.id)
+                            .also { pagingSource = it }
                     },
                 ).flow
             }.cachedIn(viewModelScope)
@@ -80,7 +85,17 @@ class MatchesViewModel(
     }
 
     fun onRefresh() {
-        fetchInitData()
+        val vs = _viewState.value
+
+        when {
+            vs.selectedSeason == null -> fetchInitData()
+            vs.selectedRound == null -> fetchRoundsData(seasonId = vs.selectedSeason.id)
+            else -> refreshMatches()
+        }
+    }
+
+    private fun refreshMatches() {
+        if (this::pagingSource.isInitialized) pagingSource.invalidate()
     }
 
     fun onRoundSelected(newRound: Round) {
@@ -88,8 +103,10 @@ class MatchesViewModel(
     }
 
     fun onSeasonSelected(newSeason: Season) {
-        _viewState.update { it.copy(selectedSeason = newSeason) }
-        fetchRoundsData(seasonId = newSeason.id)
+        if (newSeason != _viewState.value.selectedSeason) {
+            _viewState.update { it.copy(selectedSeason = newSeason, selectedRound = null) }
+            fetchRoundsData(seasonId = newSeason.id)
+        }
     }
 
     private fun fetchInitData() {

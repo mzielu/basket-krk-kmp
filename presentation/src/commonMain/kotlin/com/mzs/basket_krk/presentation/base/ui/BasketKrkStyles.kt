@@ -6,11 +6,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 object BasketKrkStyles {
-
     val actionBarTitle = TextStyle(
         color = BasketKrkColors.AppBarText,
         fontWeight = FontWeight.Normal,
         fontSize = 20.sp
+    )
+
+    val errorDescription = TextStyle(
+        color = BasketKrkColors.TextSecondary,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
     )
 
     // LIST

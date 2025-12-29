@@ -8,11 +8,15 @@ class MatchesPagingSourceFactory(
     private val getMatches: GetMatches
 ) : BaseMatchesPagingSourceFactory {
     override fun create(pageSize: Int, roundId: Int): BasePagingSource<Match> {
-        return MatchesPagingSource(
+        val xd =  MatchesPagingSource(
             pageSize = pageSize,
             roundId = roundId,
             getMatches = getMatches
         )
+
+        xd
+
+        return xd
     }
 
 
