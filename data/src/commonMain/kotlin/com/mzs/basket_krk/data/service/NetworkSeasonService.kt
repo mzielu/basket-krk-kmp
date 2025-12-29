@@ -1,6 +1,7 @@
 package com.mzs.basket_krk.data.service
 
 import arrow.core.Either
+import com.mzs.basket_krk.data.dto.RoundsListDto
 import com.mzs.basket_krk.data.dto.SeasonsInfoDto
 import com.mzs.basket_krk.data.dto.toDomain
 import com.mzs.basket_krk.domain.base.catchWithError
@@ -21,7 +22,7 @@ class NetworkSeasonService(
 
     override suspend fun getRounds(seasonId: Int): Either<Failure, List<Round>> {
         return Either.catchWithError {
-            apiService.get<List<Round>>("/season/$seasonId/rounds/")
+            apiService.get<RoundsListDto>("/season/$seasonId/rounds/").toDomain()
         }
     }
 }

@@ -2,6 +2,8 @@ package com.mzs.basket_krk.presentation.di
 
 import com.mzs.basket_krk.domain.usecase.GetMatches
 import com.mzs.basket_krk.domain.usecase.GetMatchesUseCase
+import com.mzs.basket_krk.domain.usecase.GetRoundsForSeason
+import com.mzs.basket_krk.domain.usecase.GetRoundsForSeasonUseCase
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfo
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfoUseCase
 import com.mzs.basket_krk.presentation.screens.main.MainViewModel
@@ -15,6 +17,7 @@ val presentationModule = module {
     // use cases
     single<GetSeasonsInfo> { GetSeasonsInfoUseCase(get()) }
     single<GetMatches> { GetMatchesUseCase(get()) }
+    single<GetRoundsForSeason> { GetRoundsForSeasonUseCase(get()) }
 
     // data source factories
     single<BaseMatchesPagingSourceFactory> { MatchesPagingSourceFactory(get()) }

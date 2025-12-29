@@ -14,16 +14,22 @@ import com.mzs.basket_krk.domain.model.Failure
 import com.mzs.basket_krk.domain.model.Match
 import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
-import com.mzs.basket_krk.domain.usecase.GetMatches
+import com.mzs.basket_krk.domain.usecase.GetRoundsForSeason
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfo
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.BaseMatchesPagingSourceFactory
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
@@ -33,8 +39,10 @@ import kotlin.math.abs
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class MatchesViewModel(
     private val getSeasonsInfo: GetSeasonsInfo,
+    private val getRoundsForSeason: GetRoundsForSeason,
     private val matchesPagingSourceFactory: BaseMatchesPagingSourceFactory
 ) : ViewModel() {
     private val _viewState: MutableStateFlow<MatchesViewState> =
@@ -44,21 +52,35 @@ class MatchesViewModel(
     private val _effect: MutableSharedFlow<MatchesEffect> = MutableSharedFlow()
     val effect: SharedFlow<MatchesEffect> = _effect.asSharedFlow()
 
+    private val roundFlow: StateFlow<Round?> by lazy {
+        _viewState
+            .map { it.selectedRound }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(),
+                initialValue = null
+            )
+    }
+
     val pagingFlow: Flow<PagingData<Match>> by lazy {
-        Pager(
-            config = PagingConfig(pageSize = 10),
-            pagingSourceFactory = {
-                matchesPagingSourceFactory.create(10, 580)
-            },
-        ).flow.cachedIn(viewModelScope)
+        roundFlow
+            .filterNotNull()
+            .flatMapLatest { round ->
+                Pager(
+                    config = PagingConfig(pageSize = 10),
+                    pagingSourceFactory = {
+                        matchesPagingSourceFactory.create(10, round.id)
+                    },
+                ).flow
+            }.cachedIn(viewModelScope)
     }
 
     init {
-        fetchData()
+        fetchInitData()
     }
 
     fun onRefresh() {
-        fetchData()
+        fetchInitData()
     }
 
     fun onRoundSelected(newRound: Round) {
@@ -67,9 +89,10 @@ class MatchesViewModel(
 
     fun onSeasonSelected(newSeason: Season) {
         _viewState.update { it.copy(selectedSeason = newSeason) }
+        fetchRoundsData(seasonId = newSeason.id)
     }
 
-    private fun fetchData() {
+    private fun fetchInitData() {
         viewModelScope.launch {
             _viewState.update { it.copy(fullScreenLoading = true, error = null) }
 
@@ -91,6 +114,30 @@ class MatchesViewModel(
                     }
                 }.onSuspendGeneralError { error ->
                     Logger.e("Error when fetching data", error)
+                    _viewState.update { it.copy(error = error, fullScreenLoading = false) }
+                }
+        }
+    }
+
+    private fun fetchRoundsData(seasonId: Int) {
+        viewModelScope.launch {
+            _viewState.update { it.copy(fullScreenLoading = true, error = null) }
+
+            getRoundsForSeason(input = seasonId)
+                .onSuspendSuccess { rounds ->
+
+                    val sortedRounds = rounds.sortedByDescending { it.date }
+                    val selectedRound = getClosestRound(rounds)
+
+                    _viewState.update {
+                        it.copy(
+                            rounds = sortedRounds,
+                            selectedRound = selectedRound,
+                            fullScreenLoading = false
+                        )
+                    }
+                }.onSuspendGeneralError { error ->
+                    Logger.e("Error when fetching rounds data", error)
                     _viewState.update { it.copy(error = error, fullScreenLoading = false) }
                 }
         }
