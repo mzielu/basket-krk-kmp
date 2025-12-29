@@ -87,7 +87,7 @@ fun MatchesContent(
                     Column(modifier = Modifier.fillMaxSize()) {
 
                         Row(
-                            modifier = Modifier.fillMaxWidth().padding(4.dp),
+                            modifier = Modifier.fillMaxWidth().padding(8.dp),
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
                             DropdownFormField(
@@ -117,7 +117,7 @@ fun MatchesContent(
                                     MatchListItem(
                                         match = match,
                                         onClick = {},
-                                        modifier = Modifier.padding(4.dp)
+                                        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
                                     )
                                 }
                             }

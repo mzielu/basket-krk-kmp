@@ -7,7 +7,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -57,12 +56,20 @@ fun <T> DropdownFormField(
         ) {
             options.forEach { option ->
                 val backgroundColor =
-                    if (option == selectedOption) Color.LightGray else Color.Transparent
+                    if (option == selectedOption) BasketKrkColors.DefaultBackgroundDark else Color.Transparent
+
+                val textStyle = if (option == selectedOption) {
+                    BasketKrkStyles.dropdownMenuItemSelected;
+                } else {
+                    BasketKrkStyles.dropdownMenuItemUnselected;
+                }
 
                 val label = readableValue(option)
                 DropdownMenuItem(
                     modifier = Modifier.background(backgroundColor),
-                    text = { Text(label, style = MaterialTheme.typography.bodyLarge) },
+                    text = {
+                        Text(label, style = textStyle)
+                    },
                     onClick = {
                         onOptionSelected(option)
                         textFieldValue = readableValue(option)

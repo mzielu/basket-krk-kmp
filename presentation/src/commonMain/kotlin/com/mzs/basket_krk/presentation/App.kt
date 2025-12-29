@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.navigation.Screen
 import com.mzs.basket_krk.presentation.screens.main.MainScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -23,7 +24,7 @@ fun App() {
         Box(
             Modifier
                 .fillMaxSize()
-                .background(Color.Cyan),
+                .background(BasketKrkColors.Main),
             contentAlignment = Alignment.Center,
         ) {
             val navController: NavHostController = rememberNavController()

@@ -80,7 +80,11 @@ fun MatchListItem(
                         }
                     }
 
-                    Text(text = topText, style = BasketKrkStyles.listItemTopText)
+                    Text(
+                        text = topText,
+                        style = BasketKrkStyles.listItemTopText,
+                        modifier = Modifier.padding(2.dp)
+                    )
 
                 }
             }

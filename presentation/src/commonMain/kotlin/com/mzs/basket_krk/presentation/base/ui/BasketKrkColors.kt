@@ -10,6 +10,7 @@ object BasketKrkColors {
     val DarkText = Color(0xFF272525)
 
     val DefaultBackground = Color(0xFFFFFFFF)
+    val DefaultBackgroundDark = Color(0xFFD4D2D2)
     val DefaultButtonText = Color(0xFFFFFFFF)
     val DefaultDivider = Color(0xFFE8DFDF)
 
