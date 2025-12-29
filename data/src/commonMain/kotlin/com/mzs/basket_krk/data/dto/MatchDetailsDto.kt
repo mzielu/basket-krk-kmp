@@ -1,8 +1,10 @@
 package com.mzs.basket_krk.data.dto
 
 import com.mzs.basket_krk.domain.model.MatchDetails
-import com.mzs.basket_krk.domain.model.MatchDetailsTeam
-import com.mzs.basket_krk.domain.model.League
+import com.mzs.basket_krk.domain.model.MatchStatus
+import com.mzs.basket_krk.domain.model.MatchType
+import com.mzs.basket_krk.domain.model.TournamentType
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -25,15 +27,15 @@ data class MatchDetailsDto(
 fun MatchDetailsDto.toDomain() = MatchDetails(
     id = id,
     idTmnt = id_tmnt,
-    tournament = tournament,
-    type = type,
-    status = status,
-    date = date,
+    tournament = TournamentType.fromKey(tournament),
+    type = MatchType.fromKey(type),
+    status = MatchStatus.fromKey(status),
+    date = LocalDate.parse(date),
     time = time,
     t1 = t1.toDomain(),
     t2 = t2.toDomain(),
     qtrs = qtrs,
-    desc = desc,
+    description = desc,
     arena = arena,
-    lg = lg?.toDomain()
+    league = lg?.toDomain()
 )

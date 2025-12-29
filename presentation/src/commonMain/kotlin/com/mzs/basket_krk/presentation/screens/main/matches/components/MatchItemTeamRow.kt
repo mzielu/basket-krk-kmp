@@ -22,6 +22,7 @@ import com.mzs.basket_krk.datautils.MatchFakeData
 import com.mzs.basket_krk.domain.model.MatchStatus
 import com.mzs.basket_krk.domain.model.MatchTeam
 import com.mzs.basket_krk.domain.model.inProgressOrEnded
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkImage
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -42,13 +43,9 @@ fun MatchItemTeamRow(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        AsyncImage(
-            model = ImageRequest
-                .Builder(LocalPlatformContext.current)
-                .data("https://www.basketkrk.pl/${matchTeam.logoUrl}")
-                .crossfade(true)
-                .build(),
-            contentDescription = "Team logo",
+        BasketKrkImage(
+            logoUrl = matchTeam.logoUrl,
+            contentDescription = "${matchTeam.name} logo",
             modifier = Modifier
                 .size(25.dp),
         )

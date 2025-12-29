@@ -144,7 +144,11 @@ fun MatchListItem(
                     )
                     Spacer(Modifier.width(4.dp))
                     Text(
-                        text = match.getMatchDateTime(),
+                        text = getMatchDateTime(
+                            status = match.status,
+                            date = match.date,
+                            time = match.time
+                        ),
                         style = BasketKrkStyles.listItemSecondaryText
                     )
                 }

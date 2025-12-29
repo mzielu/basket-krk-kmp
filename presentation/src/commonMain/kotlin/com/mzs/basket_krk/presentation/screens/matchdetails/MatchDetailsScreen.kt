@@ -1,12 +1,18 @@
 package com.mzs.basket_krk.presentation.screens.matchdetails
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
@@ -16,9 +22,24 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import basket_krk.presentation.generated.resources.Res
+import basket_krk.presentation.generated.resources.label_playoffs
+import basket_krk.presentation.generated.resources.label_reg_season
+import basket_krk.presentation.generated.resources.league_label
+import com.mzs.basket_krk.datautils.MatchFakeData
+import com.mzs.basket_krk.domain.model.MatchDetails
+import com.mzs.basket_krk.domain.model.MatchStatus
+import com.mzs.basket_krk.domain.model.MatchType
+import com.mzs.basket_krk.domain.model.TournamentType
+import com.mzs.basket_krk.presentation.base.ViewStateData
+import com.mzs.basket_krk.presentation.base.getMatchDateTime
 import com.mzs.basket_krk.presentation.base.ui.ActionBar
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkImage
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -70,8 +91,7 @@ fun MatchDetailsContent(
                             .padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text(text = "Match ID: ${matchDetails.id}")
-                        Text(text = "Date: ${matchDetails.date}")
+                        TopView(matchDetails)
 
                     }
                 }
@@ -80,11 +100,141 @@ fun MatchDetailsContent(
     }
 }
 
+
+@Composable
+private fun MiddleTopView(matchDetails: MatchDetails) {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = resolveMatchLabel(matchDetails),
+            style = BasketKrkStyles.matchDetailsDescription,
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(Modifier.height(8.dp))
+
+        Text(
+            text = "${matchDetails.t1.points} - ${matchDetails.t2.points}",
+            style = BasketKrkStyles.matchDetailsMainScore,
+            textAlign = TextAlign.Center
+        )
+
+        val showOpenInWeb =
+            (matchDetails.status == MatchStatus.IN_PROGRESS || matchDetails.status == MatchStatus.FINISHED) &&
+                    matchDetails.tournament != TournamentType.KNBA
+
+        if (showOpenInWeb) {
+            Spacer(Modifier.height(6.dp))
+            //TODO OpenInWebButton(onOpenInWeb = { /* TODO */ } )
+        }
+
+        Text(
+            text = getMatchDateTime(
+                status = matchDetails.status,
+                date = matchDetails.date,
+                time = matchDetails.time
+            ),
+            style = BasketKrkStyles.matchDetailsDateScore,
+            textAlign = TextAlign.Center
+        )
+
+        matchDetails.arena?.let { arena ->
+            Text(
+                text = arena,
+                style = BasketKrkStyles.matchDetailsDateScore,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+}
+
+@Composable
+private fun TopView(matchDetails: MatchDetails) {
+    return Row(modifier = Modifier.fillMaxWidth()) {
+        Box(
+            modifier = Modifier
+                .weight(6f)
+                .padding(8.dp)
+                .clickable {
+                    //TODO onOpenTeamDetails(matchDetails.t1.id)
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                BasketKrkImage(
+                    logoUrl = matchDetails.t1.logo,
+                    contentDescription = "${matchDetails.t1.name} logo",
+                    modifier = Modifier.size(80.dp)
+                )
+                Text(
+                    text = matchDetails.t1.name,
+                    textAlign = TextAlign.Center,
+                    style = BasketKrkStyles.matchDetailsTeamName
+                )
+            }
+        }
+
+        // Middle
+        Box(
+            modifier = Modifier.weight(7f),
+            contentAlignment = Alignment.Center
+        ) {
+            MiddleTopView(matchDetails = matchDetails)
+        }
+
+        // Right team
+        Box(
+            modifier = Modifier
+                .weight(6f)
+                .padding(8.dp)
+                .clickable {
+                    //TODO onOpenTeamDetails(matchDetails.t2.id)
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                BasketKrkImage(
+                    logoUrl = matchDetails.t2.logo,
+                    contentDescription = "${matchDetails.t2.name} logo",
+                    modifier = Modifier.size(80.dp)
+                )
+                Text(
+                    text = matchDetails.t2.name,
+                    textAlign = TextAlign.Center,
+                    style = BasketKrkStyles.matchDetailsTeamName
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun resolveMatchLabel(matchDetails: MatchDetails): String {
+    val description = matchDetails.description
+
+    if (description?.isEmpty() == false) return description
+
+    val league = matchDetails.league ?: return when (matchDetails.type) {
+        MatchType.REGULAR_SEASON -> stringResource(Res.string.label_reg_season)
+        MatchType.PLAYOFFS -> stringResource(Res.string.label_playoffs)
+    }
+
+    val leagueLabel = stringResource(Res.string.league_label)
+    val leagueText = if (league.name.length < 5) "${league.name} $leagueLabel" else league.name
+
+    return when (matchDetails.type) {
+        MatchType.REGULAR_SEASON -> leagueText
+        MatchType.PLAYOFFS -> "${stringResource(Res.string.label_playoffs)}: $leagueText"
+    }
+}
+
 @Composable
 @Preview
 fun MatchDetailsContentPreview() {
     MatchDetailsContent(
-        viewState = MatchDetailsViewState(),
+        viewState = MatchDetailsViewState(matchDetails = ViewStateData(MatchFakeData.matchDetails())),
         onRetry = {},
         onNavigateBack = {},
     )
