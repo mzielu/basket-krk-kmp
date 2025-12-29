@@ -1,11 +1,14 @@
 package com.mzs.basket_krk.presentation.screens.main.matches
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
@@ -20,11 +23,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.mzs.basket_krk.domain.model.Match
+import com.mzs.basket_krk.domain.model.MatchStatus
+import com.mzs.basket_krk.domain.model.MatchTeam
+import com.mzs.basket_krk.domain.model.MatchType
 import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.presentation.base.ui.DropdownFormField
@@ -77,9 +84,12 @@ fun MatchesContent(
                 }
 
                 else -> {
-                    Column {
+                    Column(modifier = Modifier.fillMaxSize()) {
 
-                        Row(modifier = Modifier.padding(4.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(4.dp),
+                            horizontalArrangement = Arrangement.SpaceAround
+                        ) {
                             DropdownFormField(
                                 modifier = Modifier.weight(1f),
                                 label = "Season",
@@ -104,7 +114,11 @@ fun MatchesContent(
                         LazyColumn(Modifier.fillMaxSize()) {
                             items(matchesPagingItems.itemCount) { index ->
                                 matchesPagingItems[index]?.let { match ->
-                                    MatchListItem(match = match, onClick = {})
+                                    MatchListItem(
+                                        match = match,
+                                        onClick = {},
+                                        modifier = Modifier.padding(4.dp)
+                                    )
                                 }
                             }
                         }
@@ -114,10 +128,33 @@ fun MatchesContent(
         }
     }
 
-
     @Composable
     @Preview
     fun MatchesScreenPreview() {
+
+        val match = Match(
+            id = 1,
+            date = LocalDate(2025, 1, 1),
+            time = "18:00",
+            team1 = MatchTeam(
+                id = 1,
+                name = "Home Team",
+                shortName = "HT",
+                logoUrl = "path/to/logo1.png",
+                points = 75
+            ),
+            team2 = MatchTeam(
+                id = 2,
+                name = "Away Team",
+                shortName = "AT",
+                logoUrl = "path/to/logo2.png",
+                points = 68
+            ),
+            status = MatchStatus.FINISHED,
+            type = MatchType.REGULAR_SEASON,
+            arena = "Main Arena"
+        )
+
         val pagingData = PagingData.from(emptyList<Match>())
         val lazyPagingItems = MutableStateFlow(pagingData).collectAsLazyPagingItems()
 

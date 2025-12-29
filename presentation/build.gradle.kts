@@ -14,6 +14,7 @@ kotlin {
         commonMain.dependencies {
             // other modules
             implementation(projects.domain)
+            implementation(projects.dataUtils)
 
             // compose
             implementation(compose.runtime)

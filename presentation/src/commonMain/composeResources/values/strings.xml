@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="bottom_bar_matches">Matches</string>
+    <string name="bottom_bar_players">Players</string>
+    <string name="bottom_bar_teams">Teams</string>
+    <string name="bottom_bar_standings">Standings</string>
+    <string name="bottom_bar_more">More</string>
+    <string name="bottom_bar_search">Search</string>
+    <string name="bottom_bar_stats">Leaders</string>
+
+    <string name="players_search">Search for a player</string>
+    <string name="teams_search">Search for a team</string>
+
+    <string name="error_description">Unknown error occurred while fetching the data. Please try again 🙏</string>
+    <string name="error_network_description">Network connection error occurred. Check your network connection and please try again 🙏</string>
+    <string name="error_old_version_description">You are using a deprecated app version at the moment. Please update it to the latest version 🙏</string>
+
+    <string name="error_try_again">Try again</string>
+    <string name="error_update">Update</string>
+
+    <string name="label_playoffs">Playoffs</string>
+    <string name="label_reg_season">Regular season</string>
+    <string name="label_open_in_web">Details</string>
+
+    <string name="label_match_not_played_yet">Match not played yet</string>
+    <string name="label_match_about_start">Match is about to start</string>
+    <string name="label_match_wo_in_favor_of">Match verified as a walkover in favor of</string>
+    <string name="label_match_wo_two_way">Match was verified as a two-way walkover</string>
+    <string name="label_match_no_stats">Stats not available for this match</string>
+
+    <string name="pts_record_description">Most points in a game</string>
+    <string name="fgm_record_description">Most fields goal made</string>
+    <string name="fga_record_description">Most fields goal attempted</string>
+    <string name="fg3m_record_description">Most 3-point fields goal made</string>
+    <string name="fg3a_record_description">Most 3-point fields goal attempted</string>
+    <string name="ftm_record_description">Most free throws made</string>
+    <string name="fta_record_description">Most free throws attempted</string>
+    <string name="reb_record_description">Most rebounds in a game</string>
+    <string name="ast_record_description">Most assists in a game</string>
+    <string name="blk_record_description">Most blocks in a game</string>
+    <string name="stl_record_description">Most steals in a game</string>
+    <string name="eff_record_description">Highest EFF score in a game</string>
+
+    <string name="label_time">time</string>
+    <string name="label_times">times</string>
+    <string name="label_last_time">last time</string>
+
+    <string name="seasons_played">Seasons played:</string>
+    <string name="team_current">Current team:</string>
+
+    <string name="team_results_tab">RESULTS</string>
+    <string name="team_roster_tab">ROSTER</string>
+    <string name="team_records_tab">RECORDS</string>
+
+    <string name="player_game_logs_tab">GAMELOGS</string>
+    <string name="player_stats_tab">STATS</string>
+    <string name="player_records_tab">RECORDS</string>
+
+    <string name="season_input_hint">Season</string>
+    <string name="range_input_hint">Range</string>
+    <string name="category_input_hint">Category</string>
+    <string name="round_input_hint">Round</string>
+    <string name="team_input_hint">Team</string>
+    <string name="league_input_hint">League</string>
+
+    <string name="team_league_info">League</string>
+
+    <string name="team_roster_empty">
+        The team roster for a given season will be available after the first match has been played.
+    </string>
+
+    <string name="team_records_empty">Team records is not available at this moment.</string>
+    <string name="team_records_explanation">Only regular season games</string>
+    <string name="team_records_info">Records section will be available soon!</string>
+
+    <string name="table_corner_player">PLAYER</string>
+    <string name="table_corner_result">RESULT</string>
+    <string name="table_corner_tot">TOT</string>
+    <string name="table_corner_avg">AVG</string>
+
+    <string name="choose_trnmnt">Choose active tournament</string>
+    <string name="trnmnt_mba">Liga MBA (Men)</string>
+    <string name="trnmnt_mbaw">Liga MBA (Women)</string>
+    <string name="trnmnt_knba">Liga KNBA</string>
+
+    <string name="more_change_trnmt">Change tournament</string>
+    <string name="more_about_us">About us</string>
+    <string name="more_donate">Support the project</string>
+    <string name="more_buy_premium">Premium Version (no ads)</string>
+    <string name="more_terms_of_use">Terms of use</string>
+    <string name="more_privacy_policy">Privacy policy</string>
+    <string name="more_write_to_us">Send us a message!</string>
+    <string name="more_check_fb">Visit us on Facebook</string>
+    <string name="more_check_ig">Visit us on Instagram</string>
+
+    <string name="live_label">LIVE</string>
+    <string name="league_label">League</string>
+
+    <string name="premium_account">Premium Account</string>
+    <string name="subscribe_button">Subscribe</string>
+    <string name="subscribe_active_button">Subscription Active</string>
+    <string name="manage_subscription_button">Manage subscription</string>
+
+    <string name="premium_active_label">
+        Your premium account is active. Thank you for your support!
+    </string>
+
+    <string name="premium_description">
+        Remove ads and support our growth! Buy subscription and help us improve the app!
+    </string>
+
+    <string name="price_label">Price</string>
+
+    <string name="month_1_period">1 month</string>
+    <string name="month_3_period">3 months</string>
+    <string name="month_6_period">6 months</string>
+    <string name="year_1_period">1 year</string>
+
+    <string name="premium_google_play_legal_info">
+        By tapping "Subscribe", you authorize Google Play to charge your account at the beginning of each billing cycle. The subscription will renew automatically unless canceled at least 24 hours before the end of the current period. This subscription is optional and not required to use the app. Please note that there are no refunds for this subscription. You can cancel anytime in your Google Play subscriptions page.
+    </string>
+
+    <string name="premium_google_play_page">Google Play subscriptions page</string>
+
+    <string name="premium_app_store_legal_info">
+        By tapping "Subscribe", you confirm your purchase and authorize Apple to charge your account at the beginning of each billing cycle. The subscription will renew automatically unless canceled at least 24 hours before the end of the current period in your Apple ID settings. This subscription is optional and not required to use the app. Please note that there are no refunds for this subscription. You can cancel anytime in your App Store subscriptions page.
+    </string>
+
+    <string name="premium_app_store_page">App Store subscriptions page</string>
+
+    <string name="premium_delay_explanation">
+        Premium access is activated immediately after purchase. Status changes like cancellation may take some time to reflect — occasionally up to a few hours.
+    </string>
+
+    <string name="season_leaders">Season leaders</string>
+    <string name="all_time_leaders">All time leaders</string>
+
+    <string name="pagination_premium_item_title">Want to see TOP 100 ranking?</string>
+    <string name="pagination_premium_item_description">Support the project by upgrading to Premium.</string>
+    <string name="pagination_premium_item_button">Upgrade to Premium</string>
+
+    <string name="all_time_category_points">All-time Points Ranking</string>
+    <string name="all_time_category_rebounds">All-time Rebounds Ranking</string>
+    <string name="all_time_category_assists">All-time Assists Ranking</string>
+    <string name="all_time_category_blocks">All-time Blocks Ranking</string>
+    <string name="all_time_category_steals">All-time Steals Ranking</string>
+    <string name="all_time_category_ftm">All-time Free Throws Ranking</string>
+    <string name="all_time_category_fgm">All-time Field Goals Ranking</string>
+    <string name="all_time_category_fg3m">All-time 3-Pt Field Goals Ranking</string>
+    <string name="all_time_category_games">All-time Games played Ranking</string>
+    <string name="all_time_category_dd">All-time Double-Double Ranking</string>
+    <string name="all_time_category_td">All-time Triple-Double Ranking</string>
+    <string name="all_time_category_qd">All-time Quadruple-Double Ranking</string>
+
+    <string name="premium_dialog_title">Go Premium</string>
+    <string name="premium_dialog_description_1">🚀 Enjoy an ad-free experience</string>
+    <string name="premium_dialog_description_2">❤️ Support the project</string>
+    <string name="premium_dialog_upgrade">Upgrade to Premium</string>
+    <string name="premium_dialog_later">Maybe later</string>
+
+    <string name="stats_empty_message">
+        Statistics will be available after the first match is played.
+    </string>
+
+    <string name="terms_of_use_dialog_title">Terms of Use and Privacy Policy</string>
+    <string name="terms_of_use_dialog_description">
+        By using the app, you confirm that you have read and accept the Terms of Use and Privacy Policy, which were updated on May 20, 2025.
+    </string>
+
+    <string name="terms_of_use_dialog_read_terms_of_use">Read Terms of Use</string>
+    <string name="terms_of_use_dialog_read_privacy_policy">Read Privacy Policy</string>
+    <string name="terms_of_use_dialog_accept">I Accept</string>
+
+</resources>

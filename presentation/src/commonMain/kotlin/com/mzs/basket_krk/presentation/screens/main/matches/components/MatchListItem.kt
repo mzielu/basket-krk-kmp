@@ -14,8 +14,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccessTime
-import androidx.compose.material.icons.filled.KeyboardDoubleArrowRight
-import androidx.compose.material.icons.filled.Stadium
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.outlined.Stadium
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -26,11 +26,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import basket_krk.presentation.generated.resources.Res
+import basket_krk.presentation.generated.resources.label_playoffs
+import basket_krk.presentation.generated.resources.label_reg_season
+import com.mzs.basket_krk.datautils.MatchFakeData
 import com.mzs.basket_krk.domain.model.Match
 import com.mzs.basket_krk.domain.model.MatchStatus
 import com.mzs.basket_krk.domain.model.MatchType
+import com.mzs.basket_krk.presentation.base.getMatchDateTime
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MatchListItem(
@@ -38,7 +46,10 @@ fun MatchListItem(
     onClick: (matchId: Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val bgColor = resolveItemBg(match)
+    val bgColor = when (match.type) {
+        MatchType.REGULAR_SEASON -> BasketKrkColors.DefaultBackground
+        MatchType.PLAYOFFS -> BasketKrkColors.PlayoffsBg
+    }
 
     Card(
         modifier = modifier
@@ -46,13 +57,36 @@ fun MatchListItem(
             .clickable { onClick(match.id) },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = bgColor),
-        border = BorderStroke(1.dp, Color.Green),
+        border = BorderStroke(1.dp, BasketKrkColors.Main),
     ) {
         Column {
-            TopItemView(match = match)
+            Surface(color = BasketKrkColors.Main) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    val topText = when (match.type) {
+                        MatchType.REGULAR_SEASON -> {
+                            match.league?.let {
+                                "${stringResource(Res.string.label_reg_season)} - ${it.name}"
+                            } ?: stringResource(Res.string.label_reg_season)
+                        }
+
+                        MatchType.PLAYOFFS -> {
+                            match.description ?: match.league?.let {
+                                "${stringResource(Res.string.label_playoffs)} - ${it.name}"
+                            } ?: stringResource(Res.string.label_playoffs)
+                        }
+                    }
+
+                    Text(text = topText, style = BasketKrkStyles.listItemTopText)
+
+                }
+            }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Left side: teams
@@ -76,15 +110,15 @@ fun MatchListItem(
 
                 // Right arrow
                 Icon(
-                    imageVector = Icons.Default.KeyboardDoubleArrowRight,
+                    imageVector = Icons.Default.ChevronRight,
                     contentDescription = null,
-                    tint = Color.Cyan,
-                    modifier = Modifier.padding(top = 8.dp, bottom = 8.dp, end = 8.dp)
+                    tint = BasketKrkColors.Main,
+                    modifier = Modifier.padding(start = 8.dp, end = 4.dp)
                 )
             }
 
             HorizontalDivider(
-                color = Color.DarkGray,
+                color = BasketKrkColors.DefaultDivider,
                 thickness = 1.dp,
                 modifier = Modifier.padding(horizontal = 4.dp)
             )
@@ -101,26 +135,31 @@ fun MatchListItem(
                     Icon(
                         imageVector = Icons.Default.AccessTime,
                         contentDescription = null,
-                        tint = Color.Green,
+                        tint = BasketKrkColors.TextSecondary,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(Modifier.width(4.dp))
                     Text(
-                        text = match.date.toString(),
+                        text = match.getMatchDateTime(),
+                        style = BasketKrkStyles.listItemSecondaryText
                     )
                 }
 
                 match.arena?.let { arena ->
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(horizontal = 8.dp)
+                    ) {
                         Icon(
-                            imageVector = Icons.Default.Stadium, // if not available, use another icon
+                            imageVector = Icons.Outlined.Stadium,
                             contentDescription = null,
-                            tint = Color.Magenta,
+                            tint = BasketKrkColors.TextSecondary,
                             modifier = Modifier.size(16.dp)
                         )
                         Spacer(Modifier.width(2.dp))
                         Text(
                             text = arena,
+                            style = BasketKrkStyles.listItemSecondaryText
                         )
                     }
                 }
@@ -130,57 +169,13 @@ fun MatchListItem(
 }
 
 @Composable
-private fun TopItemView(match: Match) {
-    when (match.type) {
-        MatchType.REGULAR_SEASON -> {
-            Surface(color = Color.Green) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "dasdas",
-                    )
-                    match.league?.let { league ->
-                        Text(
-                            text = " - ${league.name} dsadsadas",
-                        )
-                    }
-                }
-            }
-        }
-
-        MatchType.PLAYOFFS -> {
-            val league = match.league
-            val finalText = when {
-                !match.description.isNullOrBlank() -> match.description
-                league != null -> league.name
-                else -> ""
-            }.orEmpty()
-
-            Surface(color = Color.Magenta) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "pdsapdas",
-                    )
-                    if (finalText.isNotEmpty()) {
-                        Text(
-                            text = " - $finalText",
-                        )
-                    }
-                }
-            }
-        }
-    }
+@Preview
+fun MatchListItemRegularSeasonPreview() {
+    MatchListItem(match = MatchFakeData.match(), onClick = {})
 }
 
-private fun resolveItemBg(match: Match): Color =
-    when (match.type) {
-        MatchType.REGULAR_SEASON -> Color.Transparent
-        MatchType.PLAYOFFS -> Color.Cyan
-    }
+@Composable
+@Preview
+fun MatchListItemPlayoffsPreview() {
+    MatchListItem(match = MatchFakeData.match(type = MatchType.PLAYOFFS), onClick = {})
+}

@@ -10,7 +10,7 @@ data class Match(
     val time: String,
     val type: MatchType,
     val status: MatchStatus,
-    val description: String?,
-    val arena: String?,
-    val league: League?
+    val description: String? = null,
+    val arena: String? = null,
+    val league: League? = null
 )

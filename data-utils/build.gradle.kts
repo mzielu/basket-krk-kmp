@@ -63,6 +63,9 @@ kotlin {
 
                 implementation(libs.kotlin.stdlib)
                 // Add KMP dependencies here
+
+                // kotlinx datetime
+                implementation(libs.kotlinx.datetime)
             }
         }
 

@@ -1,6 +1,7 @@
 package com.mzs.basket_krk.presentation.base.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
@@ -40,7 +41,8 @@ fun <T> DropdownFormField(
         onExpandedChange = { expanded = it }
     ) {
         OutlinedTextField(
-            modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
+            modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
+                .fillMaxWidth(),
             value = TextFieldValue(textFieldValue),
             onValueChange = {},
             readOnly = true,
