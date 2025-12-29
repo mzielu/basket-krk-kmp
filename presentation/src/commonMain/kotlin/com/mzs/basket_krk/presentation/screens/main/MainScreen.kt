@@ -36,6 +36,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun MainScreen(
     viewModel: MainViewModel = koinViewModel(),
+    openMatchDetails: (Int) -> Unit,
 ) {
     val selectedTab by viewModel.selectedTab.collectAsState()
 
@@ -44,7 +45,7 @@ fun MainScreen(
         onTabSelected = { viewModel.selectTab(it) },
         contentFactory = { tab ->
             when (tab) {
-                MainTab.MATCHES -> MatchesScreen()
+                MainTab.MATCHES -> MatchesScreen(openMatchDetails = openMatchDetails)
                 MainTab.SEARCH -> Text("MY_OFFERS()")
                 MainTab.TABLES -> Text("DEVICES()")
                 MainTab.MORE -> Text("HELP_CENTER()")

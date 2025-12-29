@@ -9,4 +9,7 @@ sealed class Screen {
 
     @Serializable
     data object Settings : Screen()
+
+    @Serializable
+    data class MatchDetails(val matchId: Int) : Screen()
 }

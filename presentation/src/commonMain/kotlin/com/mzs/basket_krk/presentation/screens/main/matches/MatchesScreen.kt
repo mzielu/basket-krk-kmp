@@ -50,7 +50,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun MatchesScreen(viewModel: MatchesViewModel = koinViewModel()) {
+fun MatchesScreen(
+    viewModel: MatchesViewModel = koinViewModel(),
+    openMatchDetails: (Int) -> Unit,
+) {
     val viewState by viewModel.viewState.collectAsState()
     val matchesPagingItems = viewModel.pagingFlow.collectAsLazyPagingItems()
 
@@ -59,6 +62,7 @@ fun MatchesScreen(viewModel: MatchesViewModel = koinViewModel()) {
         matchesPagingItems = matchesPagingItems,
         onRoundSelected = viewModel::onRoundSelected,
         onSeasonSelected = viewModel::onSeasonSelected,
+        onMatchDetailsClick = openMatchDetails,
         onRefresh = viewModel::onRefresh
     )
 }
@@ -69,10 +73,12 @@ fun MatchesContent(
     matchesPagingItems: LazyPagingItems<Match>,
     onRoundSelected: (Round) -> Unit,
     onSeasonSelected: (Season) -> Unit,
+    onMatchDetailsClick: (Int) -> Unit,
     onRefresh: () -> Unit,
 ) {
     var wasRefreshFiredByUser by remember { mutableStateOf(false) }
-    val showRefresh = wasRefreshFiredByUser && matchesPagingItems.loadState.refresh == LoadState.Loading
+    val showRefresh =
+        wasRefreshFiredByUser && matchesPagingItems.loadState.refresh == LoadState.Loading
 
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
@@ -133,7 +139,7 @@ fun MatchesContent(
                                         matchesPagingItems[index]?.let { match ->
                                             MatchListItem(
                                                 match = match,
-                                                onClick = {},
+                                                onClick = onMatchDetailsClick,
                                                 modifier = Modifier.padding(
                                                     vertical = 4.dp,
                                                     horizontal = 8.dp
@@ -215,6 +221,7 @@ fun MatchesContent(
             onRefresh = {},
             onRoundSelected = {},
             onSeasonSelected = {},
+            onMatchDetailsClick = {},
             matchesPagingItems = lazyPagingItems
         )
     }
