@@ -1,9 +1,6 @@
 package com.mzs.basket_krk.presentation.base.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
@@ -19,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +30,10 @@ fun <T> DropdownFormField(
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
-    val textFieldState = rememberTextFieldState(readableValue(selectedOption))
+    var textFieldValue by remember {
+        mutableStateOf(selectedOption?.let { readableValue(it) } ?: "")
+    }
+
     ExposedDropdownMenuBox(
         modifier = modifier,
         expanded = expanded,
@@ -40,12 +41,14 @@ fun <T> DropdownFormField(
     ) {
         OutlinedTextField(
             modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
-            state = textFieldState,
+            value = TextFieldValue(textFieldValue),
+            onValueChange = {},
             readOnly = true,
-            lineLimits = TextFieldLineLimits.SingleLine,
+            singleLine = true,
             label = { Text(label, maxLines = 1, overflow = TextOverflow.Clip) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
         )
+
         ExposedDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
@@ -60,7 +63,7 @@ fun <T> DropdownFormField(
                     text = { Text(label, style = MaterialTheme.typography.bodyLarge) },
                     onClick = {
                         onOptionSelected(option)
-                        textFieldState.setTextAndPlaceCursorAtEnd(label)
+                        textFieldValue = readableValue(option)
                         expanded = false
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
