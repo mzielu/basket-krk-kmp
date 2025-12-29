@@ -47,6 +47,7 @@ fun ActionBar(
                     Icon(
                         imageVector = Icons.Default.ChevronLeft,
                         contentDescription = "Back",
+                        tint = BasketKrkColors.DefaultBackground
                     )
                 }
             }
@@ -56,6 +57,7 @@ fun ActionBar(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 textAlign = TextAlign.Start,
+                style = BasketKrkStyles.actionBarTitle,
                 modifier = Modifier.padding(horizontal = 8.dp).weight(1f),
             )
 

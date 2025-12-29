@@ -7,6 +7,12 @@ import androidx.compose.ui.unit.sp
 
 object BasketKrkStyles {
 
+    val actionBarTitle = TextStyle(
+        color = BasketKrkColors.AppBarText,
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp
+    )
+
     // LIST
     val listItemMainText = TextStyle(
         color = BasketKrkColors.TextHighlighted2,

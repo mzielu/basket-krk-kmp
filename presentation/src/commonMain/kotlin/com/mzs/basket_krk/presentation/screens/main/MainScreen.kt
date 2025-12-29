@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
@@ -21,11 +22,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import com.mzs.basket_krk.presentation.navigation.MainTab
 import com.mzs.basket_krk.presentation.base.ui.ActionBar
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
+import com.mzs.basket_krk.presentation.navigation.MainTab
+import com.mzs.basket_krk.presentation.navigation.icon
+import com.mzs.basket_krk.presentation.navigation.titleRes
 import com.mzs.basket_krk.presentation.screens.main.matches.MatchesScreen
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -59,35 +63,27 @@ fun MainContent(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = {
             ActionBar(
-                titleText = "test",
+                titleText = stringResource(selectedTab.titleRes()),
                 actions = {
-                    IconButton(onClick = {  }) {
+                    IconButton(onClick = { }) {
                         Icon(
-                            Icons.Outlined.Notifications,
-                            contentDescription = "test",
-                        )
-                    }
-                    IconButton(onClick = {  }) {
-                        Icon(
-                            Icons.Outlined.AccountCircle,
-                            contentDescription = "test",
+                            Icons.Outlined.Settings,
+                            tint = BasketKrkColors.AppBarText,
+                            contentDescription = "Settings",
                         )
                     }
                 },
             )
         },
         bottomBar = {
-            NavigationBar(containerColor = Color.White) {
+            NavigationBar(containerColor = BasketKrkColors.DefaultBackground) {
                 MainTab.entries.forEach { tab ->
-                    val title = "title"
+                    val title = stringResource(tab.titleRes())
                     NavigationBarItem(
                         selected = selectedTab == tab,
                         onClick = { onTabSelected(tab) },
                         icon = {
-                            Icon(
-                                imageVector = Icons.Outlined.AccountCircle,
-                                contentDescription = title
-                            )
+                            Icon(imageVector = tab.icon(), contentDescription = title)
                         },
                         label = {
                             Text(title, textAlign = TextAlign.Center)
