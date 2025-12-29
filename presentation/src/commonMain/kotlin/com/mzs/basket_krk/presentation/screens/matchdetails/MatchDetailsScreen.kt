@@ -17,7 +17,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MatchDetailsScreen(
-    viewModel: MatchDetailsViewModel = koinViewModel(),
+    viewModel: MatchDetailsViewModel,
     onNavigateBack: () -> Unit,
 ) {
 
@@ -54,7 +54,7 @@ fun MatchDetailsContent(
 @Preview
 fun MatchDetailsContentPreview() {
     MatchDetailsContent(
-        viewState = MatchDetailsViewState(argMatchId = 69),
+        viewState = MatchDetailsViewState(),
         onNavigateBack = {},
     )
 }

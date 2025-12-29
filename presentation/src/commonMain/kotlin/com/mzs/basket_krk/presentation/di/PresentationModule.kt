@@ -13,6 +13,7 @@ import com.mzs.basket_krk.presentation.screens.main.matches.MatchesViewModel
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.BaseMatchesPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.MatchesPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -29,5 +30,5 @@ val presentationModule = module {
     // view models
     viewModelOf(::MainViewModel)
     viewModelOf(::MatchesViewModel)
-    viewModelOf(::MatchDetailsViewModel)
+    viewModel { (matchId: Int) -> MatchDetailsViewModel(matchId) }
 }

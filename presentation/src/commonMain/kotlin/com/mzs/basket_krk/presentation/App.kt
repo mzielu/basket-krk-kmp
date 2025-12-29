@@ -16,6 +16,9 @@ import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.navigation.Screen
 import com.mzs.basket_krk.presentation.screens.main.MainScreen
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsScreen
+import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
+import org.koin.compose.koinInject
+import org.koin.core.parameter.parametersOf
 
 
 @Composable
@@ -44,7 +47,12 @@ fun App() {
 
                 composable<Screen.MatchDetails> { backStackEntry ->
                     val args = backStackEntry.toRoute<Screen.MatchDetails>()
+                    val viewModel: MatchDetailsViewModel = koinInject(
+                        parameters = { parametersOf(args.matchId) }
+                    )
+
                     MatchDetailsScreen(
+                        viewModel = viewModel,
                         onNavigateBack = { navController.popBackStack() },
                     )
                 }
