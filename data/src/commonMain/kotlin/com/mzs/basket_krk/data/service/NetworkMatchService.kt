@@ -1,11 +1,13 @@
 package com.mzs.basket_krk.data.service
 
 import arrow.core.Either
+import com.mzs.basket_krk.data.dto.MatchDetailsDto
 import com.mzs.basket_krk.data.dto.MatchesListDto
 import com.mzs.basket_krk.data.dto.toDomain
 import com.mzs.basket_krk.domain.base.catchWithError
 import com.mzs.basket_krk.domain.model.Failure
 import com.mzs.basket_krk.domain.model.Match
+import com.mzs.basket_krk.domain.model.MatchDetails
 import com.mzs.basket_krk.domain.model.PageableData
 import com.mzs.basket_krk.domain.service.MatchService
 
@@ -15,6 +17,12 @@ class NetworkMatchService(
     override suspend fun getMatches(roundId: Int, page: Int): Either<Failure, PageableData<Match>> {
         return Either.catchWithError {
             apiService.get<MatchesListDto>("/round/$roundId/?page=$page").toDomain()
+        }
+    }
+
+    override suspend fun getMatchDetails(matchId: Int): Either<Failure, MatchDetails> {
+        return Either.catchWithError {
+            apiService.get<MatchDetailsDto>("/match/$matchId").toDomain()
         }
     }
 }
