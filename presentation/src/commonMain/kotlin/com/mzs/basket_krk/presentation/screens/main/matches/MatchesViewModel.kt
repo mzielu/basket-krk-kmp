@@ -40,6 +40,8 @@ import kotlin.math.abs
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
+private const val PAGE_SIZE = 15
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class MatchesViewModel(
     private val getSeasonsInfo: GetSeasonsInfo,
@@ -71,9 +73,9 @@ class MatchesViewModel(
             .filterNotNull()
             .flatMapLatest { round ->
                 Pager(
-                    config = PagingConfig(pageSize = 10),
+                    config = PagingConfig(pageSize = PAGE_SIZE),
                     pagingSourceFactory = {
-                        matchesPagingSourceFactory.create(10, round.id)
+                        matchesPagingSourceFactory.create(PAGE_SIZE, round.id)
                             .also { pagingSource = it }
                     },
                 ).flow
@@ -95,7 +97,7 @@ class MatchesViewModel(
     }
 
     private fun refreshMatches() {
-        if (this::pagingSource.isInitialized) pagingSource.invalidate()
+        if (::pagingSource.isInitialized) pagingSource.invalidate()
     }
 
     fun onRoundSelected(newRound: Round) {

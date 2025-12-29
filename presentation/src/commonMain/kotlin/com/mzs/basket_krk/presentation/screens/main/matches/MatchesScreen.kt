@@ -19,6 +19,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -35,6 +38,7 @@ import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.presentation.base.isEmpty
 import com.mzs.basket_krk.presentation.base.isError
 import com.mzs.basket_krk.presentation.base.isLoading
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkPullToRefresh
 import com.mzs.basket_krk.presentation.base.ui.DropdownFormField
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
 import com.mzs.basket_krk.presentation.base.ui.PaginationErrorItem
@@ -67,6 +71,9 @@ fun MatchesContent(
     onSeasonSelected: (Season) -> Unit,
     onRefresh: () -> Unit,
 ) {
+    var wasRefreshFiredByUser by remember { mutableStateOf(false) }
+    val showRefresh = wasRefreshFiredByUser && matchesPagingItems.loadState.refresh == LoadState.Loading
+
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
     ) { innerPadding ->
@@ -114,35 +121,43 @@ fun MatchesContent(
                                 Text("No matches found")
                             }
                         } else {
-                            LazyColumn(Modifier.fillMaxSize()) {
-                                items(matchesPagingItems.itemCount) { index ->
-                                    matchesPagingItems[index]?.let { match ->
-                                        MatchListItem(
-                                            match = match,
-                                            onClick = {},
-                                            modifier = Modifier.padding(
-                                                vertical = 4.dp,
-                                                horizontal = 8.dp
-                                            )
-                                        )
-                                    }
+                            BasketKrkPullToRefresh(
+                                isRefreshing = showRefresh,
+                                onRefresh = {
+                                    wasRefreshFiredByUser = true
+                                    onRefresh()
                                 }
-
-                                with(matchesPagingItems) {
-                                    when {
-                                        loadState.refresh is LoadState.Error -> item {
-                                            PaginationErrorItem(
-                                                onRetryClick = matchesPagingItems::retry
+                            ) {
+                                LazyColumn(Modifier.fillMaxSize()) {
+                                    items(matchesPagingItems.itemCount) { index ->
+                                        matchesPagingItems[index]?.let { match ->
+                                            MatchListItem(
+                                                match = match,
+                                                onClick = {},
+                                                modifier = Modifier.padding(
+                                                    vertical = 4.dp,
+                                                    horizontal = 8.dp
+                                                )
                                             )
                                         }
+                                    }
 
-                                        loadState.append is LoadState.Error -> item {
-                                            PaginationErrorItem(
-                                                onRetryClick = matchesPagingItems::retry
-                                            )
+                                    with(matchesPagingItems) {
+                                        when {
+                                            loadState.refresh is LoadState.Error -> item {
+                                                PaginationErrorItem(
+                                                    onRetryClick = matchesPagingItems::retry
+                                                )
+                                            }
+
+                                            loadState.append is LoadState.Error -> item {
+                                                PaginationErrorItem(
+                                                    onRetryClick = matchesPagingItems::retry
+                                                )
+                                            }
+
+                                            isLoading -> item { PaginationLoadingIndicator() }
                                         }
-
-                                        isLoading -> item { PaginationLoadingIndicator() }
                                     }
                                 }
                             }
