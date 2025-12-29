@@ -12,8 +12,11 @@ data class MatchDetails(
     val time: String,
     val t1: MatchDetailsTeam,
     val t2: MatchDetailsTeam,
-    val qtrs: String? = null,
+    val qtrs: List<String> = emptyList(),
     val description: String? = null,
     val arena: String? = null,
     val league: League? = null
-)
+) {
+    val statsEmpty: Boolean
+        get() = t1.stats.isNullOrEmpty() && t2.stats.isNullOrEmpty()
+}

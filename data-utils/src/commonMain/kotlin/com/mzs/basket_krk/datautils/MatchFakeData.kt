@@ -74,8 +74,8 @@ object MatchFakeData {
         time: String = "18:00",
         team1: MatchDetailsTeam = matchDetailsTeam(name = "Home Team", points = 85),
         team2: MatchDetailsTeam = matchDetailsTeam(name = "Away Team", points = 78),
-        qtrs: String? = "Q1: 20-18, Q2: 22-20, Q3: 25-22, Q4: 18-18",
-        desc: String? = "Exciting match between top teams.",
+        qtrs: List<String> = listOf("12:20", "25:18", "22:22", "26:18"),
+        desc: String? = "FINAL (ALL-STAR)",
         arena: String? = "Main Arena",
         league: League? = league()
     ) = MatchDetails(
