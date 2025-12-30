@@ -1,5 +1,6 @@
 package com.mzs.basket_krk.presentation.base.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,6 +32,7 @@ fun SumAvgCornerCell(
         modifier = Modifier
             .height(height)
             .fillMaxWidth()
+            .background(BasketKrkColors.DefaultBackground)
             .padding(start = 8.dp),
         contentAlignment = Alignment.CenterStart
     ) {

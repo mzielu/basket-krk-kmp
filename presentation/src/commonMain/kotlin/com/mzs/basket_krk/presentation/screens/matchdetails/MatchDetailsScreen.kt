@@ -44,9 +44,10 @@ import basket_krk.presentation.generated.resources.label_reg_season
 import basket_krk.presentation.generated.resources.league_label
 import com.mzs.basket_krk.datautils.MatchFakeData
 import com.mzs.basket_krk.domain.model.MatchDetails
+import com.mzs.basket_krk.domain.model.MatchDetailsTeam
 import com.mzs.basket_krk.domain.model.MatchStatus
 import com.mzs.basket_krk.domain.model.MatchType
-import com.mzs.basket_krk.domain.model.StatDisplayType
+import com.mzs.basket_krk.domain.model.StatOption
 import com.mzs.basket_krk.domain.model.TournamentType
 import com.mzs.basket_krk.presentation.base.ViewStateData
 import com.mzs.basket_krk.presentation.base.getMatchDateTime
@@ -110,8 +111,15 @@ fun MatchDetailsContent(
                     } else {
                         ViewWithTable(
                             matchDetails = matchDetails,
-                            onOpenTeamDetails = {},
-                            onOpenPlayerDetails = { }
+                            onOpenTeamDetails = {
+                                // TODO Handle team click
+                            },
+                            onOpenPlayerDetails = {
+                                // TODO Handle player click
+                            },
+                            onStatClicked = {
+                                // TODO Handle stat option click
+                            }
                         )
                     }
                 }
@@ -150,6 +158,7 @@ fun ViewWithTable(
     matchDetails: MatchDetails,
     onOpenTeamDetails: (Int) -> Unit,
     onOpenPlayerDetails: (Int) -> Unit,
+    onStatClicked: (StatOption) -> Unit,
 ) {
 
     var selectedTabIndex by remember { mutableStateOf(0) }
@@ -227,10 +236,11 @@ fun ViewWithTable(
                 0 -> {
                     MatchDetailsTeamTable(
                         playersWithStats = matchDetails.t1.stats ?: emptyList(),
-                        statDisplayType = StatDisplayType.SUM,
-                        onPlayerPress = { id -> onOpenPlayerDetails(id) },
+                        onPlayerPress = { id ->
+                            onOpenPlayerDetails(id)
+                        },
                         onStatOptionPress = { statOption ->
-                            //TODO xd
+                            onStatClicked(statOption)
                         }
                     )
                 }
@@ -238,10 +248,11 @@ fun ViewWithTable(
                 else -> {
                     MatchDetailsTeamTable(
                         playersWithStats = matchDetails.t2.stats ?: emptyList(),
-                        statDisplayType = StatDisplayType.SUM,
-                        onPlayerPress = { id -> onOpenPlayerDetails(id) },
+                        onPlayerPress = { id ->
+                            onOpenPlayerDetails(id)
+                        },
                         onStatOptionPress = { statOption ->
-                            //TODO xd
+                            onStatClicked(statOption)
                         }
                     )
                 }
@@ -297,51 +308,22 @@ private fun MiddleTopView(matchDetails: MatchDetails) {
 @Composable
 private fun TopView(matchDetails: MatchDetails, onOpenTeamDetails: (Int) -> Unit = {}) {
     return Row(modifier = Modifier.fillMaxWidth()) {
-        Box(
-            modifier = Modifier.weight(6f).padding(8.dp).clickable {
-                //TODO onOpenTeamDetails(matchDetails.t1.id)
-            }, contentAlignment = Alignment.Center
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                BasketKrkImage(
-                    logoUrl = matchDetails.t1.logo,
-                    contentDescription = "${matchDetails.t1.name} logo",
-                    modifier = Modifier.size(80.dp)
-                )
-                Text(
-                    text = matchDetails.t1.name,
-                    textAlign = TextAlign.Center,
-                    style = BasketKrkStyles.matchDetailsTeamName
-                )
-            }
-        }
 
-        // Middle
-        Box(
-            modifier = Modifier.weight(7f), contentAlignment = Alignment.Center
-        ) {
+        TeamPart(
+            matchTeam = matchDetails.t1,
+            onOpenTeamDetails = onOpenTeamDetails,
+            modifier = Modifier.weight(6f)
+        )
+
+        Box(modifier = Modifier.weight(7f), contentAlignment = Alignment.Center) {
             MiddleTopView(matchDetails = matchDetails)
         }
 
-        // Right team
-        Box(
-            modifier = Modifier.weight(6f).padding(8.dp).clickable {
-                //TODO onOpenTeamDetails(matchDetails.t2.id)
-            }, contentAlignment = Alignment.Center
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                BasketKrkImage(
-                    logoUrl = matchDetails.t2.logo,
-                    contentDescription = "${matchDetails.t2.name} logo",
-                    modifier = Modifier.size(80.dp)
-                )
-                Text(
-                    text = matchDetails.t2.name,
-                    textAlign = TextAlign.Center,
-                    style = BasketKrkStyles.matchDetailsTeamName
-                )
-            }
-        }
+        TeamPart(
+            matchTeam = matchDetails.t1,
+            onOpenTeamDetails = onOpenTeamDetails,
+            modifier = Modifier.weight(6f)
+        )
     }
 }
 
@@ -380,6 +362,32 @@ private fun MatchDetails.resolveMiddleText(): String {
         }
 
         MatchStatus.FINISHED -> stringResource(Res.string.label_match_no_stats)
+    }
+}
+
+@Composable
+private fun TeamPart(
+    matchTeam: MatchDetailsTeam,
+    onOpenTeamDetails: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.padding(8.dp).clickable {
+            onOpenTeamDetails(matchTeam.id)
+        }, contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            BasketKrkImage(
+                logoUrl = matchTeam.logo,
+                contentDescription = "${matchTeam.name} logo",
+                modifier = Modifier.size(80.dp)
+            )
+            Text(
+                text = matchTeam.name,
+                textAlign = TextAlign.Center,
+                style = BasketKrkStyles.matchDetailsTeamName
+            )
+        }
     }
 }
 

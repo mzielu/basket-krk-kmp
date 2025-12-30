@@ -40,7 +40,6 @@ val cellWidth = 35.dp
 @Composable
 fun MatchDetailsTeamTable(
     playersWithStats: List<PlayerWithStat>,
-    statDisplayType: StatDisplayType,
     onPlayerPress: (Int) -> Unit,
     onStatOptionPress: (StatOption) -> Unit
 ) {
@@ -67,11 +66,11 @@ fun MatchDetailsTeamTable(
             Column {
                 // rows for players
                 playersWithStats.forEachIndexed { _, pws ->
-                    StatLine(pws.stat, statOptions, statDisplayType)
+                    StatLine(pws.stat, statOptions)
                 }
 
                 //general stat row
-                generalStat?.let { StatLine(it, statOptions, statDisplayType) }
+                generalStat?.let { StatLine(it, statOptions) }
             }
         }
 
@@ -111,11 +110,7 @@ fun MatchDetailsTeamTable(
                 )
             }
 
-            // bottom-left corner cell (TOT/AVG)
-            SumAvgCornerCell(
-                statDisplayType = statDisplayType,
-                height = rowHeight
-            )
+            SumAvgCornerCell(statDisplayType = StatDisplayType.SUM, height = rowHeight)
         }
 
         // --- TOP-LEFT CORNER (PLAYER) ---ż
@@ -132,12 +127,11 @@ fun MatchDetailsTeamTable(
 private fun StatLine(
     stat: Stat,
     statOptions: List<StatOption>,
-    statDisplayType: StatDisplayType,
     bold: Boolean = false
 ) {
     Row {
         statOptions.forEachIndexed { colIndex, statOption ->
-            val value = stat.getValueForGivenOption(statOption, statDisplayType) ?: 0.0
+            val value = stat.getValueForGivenOption(statOption, StatDisplayType.SUM) ?: 0.0
             val text = value.toReadableStatOptionText(statOption)
 
             StatCell(
