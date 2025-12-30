@@ -1,5 +1,6 @@
 package com.mzs.basket_krk.presentation.screens.matchdetails
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,15 +14,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import basket_krk.presentation.generated.resources.Res
@@ -37,6 +46,7 @@ import com.mzs.basket_krk.datautils.MatchFakeData
 import com.mzs.basket_krk.domain.model.MatchDetails
 import com.mzs.basket_krk.domain.model.MatchStatus
 import com.mzs.basket_krk.domain.model.MatchType
+import com.mzs.basket_krk.domain.model.StatDisplayType
 import com.mzs.basket_krk.domain.model.TournamentType
 import com.mzs.basket_krk.presentation.base.ViewStateData
 import com.mzs.basket_krk.presentation.base.getMatchDateTime
@@ -45,6 +55,7 @@ import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkImage
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
+import com.mzs.basket_krk.presentation.screens.matchdetails.components.MatchDetailsTeamTable
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -97,10 +108,10 @@ fun MatchDetailsContent(
                             middleText = matchDetails.resolveMiddleText()
                         )
                     } else {
-                        ViewWithoutTable(
+                        ViewWithTable(
                             matchDetails = matchDetails,
                             onOpenTeamDetails = {},
-                            middleText = matchDetails.resolveMiddleText()
+                            onOpenPlayerDetails = { }
                         )
                     }
                 }
@@ -130,6 +141,111 @@ fun ViewWithoutTable(
             Text(
                 text = middleText, textAlign = TextAlign.Center, modifier = Modifier.padding(32.dp)
             )
+        }
+    }
+}
+
+@Composable
+fun ViewWithTable(
+    matchDetails: MatchDetails,
+    onOpenTeamDetails: (Int) -> Unit,
+    onOpenPlayerDetails: (Int) -> Unit,
+) {
+
+    var selectedTabIndex by remember { mutableStateOf(0) }
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        TopView(matchDetails = matchDetails, onOpenTeamDetails = onOpenTeamDetails)
+
+        if (matchDetails.qtrs.isNotEmpty()) {
+            Text(
+                text = matchDetails.qtrs.joinToString(" | "),
+                style = BasketKrkStyles.matchDetailsDateScore,
+                modifier = Modifier.padding(bottom = 4.dp).align(Alignment.CenterHorizontally)
+            )
+        }
+
+        HorizontalDivider(color = BasketKrkColors.Main)
+
+        // Tab row container styled like Flutter
+        Box(
+            modifier = Modifier
+                .padding(horizontal = 32.dp, vertical = 8.dp)
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .background(BasketKrkColors.TabUnselected)
+        ) {
+            PrimaryTabRow(
+                selectedTabIndex = selectedTabIndex,
+                containerColor = BasketKrkColors.TabUnselected,
+                indicator = {
+                    TabRowDefaults.SecondaryIndicator(
+                        Modifier.tabIndicatorOffset(selectedTabIndex),
+                        color = BasketKrkColors.Main,
+                        height = 4.dp
+                    )
+                },
+            ) {
+                Tab(
+                    selected = selectedTabIndex == 0,
+                    onClick = { selectedTabIndex = 0 },
+                    text = {
+                        Text(
+                            text = matchDetails.t1.shortName,
+                            color = BasketKrkColors.TabText,
+                            style = if (selectedTabIndex == 0)
+                                BasketKrkStyles.fixedRowText
+                            else
+                                BasketKrkStyles.fixedRowText.copy(fontWeight = null)
+                        )
+                    }
+                )
+                Tab(
+                    selected = selectedTabIndex == 1,
+                    onClick = { selectedTabIndex = 1 },
+                    text = {
+                        Text(
+                            text = matchDetails.t2.shortName,
+                            color = BasketKrkColors.TabText,
+                            style = if (selectedTabIndex == 1)
+                                BasketKrkStyles.fixedRowText
+                            else
+                                BasketKrkStyles.fixedRowText.copy(fontWeight = null)
+                        )
+                    }
+                )
+            }
+        }
+
+        // Content
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .padding(4.dp)
+        ) {
+            when (selectedTabIndex) {
+                0 -> {
+                    MatchDetailsTeamTable(
+                        playersWithStats = matchDetails.t1.stats ?: emptyList(),
+                        statDisplayType = StatDisplayType.SUM,
+                        onPlayerPress = { id -> onOpenPlayerDetails(id) },
+                        onStatOptionPress = { statOption ->
+                            //TODO xd
+                        }
+                    )
+                }
+
+                else -> {
+                    MatchDetailsTeamTable(
+                        playersWithStats = matchDetails.t2.stats ?: emptyList(),
+                        statDisplayType = StatDisplayType.SUM,
+                        onPlayerPress = { id -> onOpenPlayerDetails(id) },
+                        onStatOptionPress = { statOption ->
+                            //TODO xd
+                        }
+                    )
+                }
+            }
         }
     }
 }
