@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -91,8 +92,13 @@ fun SearchContent(
                                     items(searchPagingItems.itemCount) { index ->
                                         searchPagingItems[index]?.let { item ->
                                             SearchListItem(
+                                                searchItem = item,
                                                 onTeamClick = openTeamDetails,
                                                 onPlayerClick = openPlayerDetails,
+                                                modifier = Modifier.padding(
+                                                    horizontal = 8.dp,
+                                                    vertical = 4.dp
+                                                )
                                             )
                                         }
                                     }

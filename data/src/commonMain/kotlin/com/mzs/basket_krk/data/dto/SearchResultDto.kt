@@ -24,14 +24,14 @@ sealed class SearchResultDto {
 
 @Serializable
 data class PlayerDto(
-    val id: Long,
+    val id: Int,
     @SerialName("fn") val firstName: String,
     @SerialName("ln") val lastName: String,
 )
 
 @Serializable
 data class TeamDto(
-    val id: Long,
+    val id: Int,
     val name: String,
     val logo: String? = null
 )

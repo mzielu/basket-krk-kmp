@@ -46,8 +46,7 @@ fun MatchItemTeamRow(
         BasketKrkImage(
             logoUrl = matchTeam.logoUrl,
             contentDescription = "${matchTeam.name} logo",
-            modifier = Modifier
-                .size(25.dp),
+            modifier = Modifier.size(25.dp),
         )
 
         Spacer(Modifier.width(4.dp))
