@@ -18,7 +18,7 @@ class GetMatchesUseCase(private val matchRepository: MatchRepository) : GetMatch
     data class Input(
         val roundId: Int,
         val page: Int,
-        //TODO implement page size in backend
+        // TODO implement page size in backend
         val pageSize: Int
     )
 }
