@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,6 +27,7 @@ import com.mzs.basket_krk.presentation.navigation.MainTab
 import com.mzs.basket_krk.presentation.navigation.icon
 import com.mzs.basket_krk.presentation.navigation.titleRes
 import com.mzs.basket_krk.presentation.screens.main.matches.MatchesScreen
+import com.mzs.basket_krk.presentation.screens.main.search.SearchScreen
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -37,6 +36,8 @@ import org.koin.compose.viewmodel.koinViewModel
 fun MainScreen(
     viewModel: MainViewModel = koinViewModel(),
     openMatchDetails: (Int) -> Unit,
+    openTeamDetails: (Int) -> Unit,
+    openPlayerDetails: (Int) -> Unit,
 ) {
     val selectedTab by viewModel.selectedTab.collectAsState()
 
@@ -46,7 +47,11 @@ fun MainScreen(
         contentFactory = { tab ->
             when (tab) {
                 MainTab.MATCHES -> MatchesScreen(openMatchDetails = openMatchDetails)
-                MainTab.SEARCH -> Text("MY_OFFERS()")
+                MainTab.SEARCH -> SearchScreen(
+                    openTeamDetails = openTeamDetails,
+                    openPlayerDetails = openPlayerDetails
+                )
+
                 MainTab.TABLES -> Text("DEVICES()")
                 MainTab.MORE -> Text("HELP_CENTER()")
             }

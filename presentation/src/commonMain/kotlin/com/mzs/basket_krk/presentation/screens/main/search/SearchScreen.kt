@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.mzs.basket_krk.domain.model.Match
+import com.mzs.basket_krk.domain.model.SearchItem
 import com.mzs.basket_krk.presentation.base.isEmpty
 import com.mzs.basket_krk.presentation.base.isError
 import com.mzs.basket_krk.presentation.base.isLoading
@@ -53,7 +53,7 @@ fun SearchScreen(
 @Composable
 fun SearchContent(
     viewState: SearchViewState,
-    searchPagingItems: LazyPagingItems<Match>,
+    searchPagingItems: LazyPagingItems<SearchItem>,
     openTeamDetails: (Int) -> Unit,
     openPlayerDetails: (Int) -> Unit,
     onRefresh: () -> Unit,

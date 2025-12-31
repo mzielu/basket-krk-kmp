@@ -14,8 +14,6 @@ class MatchesPagingSourceFactory(
             getMatches = getMatches
         )
     }
-
-
 }
 
 interface BaseMatchesPagingSourceFactory {

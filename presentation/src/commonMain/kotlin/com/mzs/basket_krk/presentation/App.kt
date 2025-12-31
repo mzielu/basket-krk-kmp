@@ -41,6 +41,12 @@ fun App() {
                     MainScreen(
                         openMatchDetails = {
                             navController.navigate(Screen.MatchDetails(matchId = it))
+                        },
+                        openPlayerDetails = {
+                            // TODO: implement player details navigation
+                        },
+                        openTeamDetails = {
+                            // TODO: implement team details navigation
                         }
                     )
                 }

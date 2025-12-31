@@ -8,7 +8,6 @@ import com.mzs.basket_krk.domain.model.PageableData
 
 abstract class BasePagingSource<T : Any>() : PagingSource<Int, T>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
-        Logger.d("XDDDDDDDDDDD Load called with params: $params")
         val nextPage = params.key ?: 1
         return fetchData(page = nextPage).fold(
             ifLeft = { error ->
@@ -28,8 +27,6 @@ abstract class BasePagingSource<T : Any>() : PagingSource<Int, T>() {
     }
 
     override fun getRefreshKey(state: PagingState<Int, T>): Int? {
-        Logger.d("XDDDDDDDDDDD Load called with params: $state")
-
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)

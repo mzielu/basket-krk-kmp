@@ -7,9 +7,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.mzs.basket_krk.domain.model.Match
+import com.mzs.basket_krk.domain.model.SearchItem
 import com.mzs.basket_krk.presentation.base.BasePagingSource
-import com.mzs.basket_krk.presentation.screens.main.matches.pagination.BaseMatchesPagingSourceFactory
+import com.mzs.basket_krk.presentation.screens.main.search.pagination.BaseSearchItemsPagingSourceFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -27,10 +27,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 private const val PAGE_SIZE = 15
+private const val INITIAL_FILTER_VALUE = ""
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class SearchViewModel(
-    private val matchesPagingSourceFactory: BaseMatchesPagingSourceFactory
+    private val searchItemsPagingSourceFactory: BaseSearchItemsPagingSourceFactory
 ) : ViewModel() {
     private val _viewState: MutableStateFlow<SearchViewState> = MutableStateFlow(SearchViewState())
     val viewState: StateFlow<SearchViewState> = _viewState.asStateFlow()
@@ -38,20 +39,20 @@ class SearchViewModel(
     private val _effect: MutableSharedFlow<SearchEffect> = MutableSharedFlow()
     val effect: SharedFlow<SearchEffect> = _effect.asSharedFlow()
 
-    private lateinit var pagingSource: BasePagingSource<Match>
+    private lateinit var pagingSource: BasePagingSource<SearchItem>
 
-    private val textFow: StateFlow<String?> by lazy {
+    private val textFow: StateFlow<String> by lazy {
         _viewState
             .map { it.currentTextFieldValue }
             .distinctUntilChanged()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(),
-                initialValue = null
+                initialValue = INITIAL_FILTER_VALUE
             )
     }
 
-    val pagingFlow: Flow<PagingData<Match>> by lazy {
+    val pagingFlow: Flow<PagingData<SearchItem>> by lazy {
         textFow
             .debounce(500)
             .distinctUntilChanged()
@@ -59,7 +60,7 @@ class SearchViewModel(
                 Pager(
                     config = PagingConfig(pageSize = PAGE_SIZE),
                     pagingSourceFactory = {
-                        matchesPagingSourceFactory.create(PAGE_SIZE, 12)
+                        searchItemsPagingSourceFactory.create(PAGE_SIZE, text)
                             .also { pagingSource = it }
                     },
                 ).flow
@@ -73,7 +74,7 @@ class SearchViewModel(
 
 @Immutable
 data class SearchViewState(
-    val currentTextFieldValue: String = ""
+    val currentTextFieldValue: String = INITIAL_FILTER_VALUE
 )
 
 sealed class SearchEffect {
