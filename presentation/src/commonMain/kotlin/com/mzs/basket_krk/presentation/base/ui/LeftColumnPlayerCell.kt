@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.mzs.basket_krk.datautils.PlayerFakeData
 import com.mzs.basket_krk.datautils.StatFakeData
 import com.mzs.basket_krk.domain.model.PlayerWithStat
+import com.mzs.basket_krk.presentation.base.drawTopBottomBorder
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -31,6 +32,7 @@ fun LeftColumnPlayerCell(
             .height(height)
             .fillMaxWidth()
             .background(BasketKrkColors.DefaultBackground)
+            .drawTopBottomBorder()
             .clickable(onClick = onClick)
             .padding(horizontal = 8.dp),
         contentAlignment = Alignment.CenterStart
