@@ -70,7 +70,7 @@ fun MatchDetailsTeamTable(
                 }
 
                 //general stat row
-                generalStat?.let { StatLine(it, statOptions) }
+                generalStat?.let { StatLine(stat = it, statOptions = statOptions, bold = true) }
             }
         }
 

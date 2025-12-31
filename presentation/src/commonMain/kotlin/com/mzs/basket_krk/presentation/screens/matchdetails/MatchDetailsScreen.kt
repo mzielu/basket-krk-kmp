@@ -71,6 +71,7 @@ fun MatchDetailsScreen(
     MatchDetailsContent(
         viewState = viewState,
         onRetry = viewModel::retry,
+        onSortByStat = viewModel::onSortByStat,
         onNavigateBack = onNavigateBack,
     )
 }
@@ -79,6 +80,7 @@ fun MatchDetailsScreen(
 fun MatchDetailsContent(
     viewState: MatchDetailsViewState,
     onRetry: () -> Unit,
+    onSortByStat: (StatOption) -> Unit,
     onNavigateBack: () -> Unit,
 ) {
     Scaffold(
@@ -117,9 +119,7 @@ fun MatchDetailsContent(
                             onOpenPlayerDetails = {
                                 // TODO Handle player click
                             },
-                            onStatClicked = {
-                                // TODO Handle stat option click
-                            }
+                            onStatClicked = onSortByStat
                         )
                     }
                 }
@@ -320,7 +320,7 @@ private fun TopView(matchDetails: MatchDetails, onOpenTeamDetails: (Int) -> Unit
         }
 
         TeamPart(
-            matchTeam = matchDetails.t1,
+            matchTeam = matchDetails.t2,
             onOpenTeamDetails = onOpenTeamDetails,
             modifier = Modifier.weight(6f)
         )
@@ -398,5 +398,6 @@ fun MatchDetailsContentPreview() {
         viewState = MatchDetailsViewState(matchDetails = ViewStateData(MatchFakeData.matchDetails())),
         onRetry = {},
         onNavigateBack = {},
+        onSortByStat = {},
     )
 }

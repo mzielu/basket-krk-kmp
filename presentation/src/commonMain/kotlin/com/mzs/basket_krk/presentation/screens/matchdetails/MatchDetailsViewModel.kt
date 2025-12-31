@@ -7,6 +7,12 @@ import co.touchlab.kermit.Logger
 import com.mzs.basket_krk.domain.base.onSuspendGeneralError
 import com.mzs.basket_krk.domain.base.onSuspendSuccess
 import com.mzs.basket_krk.domain.model.MatchDetails
+import com.mzs.basket_krk.domain.model.MatchDetailsTeam
+import com.mzs.basket_krk.domain.model.PlayerWithStat
+import com.mzs.basket_krk.domain.model.StatDisplayType
+import com.mzs.basket_krk.domain.model.StatOption
+import com.mzs.basket_krk.domain.model.getValueForGivenOption
+import com.mzs.basket_krk.domain.sortTeam
 import com.mzs.basket_krk.domain.usecase.GetMatchDetails
 import com.mzs.basket_krk.domain.usecase.GetMatchDetailsUseCase
 import com.mzs.basket_krk.presentation.base.ViewStateData
@@ -43,6 +49,24 @@ class MatchDetailsViewModel(
 
     fun retry() {
         fetchMatchDetails()
+    }
+
+    fun onSortByStat(statOption: StatOption) {
+        val matchDetails = _viewState.value.matchDetails.data ?: return
+
+        val team1Sorted = matchDetails.t1.sortTeam(statOption)
+        val team2Sorted = matchDetails.t2.sortTeam(statOption)
+
+        _viewState.update {
+            it.copy(
+                matchDetails = it.matchDetails.data(
+                    matchDetails.copy(
+                        t1 = matchDetails.t1.copy(stats = team1Sorted),
+                        t2 = matchDetails.t2.copy(stats = team2Sorted)
+                    )
+                )
+            )
+        }
     }
 }
 
