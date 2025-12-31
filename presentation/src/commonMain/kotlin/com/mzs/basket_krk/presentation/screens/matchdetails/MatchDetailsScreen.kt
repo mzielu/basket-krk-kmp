@@ -2,6 +2,7 @@ package com.mzs.basket_krk.presentation.screens.matchdetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,10 +14,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
@@ -31,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import basket_krk.presentation.generated.resources.Res
@@ -39,6 +45,7 @@ import basket_krk.presentation.generated.resources.label_match_no_stats
 import basket_krk.presentation.generated.resources.label_match_not_played_yet
 import basket_krk.presentation.generated.resources.label_match_wo_in_favor_of
 import basket_krk.presentation.generated.resources.label_match_wo_two_way
+import basket_krk.presentation.generated.resources.label_open_in_web
 import basket_krk.presentation.generated.resources.label_playoffs
 import basket_krk.presentation.generated.resources.label_reg_season
 import basket_krk.presentation.generated.resources.league_label
@@ -56,6 +63,7 @@ import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkImage
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
+import com.mzs.basket_krk.presentation.navigation.getWebLink
 import com.mzs.basket_krk.presentation.screens.matchdetails.components.MatchDetailsTeamTable
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -264,6 +272,8 @@ fun ViewWithTable(
 
 @Composable
 private fun MiddleTopView(matchDetails: MatchDetails) {
+    val uriHandler = LocalUriHandler.current
+
     Column(
         modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -285,8 +295,27 @@ private fun MiddleTopView(matchDetails: MatchDetails) {
             (matchDetails.status == MatchStatus.IN_PROGRESS || matchDetails.status == MatchStatus.FINISHED) && matchDetails.tournament != TournamentType.KNBA
 
         if (showOpenInWeb) {
-            Spacer(Modifier.height(6.dp))
-            //TODO OpenInWebButton(onOpenInWeb = { /* TODO */ } )
+            Box(Modifier.clickable(onClick = { uriHandler.openUri(matchDetails.getWebLink()) })) {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(top = 4.dp, bottom = 8.dp)
+                ) {
+                    Text(
+                        stringResource(Res.string.label_open_in_web),
+                        style = BasketKrkStyles.matchDetailsOpenInWeb
+                    )
+
+                    Spacer(modifier = Modifier.width(2.dp))
+
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Default.OpenInNew,
+                        contentDescription = null,
+                        tint = BasketKrkColors.MainLight,
+                        modifier = Modifier.size(12.dp)
+                    )
+                }
+            }
         }
 
         Text(

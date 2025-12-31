@@ -16,7 +16,7 @@
     <string name="error_update">Aktualizuj</string>
     <string name="label_playoffs">Playoffs</string>
     <string name="label_reg_season">Sezon regularny</string>
-    <string name="label_open_in_web">Szczegóły</string>
+    <string name="label_open_in_web">Pokaż więcej</string>
     <string name="label_match_not_played_yet">Mecz jeszcze nie był rozgrywany</string>
     <string name="label_match_about_start">Mecz zaraz się zacznie</string>
     <string name="label_match_wo_in_favor_of">Mecz zweryfikowany jako walkower na korzyść</string>

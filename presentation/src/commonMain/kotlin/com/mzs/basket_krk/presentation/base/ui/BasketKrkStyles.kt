@@ -129,7 +129,7 @@ object BasketKrkStyles {
         fontSize = 12.sp
     )
     val matchDetailsOpenInWeb = TextStyle(
-        color = BasketKrkColors.Main,
+        color = BasketKrkColors.MainLight,
         fontSize = 11.sp
     )
 

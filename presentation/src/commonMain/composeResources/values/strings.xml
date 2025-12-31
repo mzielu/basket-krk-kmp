@@ -16,7 +16,7 @@
     <string name="error_update">Update</string>
     <string name="label_playoffs">Playoffs</string>
     <string name="label_reg_season">Regular season</string>
-    <string name="label_open_in_web">Details</string>
+    <string name="label_open_in_web">Show more</string>
     <string name="label_match_not_played_yet">Match not played yet</string>
     <string name="label_match_about_start">Match is about to start</string>
     <string name="label_match_wo_in_favor_of">Match verified as a walkover in favor of</string>
