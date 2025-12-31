@@ -15,7 +15,7 @@ object SearchFakeData {
 
     fun searchItemTeam(
         id: Int = 1,
-        name: String = "John",
+        name: String = "War Schythes",
         logo: String? = null
     ) = SearchItem.Team(
         id = id,

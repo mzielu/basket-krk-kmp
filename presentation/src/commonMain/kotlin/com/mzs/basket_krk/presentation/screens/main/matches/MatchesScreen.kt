@@ -29,10 +29,9 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.mzs.basket_krk.datautils.MatchFakeData
+import com.mzs.basket_krk.datautils.SeasonFakeData
 import com.mzs.basket_krk.domain.model.Match
-import com.mzs.basket_krk.domain.model.MatchStatus
-import com.mzs.basket_krk.domain.model.MatchTeam
-import com.mzs.basket_krk.domain.model.MatchType
 import com.mzs.basket_krk.domain.model.Round
 import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.presentation.base.isEmpty
@@ -45,7 +44,6 @@ import com.mzs.basket_krk.presentation.base.ui.PaginationErrorItem
 import com.mzs.basket_krk.presentation.base.ui.PaginationLoadingIndicator
 import com.mzs.basket_krk.presentation.screens.main.matches.components.MatchListItem
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -173,56 +171,27 @@ fun MatchesContent(
             }
         }
     }
+}
 
-    @Composable
-    @Preview
-    fun MatchesScreenPreview() {
+@Composable
+@Preview
+fun MatchesScreenPreview() {
+    val pagingData = PagingData.from(listOf(MatchFakeData.match()))
+    val lazyPagingItems = MutableStateFlow(pagingData).collectAsLazyPagingItems()
 
-        val match = Match(
-            id = 1,
-            date = LocalDate(2025, 1, 1),
-            time = "18:00",
-            team1 = MatchTeam(
-                id = 1,
-                name = "Home Team",
-                shortName = "HT",
-                logoUrl = "path/to/logo1.png",
-                points = 75
-            ),
-            team2 = MatchTeam(
-                id = 2,
-                name = "Away Team",
-                shortName = "AT",
-                logoUrl = "path/to/logo2.png",
-                points = 68
-            ),
-            status = MatchStatus.FINISHED,
-            type = MatchType.REGULAR_SEASON,
-            arena = "Main Arena"
-        )
-
-        val pagingData = PagingData.from(emptyList<Match>())
-        val lazyPagingItems = MutableStateFlow(pagingData).collectAsLazyPagingItems()
-
-        val selectedSeason = Season(id = 1, num = 23)
-        val selectedRound = Round(id = 1, name = "Round 1", date = LocalDate(2025, 1, 1))
-        MatchesContent(
-            viewState = MatchesViewState(
-                rounds = listOf(
-                    selectedRound,
-                    Round(id = 2, name = "Round 2", date = LocalDate(2025, 1, 15))
-                ),
-                selectedRound = selectedRound,
-                seasons = listOf(
-                    selectedSeason
-                ),
-                selectedSeason = selectedSeason
-            ),
-            onRefresh = {},
-            onRoundSelected = {},
-            onSeasonSelected = {},
-            onMatchDetailsClick = {},
-            matchesPagingItems = lazyPagingItems
-        )
-    }
+    val selectedSeason = SeasonFakeData.season()
+    val selectedRound = SeasonFakeData.round(name = "Round 1")
+    MatchesContent(
+        viewState = MatchesViewState(
+            rounds = listOf(selectedRound),
+            selectedRound = selectedRound,
+            seasons = listOf(selectedSeason),
+            selectedSeason = selectedSeason
+        ),
+        onRefresh = {},
+        onRoundSelected = {},
+        onSeasonSelected = {},
+        onMatchDetailsClick = {},
+        matchesPagingItems = lazyPagingItems
+    )
 }

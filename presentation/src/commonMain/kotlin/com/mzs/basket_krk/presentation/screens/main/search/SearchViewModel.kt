@@ -54,7 +54,7 @@ class SearchViewModel(
 
     val pagingFlow: Flow<PagingData<SearchItem>> by lazy {
         textFow
-            .debounce(500)
+            .debounce(1000)
             .distinctUntilChanged()
             .flatMapLatest { text ->
                 Pager(
@@ -69,6 +69,12 @@ class SearchViewModel(
 
     fun onRefresh() {
         if (::pagingSource.isInitialized) pagingSource.invalidate()
+    }
+
+    fun onTextFieldChanged(newValue: String) {
+        _viewState.value = _viewState.value.copy(
+            currentTextFieldValue = newValue
+        )
     }
 }
 
