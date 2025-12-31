@@ -34,7 +34,7 @@ fun AutoSizeText(
         onTextLayout = { result ->
             if (result.hasVisualOverflow && textStyle.fontSize > minFontSize) {
                 textStyle = textStyle.copy(
-                    fontSize = textStyle.fontSize * 0.9f
+                    fontSize = textStyle.fontSize * 0.95f
                 )
             } else {
                 readyToDraw = true

@@ -59,6 +59,7 @@ import com.mzs.basket_krk.domain.model.TournamentType
 import com.mzs.basket_krk.presentation.base.ViewStateData
 import com.mzs.basket_krk.presentation.base.getMatchDateTime
 import com.mzs.basket_krk.presentation.base.ui.ActionBar
+import com.mzs.basket_krk.presentation.base.ui.AutoSizeText
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkImage
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
@@ -285,10 +286,9 @@ private fun MiddleTopView(matchDetails: MatchDetails) {
 
         Spacer(Modifier.height(8.dp))
 
-        Text(
+        AutoSizeText(
             text = "${matchDetails.t1.points} - ${matchDetails.t2.points}",
-            style = BasketKrkStyles.matchDetailsMainScore,
-            textAlign = TextAlign.Center
+            style = BasketKrkStyles.matchDetailsMainScore
         )
 
         val showOpenInWeb =
@@ -303,6 +303,7 @@ private fun MiddleTopView(matchDetails: MatchDetails) {
                 ) {
                     Text(
                         stringResource(Res.string.label_open_in_web),
+                        textAlign = TextAlign.Center,
                         style = BasketKrkStyles.matchDetailsOpenInWeb
                     )
 
