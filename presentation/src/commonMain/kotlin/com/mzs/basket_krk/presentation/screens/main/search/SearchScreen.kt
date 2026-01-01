@@ -1,5 +1,6 @@
 package com.mzs.basket_krk.presentation.screens.main.search
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,7 +14,6 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -39,7 +39,9 @@ import com.mzs.basket_krk.presentation.base.isError
 import com.mzs.basket_krk.presentation.base.isLoading
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkPullToRefresh
+import com.mzs.basket_krk.presentation.base.ui.EmptyView
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
+import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
 import com.mzs.basket_krk.presentation.base.ui.PaginationErrorItem
 import com.mzs.basket_krk.presentation.base.ui.PaginationLoadingIndicator
 import com.mzs.basket_krk.presentation.screens.main.search.components.SearchListItem
@@ -76,15 +78,20 @@ fun SearchContent(
     onRefresh: () -> Unit,
 ) {
     var wasRefreshFiredByUser by remember { mutableStateOf(false) }
-    val showRefresh =
-        wasRefreshFiredByUser && searchPagingItems.loadState.refresh == LoadState.Loading
+
+    val itemsRefreshing = searchPagingItems.loadState.refresh == LoadState.Loading
+    val showRefresh = (wasRefreshFiredByUser && itemsRefreshing)
 
     var filterText by rememberSaveable { mutableStateOf(viewState.currentTextFieldValue) }
 
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
     ) { innerPadding ->
-        Column(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .background(BasketKrkColors.DefaultBackground)
+            .padding(innerPadding)
+        ) {
 
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth().padding(8.dp),
@@ -122,9 +129,9 @@ fun SearchContent(
                         Column(modifier = Modifier.fillMaxSize()) {
                             if (searchPagingItems.isEmpty) {
                                 if (searchPagingItems.isLoading) {
-                                    CircularProgressIndicator()
+                                    FullScreenLoader()
                                 } else {
-                                    Text("No matches found")
+                                    EmptyView()
                                 }
                             } else {
                                 BasketKrkPullToRefresh(

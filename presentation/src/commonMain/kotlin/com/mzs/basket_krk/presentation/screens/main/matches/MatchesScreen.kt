@@ -1,5 +1,6 @@
 package com.mzs.basket_krk.presentation.screens.main.matches
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,16 +14,13 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -37,9 +35,12 @@ import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.presentation.base.isEmpty
 import com.mzs.basket_krk.presentation.base.isError
 import com.mzs.basket_krk.presentation.base.isLoading
+import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkPullToRefresh
 import com.mzs.basket_krk.presentation.base.ui.DropdownFormField
+import com.mzs.basket_krk.presentation.base.ui.EmptyView
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
+import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
 import com.mzs.basket_krk.presentation.base.ui.PaginationErrorItem
 import com.mzs.basket_krk.presentation.base.ui.PaginationLoadingIndicator
 import com.mzs.basket_krk.presentation.screens.main.matches.components.MatchListItem
@@ -81,10 +82,15 @@ fun MatchesContent(
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
     ) { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(BasketKrkColors.DefaultBackground)
+                .padding(innerPadding)
+        ) {
             when {
                 viewState.fullScreenLoading -> {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    FullScreenLoader()
                 }
 
                 viewState.error != null || matchesPagingItems.isError -> {
@@ -120,9 +126,9 @@ fun MatchesContent(
 
                         if (matchesPagingItems.isEmpty) {
                             if (matchesPagingItems.isLoading) {
-                                CircularProgressIndicator()
+                                FullScreenLoader()
                             } else {
-                                Text("No matches found")
+                                EmptyView()
                             }
                         } else {
                             BasketKrkPullToRefresh(

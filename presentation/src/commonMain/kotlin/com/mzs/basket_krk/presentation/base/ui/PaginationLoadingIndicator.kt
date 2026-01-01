@@ -22,7 +22,7 @@ fun PaginationLoadingIndicator(
         modifier = modifier.fillMaxWidth()
     ) {
         Spacer(Modifier.height(24.dp))
-        CircularProgressIndicator()
+        CircularProgressIndicator(color = BasketKrkColors.Main)
         Spacer(Modifier.height(24.dp))
     }
 }

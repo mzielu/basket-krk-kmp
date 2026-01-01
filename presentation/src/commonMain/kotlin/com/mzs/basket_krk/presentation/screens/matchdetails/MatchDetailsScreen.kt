@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.PrimaryTabRow
@@ -64,6 +63,7 @@ import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkImage
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
+import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
 import com.mzs.basket_krk.presentation.navigation.getWebLink
 import com.mzs.basket_krk.presentation.screens.matchdetails.components.MatchDetailsTeamTable
 import org.jetbrains.compose.resources.stringResource
@@ -103,13 +103,9 @@ fun MatchDetailsContent(
         },
     ) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
-
-
             if (viewState.matchDetails.isLoading) {
-
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                FullScreenLoader()
             } else if (viewState.matchDetails.isError) {
-
                 ErrorView(error = viewState.matchDetails.error, retryAction = onRetry)
             } else {
                 viewState.matchDetails.data?.let { matchDetails ->
