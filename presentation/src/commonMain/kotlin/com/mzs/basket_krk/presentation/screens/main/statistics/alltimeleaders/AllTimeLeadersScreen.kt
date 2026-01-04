@@ -94,9 +94,7 @@ fun AllTimeLeadersContent(
     onRefresh: () -> Unit,
     onStatOptionChanged: (AllTimeStatLeaderOption) -> Unit,
 ) {
-    var wasRefreshFiredByUser by remember { mutableStateOf(false) }
-    val showRefresh =
-        wasRefreshFiredByUser && leadersPagingItems.loadState.refresh == LoadState.Loading
+    val showRefresh = leadersPagingItems.loadState.refresh == LoadState.Loading
 
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
@@ -159,7 +157,6 @@ fun AllTimeLeadersContent(
                                     BasketKrkPullToRefresh(
                                         isRefreshing = showRefresh,
                                         onRefresh = {
-                                            wasRefreshFiredByUser = true
                                             onRefresh()
                                         }
                                     ) {
