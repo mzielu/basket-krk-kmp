@@ -6,6 +6,8 @@ import com.mzs.basket_krk.domain.model.AllTimeStatLeaderOption
 import com.mzs.basket_krk.domain.model.Failure
 import com.mzs.basket_krk.domain.model.League
 import com.mzs.basket_krk.domain.model.LeagueDetails
+import com.mzs.basket_krk.domain.model.LeagueLeader
+import com.mzs.basket_krk.domain.model.LeagueStatLeaderOption
 import com.mzs.basket_krk.domain.model.PageableData
 import com.mzs.basket_krk.domain.repository.LeagueRepository
 import com.mzs.basket_krk.domain.service.LeagueService
@@ -16,6 +18,13 @@ class LeagueRepositoryImpl(private val leagueService: LeagueService) : LeagueRep
         page: Int
     ): Either<Failure, PageableData<AllTimeLeader>> {
         return leagueService.getAllTimeLeaders(statOption, page)
+    }
+
+    override suspend fun getLeagueLeaders(
+        leagueId: Int,
+        statOption: LeagueStatLeaderOption
+    ): Either<Failure, List<LeagueLeader>> {
+        return leagueService.getLeagueLeaders(leagueId, statOption)
     }
 
     override suspend fun getSeasonLeagues(seasonId: Int): Either<Failure, List<League>> {
