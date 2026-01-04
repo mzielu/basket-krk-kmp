@@ -17,7 +17,7 @@ object LeagueFakeData {
         team: SearchItem.Team = searchItemTeam(),
         value: Int = 1000,
         position: Int = 1,
-        inf: String? = "Some info"
+        inf: String? = "25.2"
     ) = AllTimeLeader(
         player = player,
         team = team,
