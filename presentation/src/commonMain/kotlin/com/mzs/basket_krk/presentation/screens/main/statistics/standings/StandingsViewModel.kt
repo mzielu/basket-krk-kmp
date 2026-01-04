@@ -11,12 +11,16 @@ import com.mzs.basket_krk.domain.model.League
 import com.mzs.basket_krk.domain.model.LeagueDetails
 import com.mzs.basket_krk.domain.model.Season
 import com.mzs.basket_krk.domain.usecase.GetLeagueDetails
+import com.mzs.basket_krk.domain.usecase.GetLeagueDetailsUseCase
 import com.mzs.basket_krk.domain.usecase.GetLeaguesForSeason
 import com.mzs.basket_krk.domain.usecase.GetLeaguesForSeasonUseCase
 import com.mzs.basket_krk.domain.usecase.GetLeaguesInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -33,6 +37,16 @@ class StandingsViewModel(
 
     init {
         fetchInitData()
+
+        viewModelScope.launch {
+            viewState
+                .map { it.selectedLeague }
+                .distinctUntilChanged()
+                .filterNotNull()
+                .collect {
+                    fetchLeagueDetails(leagueId = it.id)
+                }
+        }
     }
 
     fun onRefresh() {
@@ -41,12 +55,8 @@ class StandingsViewModel(
         when {
             vs.selectedSeason == null -> fetchInitData()
             vs.selectedLeague == null -> fetchLeaguesData(seasonId = vs.selectedSeason.id)
-            else -> refreshLeagueDetails()
+            else -> fetchLeagueDetails(vs.selectedLeague.id)
         }
-    }
-
-    private fun refreshLeagueDetails() {
-        // TODO implement if needed
     }
 
     fun onLeagueSelected(newLeague: League) {
@@ -98,6 +108,26 @@ class StandingsViewModel(
                     }
                 }.onSuspendGeneralError { error ->
                     Logger.e("Error when fetching leagues data", error)
+                    _viewState.update { it.copy(error = error, fullScreenLoading = false) }
+                }
+        }
+    }
+
+    private fun fetchLeagueDetails(leagueId: Int) {
+        viewModelScope.launch {
+            _viewState.update { it.copy(fullScreenLoading = true, error = null) }
+
+            getLeagueDetails
+                .invoke(GetLeagueDetailsUseCase.Input(leagueId = leagueId))
+                .onSuspendSuccess { details ->
+                    _viewState.update {
+                        it.copy(
+                            leagueDetails = details,
+                            fullScreenLoading = false
+                        )
+                    }
+                }.onSuspendGeneralError { error ->
+                    Logger.e("Error when fetching league details data", error)
                     _viewState.update { it.copy(error = error, fullScreenLoading = false) }
                 }
         }
