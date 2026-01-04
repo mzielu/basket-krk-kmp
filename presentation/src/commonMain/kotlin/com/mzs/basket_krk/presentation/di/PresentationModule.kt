@@ -4,6 +4,8 @@ import com.mzs.basket_krk.domain.usecase.GetMatchDetails
 import com.mzs.basket_krk.domain.usecase.GetMatchDetailsUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatches
 import com.mzs.basket_krk.domain.usecase.GetMatchesUseCase
+import com.mzs.basket_krk.domain.usecase.GetPlatform
+import com.mzs.basket_krk.domain.usecase.GetPlatformUseCase
 import com.mzs.basket_krk.domain.usecase.GetRoundsForSeason
 import com.mzs.basket_krk.domain.usecase.GetRoundsForSeasonUseCase
 import com.mzs.basket_krk.domain.usecase.GetSearchItems
@@ -14,6 +16,7 @@ import com.mzs.basket_krk.presentation.screens.main.MainViewModel
 import com.mzs.basket_krk.presentation.screens.main.matches.MatchesViewModel
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.BaseMatchesPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.MatchesPagingSourceFactory
+import com.mzs.basket_krk.presentation.screens.main.more.MoreViewModel
 import com.mzs.basket_krk.presentation.screens.main.search.SearchViewModel
 import com.mzs.basket_krk.presentation.screens.main.search.pagination.BaseSearchItemsPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.search.pagination.SearchItemsPagingSourceFactory
@@ -29,6 +32,7 @@ val presentationModule = module {
     single<GetRoundsForSeason> { GetRoundsForSeasonUseCase(get()) }
     single<GetMatchDetails> { GetMatchDetailsUseCase(get()) }
     single<GetSearchItems> { GetSearchItemsUseCase(get()) }
+    single<GetPlatform> { GetPlatformUseCase() }
 
     // data source factories
     single<BaseMatchesPagingSourceFactory> { MatchesPagingSourceFactory(get()) }
@@ -39,4 +43,5 @@ val presentationModule = module {
     viewModelOf(::MatchesViewModel)
     viewModel { (matchId: Int) -> MatchDetailsViewModel(matchId, get()) }
     viewModelOf(::SearchViewModel)
+    viewModelOf(::MoreViewModel)
 }

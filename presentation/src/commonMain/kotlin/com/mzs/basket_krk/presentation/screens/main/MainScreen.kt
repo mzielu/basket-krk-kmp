@@ -27,6 +27,7 @@ import com.mzs.basket_krk.presentation.navigation.MainTab
 import com.mzs.basket_krk.presentation.navigation.icon
 import com.mzs.basket_krk.presentation.navigation.titleRes
 import com.mzs.basket_krk.presentation.screens.main.matches.MatchesScreen
+import com.mzs.basket_krk.presentation.screens.main.more.MoreScreen
 import com.mzs.basket_krk.presentation.screens.main.search.SearchScreen
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -53,7 +54,11 @@ fun MainScreen(
                 )
 
                 MainTab.TABLES -> Text("DEVICES()")
-                MainTab.MORE -> Text("HELP_CENTER()")
+                MainTab.MORE -> MoreScreen(
+                    logEvent = { _, _ -> },
+                    onOpenPayments = {},
+                    onOpenTournamentChooser = {}
+                )
             }
         },
     )
