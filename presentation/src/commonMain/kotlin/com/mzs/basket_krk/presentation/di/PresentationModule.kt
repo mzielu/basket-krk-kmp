@@ -16,8 +16,8 @@ import com.mzs.basket_krk.domain.usecase.GetRoundsForSeason
 import com.mzs.basket_krk.domain.usecase.GetRoundsForSeasonUseCase
 import com.mzs.basket_krk.domain.usecase.GetSearchItems
 import com.mzs.basket_krk.domain.usecase.GetSearchItemsUseCase
-import com.mzs.basket_krk.domain.usecase.GetSeasonLeagues
-import com.mzs.basket_krk.domain.usecase.GetSeasonLeaguesUseCase
+import com.mzs.basket_krk.domain.usecase.GetLeaguesForSeason
+import com.mzs.basket_krk.domain.usecase.GetLeaguesForSeasonUseCase
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfo
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfoUseCase
 import com.mzs.basket_krk.presentation.screens.main.MainViewModel
@@ -47,7 +47,7 @@ val presentationModule = module {
     single<GetAllTimeLeaders> { GetAllTimeLeadersUseCase(get()) }
     single<GetLeagueDetails> { GetLeagueDetailsUseCase(get()) }
     single<GetLeaguesInfo> { GetLeaguesInfoUseCase(get()) }
-    single<GetSeasonLeagues> { GetSeasonLeaguesUseCase(get()) }
+    single<GetLeaguesForSeason> { GetLeaguesForSeasonUseCase(get()) }
 
 
     // data source factories
