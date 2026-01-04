@@ -2,6 +2,10 @@ package com.mzs.basket_krk.presentation.di
 
 import com.mzs.basket_krk.domain.usecase.GetAllTimeLeaders
 import com.mzs.basket_krk.domain.usecase.GetAllTimeLeadersUseCase
+import com.mzs.basket_krk.domain.usecase.GetLeagueDetails
+import com.mzs.basket_krk.domain.usecase.GetLeagueDetailsUseCase
+import com.mzs.basket_krk.domain.usecase.GetLeaguesInfo
+import com.mzs.basket_krk.domain.usecase.GetLeaguesInfoUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatchDetails
 import com.mzs.basket_krk.domain.usecase.GetMatchDetailsUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatches
@@ -12,6 +16,8 @@ import com.mzs.basket_krk.domain.usecase.GetRoundsForSeason
 import com.mzs.basket_krk.domain.usecase.GetRoundsForSeasonUseCase
 import com.mzs.basket_krk.domain.usecase.GetSearchItems
 import com.mzs.basket_krk.domain.usecase.GetSearchItemsUseCase
+import com.mzs.basket_krk.domain.usecase.GetSeasonLeagues
+import com.mzs.basket_krk.domain.usecase.GetSeasonLeaguesUseCase
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfo
 import com.mzs.basket_krk.domain.usecase.GetSeasonsInfoUseCase
 import com.mzs.basket_krk.presentation.screens.main.MainViewModel
@@ -39,6 +45,9 @@ val presentationModule = module {
     single<GetSearchItems> { GetSearchItemsUseCase(get()) }
     single<GetPlatform> { GetPlatformUseCase() }
     single<GetAllTimeLeaders> { GetAllTimeLeadersUseCase(get()) }
+    single<GetLeagueDetails> { GetLeagueDetailsUseCase(get()) }
+    single<GetLeaguesInfo> { GetLeaguesInfoUseCase(get()) }
+    single<GetSeasonLeagues> { GetSeasonLeaguesUseCase(get()) }
 
 
     // data source factories
