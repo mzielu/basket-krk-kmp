@@ -1,5 +1,7 @@
 package com.mzs.basket_krk.presentation.di
 
+import com.mzs.basket_krk.domain.usecase.GetAllTimeLeaders
+import com.mzs.basket_krk.domain.usecase.GetAllTimeLeadersUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatchDetails
 import com.mzs.basket_krk.domain.usecase.GetMatchDetailsUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatches
@@ -20,6 +22,9 @@ import com.mzs.basket_krk.presentation.screens.main.more.MoreViewModel
 import com.mzs.basket_krk.presentation.screens.main.search.SearchViewModel
 import com.mzs.basket_krk.presentation.screens.main.search.pagination.BaseSearchItemsPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.search.pagination.SearchItemsPagingSourceFactory
+import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersViewModel
+import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.pagination.AllTimeLeadersPagingSourceFactory
+import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.pagination.BaseAllTimeLeadersPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -33,10 +38,13 @@ val presentationModule = module {
     single<GetMatchDetails> { GetMatchDetailsUseCase(get()) }
     single<GetSearchItems> { GetSearchItemsUseCase(get()) }
     single<GetPlatform> { GetPlatformUseCase() }
+    single<GetAllTimeLeaders> { GetAllTimeLeadersUseCase(get()) }
+
 
     // data source factories
     single<BaseMatchesPagingSourceFactory> { MatchesPagingSourceFactory(get()) }
     single<BaseSearchItemsPagingSourceFactory> { SearchItemsPagingSourceFactory(get()) }
+    single<BaseAllTimeLeadersPagingSourceFactory> { AllTimeLeadersPagingSourceFactory(get()) }
 
     // view models
     viewModelOf(::MainViewModel)
@@ -44,4 +52,5 @@ val presentationModule = module {
     viewModel { (matchId: Int) -> MatchDetailsViewModel(matchId, get()) }
     viewModelOf(::SearchViewModel)
     viewModelOf(::MoreViewModel)
+    viewModelOf(::AllTimeLeadersViewModel)
 }

@@ -92,7 +92,6 @@ fun SearchContent(
             .background(BasketKrkColors.DefaultBackground)
             .padding(innerPadding)
         ) {
-
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth().padding(8.dp),
                 value = filterText,

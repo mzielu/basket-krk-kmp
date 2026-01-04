@@ -15,9 +15,12 @@ import androidx.navigation.toRoute
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.navigation.Screen
 import com.mzs.basket_krk.presentation.screens.main.MainScreen
+import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersScreen
+import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersViewModel
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsScreen
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 
@@ -47,7 +50,10 @@ fun App() {
                         },
                         openTeamDetails = {
                             // TODO: implement team details navigation
-                        }
+                        },
+                        openAllTimeLeaders = {
+                            navController.navigate(Screen.AllTimeLeaders)
+                        },
                     )
                 }
 
@@ -59,6 +65,16 @@ fun App() {
 
                     MatchDetailsScreen(
                         viewModel = viewModel,
+                        onNavigateBack = { navController.popBackStack() },
+                    )
+                }
+
+                composable<Screen.AllTimeLeaders> {
+                    AllTimeLeadersScreen(
+                        viewModel = koinViewModel<AllTimeLeadersViewModel>(),
+                        openPlayerDetails = {
+                            //TODO: implement player details navigation
+                        },
                         onNavigateBack = { navController.popBackStack() },
                     )
                 }

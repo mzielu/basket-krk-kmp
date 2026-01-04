@@ -1,6 +1,7 @@
 package com.mzs.basket_krk.datautils
 
 import com.mzs.basket_krk.domain.model.Round
+import com.mzs.basket_krk.domain.model.SearchItem
 import com.mzs.basket_krk.domain.model.Season
 import kotlinx.datetime.LocalDate
 

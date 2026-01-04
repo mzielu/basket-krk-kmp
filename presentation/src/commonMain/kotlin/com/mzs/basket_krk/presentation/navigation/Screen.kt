@@ -12,4 +12,7 @@ sealed class Screen {
 
     @Serializable
     data class MatchDetails(val matchId: Int) : Screen()
+
+    @Serializable
+    data object AllTimeLeaders : Screen()
 }

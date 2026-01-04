@@ -1,10 +1,28 @@
 package com.mzs.basket_krk.datautils
 
+import com.mzs.basket_krk.datautils.SearchFakeData.searchItemPlayer
+import com.mzs.basket_krk.datautils.SearchFakeData.searchItemTeam
+import com.mzs.basket_krk.domain.model.AllTimeLeader
 import com.mzs.basket_krk.domain.model.League
+import com.mzs.basket_krk.domain.model.SearchItem
 
 object LeagueFakeData {
     fun league(
         id: Int = 42,
         name: String = "Super League"
     ) = League(id = id, name = name)
+
+    fun allTimeLeader(
+        player: SearchItem.Player = searchItemPlayer(),
+        team: SearchItem.Team = searchItemTeam(),
+        value: Int = 1000,
+        position: Int = 1,
+        inf: String? = "Some info"
+    ) = AllTimeLeader(
+        player = player,
+        team = team,
+        value = value,
+        position = position,
+        inf = inf
+    )
 }
