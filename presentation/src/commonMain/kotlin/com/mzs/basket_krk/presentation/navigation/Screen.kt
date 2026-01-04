@@ -15,4 +15,7 @@ sealed class Screen {
 
     @Serializable
     data object AllTimeLeaders : Screen()
+
+    @Serializable
+    data object Standings : Screen()
 }

@@ -17,6 +17,8 @@ import com.mzs.basket_krk.presentation.navigation.Screen
 import com.mzs.basket_krk.presentation.screens.main.MainScreen
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersScreen
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersViewModel
+import com.mzs.basket_krk.presentation.screens.main.statistics.standings.StandingsScreen
+import com.mzs.basket_krk.presentation.screens.main.statistics.standings.StandingsViewModel
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsScreen
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
 import org.koin.compose.koinInject
@@ -54,6 +56,9 @@ fun App() {
                         openAllTimeLeaders = {
                             navController.navigate(Screen.AllTimeLeaders)
                         },
+                        openTables = {
+                            navController.navigate(Screen.Standings)
+                        }
                     )
                 }
 
@@ -75,6 +80,13 @@ fun App() {
                         openPlayerDetails = {
                             //TODO: implement player details navigation
                         },
+                        onNavigateBack = { navController.popBackStack() },
+                    )
+                }
+
+                composable<Screen.Standings> {
+                    StandingsScreen(
+                        viewModel = koinViewModel<StandingsViewModel>(),
                         onNavigateBack = { navController.popBackStack() },
                     )
                 }

@@ -30,9 +30,9 @@ class StandingsViewModel(
     private val getLeaguesForSeason: GetLeaguesForSeason,
     private val getLeagueDetails: GetLeagueDetails
 ) : ViewModel() {
-    private val _viewState: MutableStateFlow<MatchesViewState> =
-        MutableStateFlow(MatchesViewState())
-    val viewState: StateFlow<MatchesViewState> = _viewState.asStateFlow()
+    private val _viewState: MutableStateFlow<StandingsViewState> =
+        MutableStateFlow(StandingsViewState())
+    val viewState: StateFlow<StandingsViewState> = _viewState.asStateFlow()
 
 
     init {
@@ -135,7 +135,7 @@ class StandingsViewModel(
 }
 
 @Immutable
-data class MatchesViewState(
+data class StandingsViewState(
     val fullScreenLoading: Boolean = false,
     val seasons: List<Season> = emptyList(),
     val leagues: List<League> = emptyList(),

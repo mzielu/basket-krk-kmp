@@ -3,7 +3,9 @@ package com.mzs.basket_krk.datautils
 import com.mzs.basket_krk.datautils.SearchFakeData.searchItemPlayer
 import com.mzs.basket_krk.datautils.SearchFakeData.searchItemTeam
 import com.mzs.basket_krk.domain.model.AllTimeLeader
+import com.mzs.basket_krk.domain.model.Competition
 import com.mzs.basket_krk.domain.model.League
+import com.mzs.basket_krk.domain.model.LeagueDetails
 import com.mzs.basket_krk.domain.model.SearchItem
 
 object LeagueFakeData {
@@ -11,6 +13,12 @@ object LeagueFakeData {
         id: Int = 42,
         name: String = "Super League"
     ) = League(id = id, name = name)
+
+    fun leagueDetails(
+        id: Int = 42,
+        name: String = "Super League",
+        competitions: List<Competition> = emptyList()
+    ) = LeagueDetails(id = id, name = name, competitions = competitions)
 
     fun allTimeLeader(
         player: SearchItem.Player = searchItemPlayer(),
