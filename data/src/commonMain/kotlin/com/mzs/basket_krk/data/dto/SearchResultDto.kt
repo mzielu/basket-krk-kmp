@@ -29,6 +29,12 @@ data class PlayerDto(
     @SerialName("ln") val lastName: String,
 )
 
+fun PlayerDto.toDomain(): SearchItem.Player = SearchItem.Player(
+    id = id,
+    firstName = firstName,
+    lastName = lastName
+)
+
 @Serializable
 data class TeamDto(
     val id: Int,
@@ -36,17 +42,8 @@ data class TeamDto(
     val logo: String? = null
 )
 
-fun SearchResultDto.toDomain(): SearchItem =
-    when (this) {
-        is SearchResultDto.Player -> SearchItem.Player(
-            id = data.id,
-            firstName = data.firstName,
-            lastName = data.lastName
-        )
-
-        is SearchResultDto.Team -> SearchItem.Team(
-            id = data.id,
-            name = data.name,
-            logoPath = data.logo
-        )
-    }
+fun TeamDto.toDomain(): SearchItem.Team = SearchItem.Team(
+    id = id,
+    name = name,
+    logoPath = logo
+)

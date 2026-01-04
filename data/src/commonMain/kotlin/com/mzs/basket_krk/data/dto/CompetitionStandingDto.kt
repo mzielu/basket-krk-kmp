@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CompetitionStandingDto(
-    val team: SearchResultDto.Team,
+    val team: TeamDto,
     val pos: Int,
     val w: Int,
     val l: Int,
@@ -16,7 +16,7 @@ data class CompetitionStandingDto(
 )
 
 fun CompetitionStandingDto.toDomain() = CompetitionStanding(
-    team = team.toDomain() as SearchItem.Team,
+    team = team.toDomain(),
     pos = pos,
     w = w,
     l = l,

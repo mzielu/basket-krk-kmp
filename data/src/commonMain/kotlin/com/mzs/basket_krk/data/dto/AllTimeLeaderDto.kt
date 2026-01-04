@@ -1,7 +1,6 @@
 package com.mzs.basket_krk.data.dto
 
 import com.mzs.basket_krk.domain.model.AllTimeLeader
-import com.mzs.basket_krk.domain.model.SearchItem
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,8 +14,8 @@ data class AllTimeLeaderDto(
 )
 
 fun AllTimeLeaderDto.toDomain() = AllTimeLeader(
-    player = SearchResultDto.Player(data = player).toDomain() as SearchItem.Player,
-    team = SearchResultDto.Team(data = team).toDomain() as SearchItem.Team,
+    player = player.toDomain(),
+    team = team.toDomain(),
     value = value,
     position = position,
     inf = inf

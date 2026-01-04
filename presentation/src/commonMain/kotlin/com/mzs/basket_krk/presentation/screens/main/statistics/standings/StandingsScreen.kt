@@ -62,57 +62,59 @@ fun StandingsContent(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = {
             ActionBar(
-                titleText = "All Time Leaders",
+                titleText = "Standings",
                 showBackButton = true,
                 onBackButtonClick = onNavigateBack,
             )
         },
     ) { innerPadding ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(BasketKrkColors.DefaultBackground)
                 .padding(innerPadding)
         ) {
-            when {
-                viewState.fullScreenLoading -> {
-                    FullScreenLoader()
-                }
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                DropdownFormField(
+                    modifier = Modifier.weight(1f),
+                    label = "Season",
+                    options = viewState.seasons,
+                    selectedOption = viewState.selectedSeason,
+                    onOptionSelected = onSeasonSelected,
+                    readableValue = { it?.num.toString() }
+                )
 
-                viewState.error != null -> {
-                    ErrorView(error = viewState.error, retryAction = { onRefresh() })
-                }
+                Spacer(modifier = Modifier.width(8.dp))
 
-                else -> {
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(8.dp),
-                            horizontalArrangement = Arrangement.SpaceAround
-                        ) {
-                            DropdownFormField(
-                                modifier = Modifier.weight(1f),
-                                label = "Season",
-                                options = viewState.seasons,
-                                selectedOption = viewState.selectedSeason,
-                                onOptionSelected = onSeasonSelected,
-                                readableValue = { it?.num.toString() }
-                            )
+                DropdownFormField(
+                    modifier = Modifier.weight(3f),
+                    label = "League",
+                    options = viewState.leagues,
+                    selectedOption = viewState.selectedLeague,
+                    onOptionSelected = onLeagueSelected,
+                    readableValue = { it?.name.orEmpty() }
+                )
+            }
 
-                            Spacer(modifier = Modifier.width(8.dp))
+            Box(modifier = Modifier.weight(1f)) {
+                when {
+                    viewState.fullScreenLoading -> {
+                        FullScreenLoader()
+                    }
 
-                            DropdownFormField(
-                                modifier = Modifier.weight(3f),
-                                label = "League",
-                                options = viewState.leagues,
-                                selectedOption = viewState.selectedLeague,
-                                onOptionSelected = onLeagueSelected,
-                                readableValue = { it?.name.orEmpty() }
-                            )
+                    viewState.error != null -> {
+                        ErrorView(error = viewState.error, retryAction = { onRefresh() })
+                    }
+
+                    else -> {
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            viewState.leagueDetails?.let {
+                                Text(it.name)
+                            } ?: EmptyView()
                         }
-
-                        viewState.leagueDetails?.let {
-                            Text(it.name)
-                        } ?: EmptyView()
                     }
                 }
             }

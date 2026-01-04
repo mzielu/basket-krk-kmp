@@ -30,9 +30,7 @@ fun <T> DropdownFormField(
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var textFieldValue by remember {
-        mutableStateOf(selectedOption?.let { readableValue(it) } ?: "")
-    }
+    var text by remember(selectedOption) { mutableStateOf(readableValue(selectedOption)) }
 
     ExposedDropdownMenuBox(
         modifier = modifier,
@@ -42,7 +40,7 @@ fun <T> DropdownFormField(
         OutlinedTextField(
             modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
                 .fillMaxWidth(),
-            value = TextFieldValue(textFieldValue),
+            value = TextFieldValue(text),
             onValueChange = {},
             readOnly = true,
             singleLine = true,
@@ -72,7 +70,7 @@ fun <T> DropdownFormField(
                     },
                     onClick = {
                         onOptionSelected(option)
-                        textFieldValue = readableValue(option)
+                        text = readableValue(option)
                         expanded = false
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,

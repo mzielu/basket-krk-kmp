@@ -18,9 +18,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -40,7 +37,6 @@ import com.mzs.basket_krk.presentation.base.ui.BasketKrkPullToRefresh
 import com.mzs.basket_krk.presentation.base.ui.DropdownFormField
 import com.mzs.basket_krk.presentation.base.ui.EmptyView
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
-import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
 import com.mzs.basket_krk.presentation.base.ui.PaginationErrorItem
 import com.mzs.basket_krk.presentation.base.ui.PaginationLoadingIndicator
 import com.mzs.basket_krk.presentation.screens.main.matches.components.MatchListItem
@@ -75,99 +71,89 @@ fun MatchesContent(
     onMatchDetailsClick: (Int) -> Unit,
     onRefresh: () -> Unit,
 ) {
-    var wasRefreshFiredByUser by remember { mutableStateOf(false) }
     val showRefresh =
-        wasRefreshFiredByUser && matchesPagingItems.loadState.refresh == LoadState.Loading
+        (viewState.fullScreenLoading) || matchesPagingItems.loadState.refresh == LoadState.Loading
 
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
     ) { innerPadding ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(BasketKrkColors.DefaultBackground)
                 .padding(innerPadding)
         ) {
-            when {
-                viewState.fullScreenLoading -> {
-                    FullScreenLoader()
-                }
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                DropdownFormField(
+                    modifier = Modifier.weight(1f),
+                    label = "Season",
+                    options = viewState.seasons,
+                    selectedOption = viewState.selectedSeason,
+                    onOptionSelected = onSeasonSelected,
+                    readableValue = { it?.num.toString() }
+                )
 
-                viewState.error != null || matchesPagingItems.isError -> {
-                    ErrorView(error = viewState.error, retryAction = { onRefresh() })
-                }
+                Spacer(modifier = Modifier.width(8.dp))
 
-                else -> {
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(8.dp),
-                            horizontalArrangement = Arrangement.SpaceAround
-                        ) {
-                            DropdownFormField(
-                                modifier = Modifier.weight(1f),
-                                label = "Season",
-                                options = viewState.seasons,
-                                selectedOption = viewState.selectedSeason,
-                                onOptionSelected = onSeasonSelected,
-                                readableValue = { it?.num.toString() }
-                            )
+                DropdownFormField(
+                    modifier = Modifier.weight(3f),
+                    label = "Round",
+                    options = viewState.rounds,
+                    selectedOption = viewState.selectedRound,
+                    onOptionSelected = onRoundSelected,
+                    readableValue = { it?.name.orEmpty() }
+                )
+            }
 
-                            Spacer(modifier = Modifier.width(8.dp))
+            Box(modifier = Modifier.weight(1f)) {
+                when {
+                    viewState.error != null || matchesPagingItems.isError -> {
+                        ErrorView(error = viewState.error, retryAction = { onRefresh() })
+                    }
 
-                            DropdownFormField(
-                                modifier = Modifier.weight(3f),
-                                label = "Round",
-                                options = viewState.rounds,
-                                selectedOption = viewState.selectedRound,
-                                onOptionSelected = onRoundSelected,
-                                readableValue = { it?.name.orEmpty() }
-                            )
-                        }
+                    !viewState.fullScreenLoading && matchesPagingItems.isEmpty && !matchesPagingItems.isLoading -> {
+                        EmptyView()
+                    }
 
-                        if (matchesPagingItems.isEmpty) {
-                            if (matchesPagingItems.isLoading) {
-                                FullScreenLoader()
-                            } else {
-                                EmptyView()
+                    else -> {
+                        BasketKrkPullToRefresh(
+                            isRefreshing = showRefresh,
+                            onRefresh = {
+                                onRefresh()
                             }
-                        } else {
-                            BasketKrkPullToRefresh(
-                                isRefreshing = showRefresh,
-                                onRefresh = {
-                                    wasRefreshFiredByUser = true
-                                    onRefresh()
+                        ) {
+                            LazyColumn(Modifier.fillMaxSize()) {
+                                items(matchesPagingItems.itemCount) { index ->
+                                    matchesPagingItems[index]?.let { match ->
+                                        MatchListItem(
+                                            match = match,
+                                            onClick = onMatchDetailsClick,
+                                            modifier = Modifier.padding(
+                                                vertical = 4.dp,
+                                                horizontal = 8.dp
+                                            )
+                                        )
+                                    }
                                 }
-                            ) {
-                                LazyColumn(Modifier.fillMaxSize()) {
-                                    items(matchesPagingItems.itemCount) { index ->
-                                        matchesPagingItems[index]?.let { match ->
-                                            MatchListItem(
-                                                match = match,
-                                                onClick = onMatchDetailsClick,
-                                                modifier = Modifier.padding(
-                                                    vertical = 4.dp,
-                                                    horizontal = 8.dp
-                                                )
+
+                                with(matchesPagingItems) {
+                                    when {
+                                        loadState.refresh is LoadState.Error -> item {
+                                            PaginationErrorItem(
+                                                onRetryClick = matchesPagingItems::retry
                                             )
                                         }
-                                    }
 
-                                    with(matchesPagingItems) {
-                                        when {
-                                            loadState.refresh is LoadState.Error -> item {
-                                                PaginationErrorItem(
-                                                    onRetryClick = matchesPagingItems::retry
-                                                )
-                                            }
-
-                                            loadState.append is LoadState.Error -> item {
-                                                PaginationErrorItem(
-                                                    onRetryClick = matchesPagingItems::retry
-                                                )
-                                            }
-
-                                            isLoading -> item { PaginationLoadingIndicator() }
+                                        loadState.append is LoadState.Error -> item {
+                                            PaginationErrorItem(
+                                                onRetryClick = matchesPagingItems::retry
+                                            )
                                         }
+
+                                        isLoading && !isEmpty -> item { PaginationLoadingIndicator() }
                                     }
                                 }
                             }

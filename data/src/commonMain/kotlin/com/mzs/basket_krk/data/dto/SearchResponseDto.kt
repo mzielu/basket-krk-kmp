@@ -11,6 +11,11 @@ data class SearchResponseDto(
 )
 
 fun SearchResponseDto.toDomain(): PageableData<SearchItem> = PageableData(
-    data = data.map { it.toDomain() },
+    data = data.map {
+        when (it) {
+            is SearchResultDto.Player -> it.data.toDomain()
+            is SearchResultDto.Team -> it.data.toDomain()
+        }
+    },
     next = next
 )
