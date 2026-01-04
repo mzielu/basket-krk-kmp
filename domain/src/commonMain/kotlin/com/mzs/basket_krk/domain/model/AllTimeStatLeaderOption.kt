@@ -8,7 +8,7 @@ enum class AllTimeStatLeaderOption(val label: String) {
     BLK("BLK"),
     FT("FT"),
     FG("FG"),
-    FG3("3FG"),
+    FG3("FG3"),
     GMS("GMS"),
     DD("DD"),
     TD("TD"),
