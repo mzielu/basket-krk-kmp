@@ -14,8 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -31,6 +31,7 @@ import com.mzs.basket_krk.presentation.base.ui.DropdownFormField
 import com.mzs.basket_krk.presentation.base.ui.EmptyView
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
 import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
+import com.mzs.basket_krk.presentation.screens.main.statistics.standings.components.CompetitionItem
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -111,8 +112,25 @@ fun StandingsContent(
 
                     else -> {
                         Column(modifier = Modifier.fillMaxSize()) {
-                            viewState.leagueDetails?.let {
-                                Text(it.name)
+                            viewState.leagueDetails?.let { details ->
+
+                                LazyColumn {
+                                    items(details.competitions.size) { index ->
+                                        val competition = details.competitions[index]
+
+                                        CompetitionItem(
+                                            competition = competition,
+                                            onOpenTeamDetails = {
+                                                //TODO: implement navigation to team details
+                                            },
+                                            modifier = Modifier.padding(
+                                                horizontal = 8.dp,
+                                                vertical = 4.dp
+                                            )
+                                        )
+                                    }
+                                }
+
                             } ?: EmptyView()
                         }
                     }
