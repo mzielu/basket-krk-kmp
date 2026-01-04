@@ -4,9 +4,9 @@
     <string name="bottom_bar_players">Players</string>
     <string name="bottom_bar_teams">Teams</string>
     <string name="bottom_bar_standings">Standings</string>
+    <string name="bottom_bar_stats">Statistics</string>
     <string name="bottom_bar_more">More</string>
     <string name="bottom_bar_search">Search</string>
-    <string name="bottom_bar_stats">Leaders</string>
     <string name="players_search">Search for a player</string>
     <string name="teams_search">Search for a team</string>
     <string name="error_description">Unknown error occurred while fetching the data. Please try again 🙏</string>
@@ -93,6 +93,7 @@
     <string name="premium_delay_explanation">Premium access is activated immediately after purchase. Status changes like cancellation may take some time to reflect — occasionally up to a few hours.</string>
     <string name="season_leaders">Season leaders</string>
     <string name="all_time_leaders">All time leaders</string>
+    <string name="league_tables">League tables</string>
     <string name="pagination_premium_item_title">Want to see TOP 100 ranking?</string>
     <string name="pagination_premium_item_description">Support the project by upgrading to Premium.</string>
     <string name="pagination_premium_item_button">Upgrade to Premium</string>

@@ -4,9 +4,9 @@
     <string name="bottom_bar_players">Zawodnicy</string>
     <string name="bottom_bar_teams">Drużyny</string>
     <string name="bottom_bar_standings">Tabele</string>
+    <string name="bottom_bar_stats">Statystyki</string>
     <string name="bottom_bar_more">Więcej</string>
     <string name="bottom_bar_search">Szukaj</string>
-    <string name="bottom_bar_stats">Liderzy</string>
     <string name="players_search">Znajdź zawodnika</string>
     <string name="teams_search">Znajdź zespół</string>
     <string name="error_description">Podczas pobierania danych wystąpił nieznany błąd. Proszę spróbuj ponownie 🙏</string>
@@ -93,6 +93,7 @@
     <string name="premium_delay_explanation">Dostęp Premium jest aktywowany od razu po zakupie. Zmiany statusu, takie jak anulowanie subskrypcji, mogą być widoczne z opóźnieniem — czasem nawet do kilku godzin.</string>
     <string name="season_leaders">Liderzy sezonowi</string>
     <string name="all_time_leaders">Liderzy all-time</string>
+    <string name="league_tables">Tabele ligowe</string>
     <string name="pagination_premium_item_title">Chcesz zobaczyć ranking TOP 100?</string>
     <string name="pagination_premium_item_description">Wesprzyj projekt poprzez przejście na wersję Premium.</string>
     <string name="pagination_premium_item_button">Przejdź na Premium</string>

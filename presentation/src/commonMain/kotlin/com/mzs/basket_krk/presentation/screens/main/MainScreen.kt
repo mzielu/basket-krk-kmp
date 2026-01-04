@@ -29,6 +29,7 @@ import com.mzs.basket_krk.presentation.navigation.titleRes
 import com.mzs.basket_krk.presentation.screens.main.matches.MatchesScreen
 import com.mzs.basket_krk.presentation.screens.main.more.MoreScreen
 import com.mzs.basket_krk.presentation.screens.main.search.SearchScreen
+import com.mzs.basket_krk.presentation.screens.main.statistics.StatisticsScreen
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -53,9 +54,13 @@ fun MainScreen(
                     openPlayerDetails = openPlayerDetails
                 )
 
-                MainTab.TABLES -> Text("DEVICES()")
+                MainTab.STATS -> StatisticsScreen(
+                    openTables = {},
+                    openLeagueLeaders = {},
+                    openAllTimeLeaders = {}
+                )
+
                 MainTab.MORE -> MoreScreen(
-                    logEvent = { _, _ -> },
                     onOpenPayments = {},
                     onOpenTournamentChooser = {}
                 )
