@@ -92,45 +92,45 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PLYR-01 | — | Pending |
-| PLYR-02 | — | Pending |
-| PLOG-01 | — | Pending |
-| PLOG-02 | — | Pending |
-| PLOG-03 | — | Pending |
-| PLOG-04 | — | Pending |
-| PLOG-05 | — | Pending |
-| PSTA-01 | — | Pending |
-| PSTA-02 | — | Pending |
-| PSTA-03 | — | Pending |
-| PSTA-04 | — | Pending |
-| PREC-01 | — | Pending |
-| PREC-02 | — | Pending |
-| TEAM-01 | — | Pending |
-| TEAM-02 | — | Pending |
-| TEAM-03 | — | Pending |
-| TRES-01 | — | Pending |
-| TRES-02 | — | Pending |
-| TRES-03 | — | Pending |
-| TROS-01 | — | Pending |
-| TROS-02 | — | Pending |
-| TROS-03 | — | Pending |
-| TROS-04 | — | Pending |
-| TROS-05 | — | Pending |
-| TREC-01 | — | Pending |
-| TREC-02 | — | Pending |
-| TREC-03 | — | Pending |
-| TREC-04 | — | Pending |
-| NAV-01 | — | Pending |
-| NAV-02 | — | Pending |
-| NAV-03 | — | Pending |
-| NAV-04 | — | Pending |
-| NAV-05 | — | Pending |
+| PLYR-01 | Phase 1 | Pending |
+| PLYR-02 | Phase 1 | Pending |
+| PLOG-01 | Phase 2 | Pending |
+| PLOG-02 | Phase 2 | Pending |
+| PLOG-03 | Phase 2 | Pending |
+| PLOG-04 | Phase 2 | Pending |
+| PLOG-05 | Phase 2 | Pending |
+| PSTA-01 | Phase 2 | Pending |
+| PSTA-02 | Phase 2 | Pending |
+| PSTA-03 | Phase 2 | Pending |
+| PSTA-04 | Phase 2 | Pending |
+| PREC-01 | Phase 2 | Pending |
+| PREC-02 | Phase 2 | Pending |
+| TEAM-01 | Phase 3 | Pending |
+| TEAM-02 | Phase 3 | Pending |
+| TEAM-03 | Phase 3 | Pending |
+| TRES-01 | Phase 4 | Pending |
+| TRES-02 | Phase 4 | Pending |
+| TRES-03 | Phase 4 | Pending |
+| TROS-01 | Phase 4 | Pending |
+| TROS-02 | Phase 4 | Pending |
+| TROS-03 | Phase 4 | Pending |
+| TROS-04 | Phase 4 | Pending |
+| TROS-05 | Phase 4 | Pending |
+| TREC-01 | Phase 4 | Pending |
+| TREC-02 | Phase 4 | Pending |
+| TREC-03 | Phase 4 | Pending |
+| TREC-04 | Phase 4 | Pending |
+| NAV-01 | Phase 5 | Pending |
+| NAV-02 | Phase 5 | Pending |
+| NAV-03 | Phase 5 | Pending |
+| NAV-04 | Phase 5 | Pending |
+| NAV-05 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 33 total
-- Mapped to phases: 0
-- Unmapped: 33
+- Mapped to phases: 33
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 after initial definition*
+*Last updated: 2026-03-16 after roadmap creation — all 33 requirements mapped*
