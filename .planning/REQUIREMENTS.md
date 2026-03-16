@@ -15,22 +15,22 @@ Requirements for this milestone. Each maps to roadmap phases.
 ### Player Details — Game Logs
 
 - [ ] **PLOG-01**: User can view game logs as a scrollable stat table with fixed player/opponent column and scrollable stat columns
-- [ ] **PLOG-02**: User can filter game logs by season using a dropdown selector
-- [ ] **PLOG-03**: User can filter game logs by team (when player played for multiple teams in a season)
-- [ ] **PLOG-04**: User can sort game logs by clicking any stat column header
-- [ ] **PLOG-05**: User can click a game log row to navigate to the match details
+- [x] **PLOG-02**: User can filter game logs by season using a dropdown selector
+- [x] **PLOG-03**: User can filter game logs by team (when player played for multiple teams in a season)
+- [x] **PLOG-04**: User can sort game logs by clicking any stat column header
+- [x] **PLOG-05**: User can click a game log row to navigate to the match details
 
 ### Player Details — Stats
 
 - [ ] **PSTA-01**: User can view aggregated stats per season/team/league in a scrollable stat table
-- [ ] **PSTA-02**: User can toggle between average and total stat display
-- [ ] **PSTA-03**: User can see a totals row at the bottom of the stats table
-- [ ] **PSTA-04**: User can click a team name in stats to navigate to TeamDetails
+- [x] **PSTA-02**: User can toggle between average and total stat display
+- [x] **PSTA-03**: User can see a totals row at the bottom of the stats table
+- [x] **PSTA-04**: User can click a team name in stats to navigate to TeamDetails
 
 ### Player Details — Records
 
 - [ ] **PREC-01**: User can view a list of player record achievements (type, value, times, date)
-- [ ] **PREC-02**: User can click a record to navigate to the associated match
+- [x] **PREC-02**: User can click a record to navigate to the associated match
 
 ### Team Details — General
 
@@ -95,16 +95,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PLYR-01 | Phase 1 | Complete |
 | PLYR-02 | Phase 1 | Complete |
 | PLOG-01 | Phase 2 | Pending |
-| PLOG-02 | Phase 2 | Pending |
-| PLOG-03 | Phase 2 | Pending |
-| PLOG-04 | Phase 2 | Pending |
-| PLOG-05 | Phase 2 | Pending |
+| PLOG-02 | Phase 2 | Complete |
+| PLOG-03 | Phase 2 | Complete |
+| PLOG-04 | Phase 2 | Complete |
+| PLOG-05 | Phase 2 | Complete |
 | PSTA-01 | Phase 2 | Pending |
-| PSTA-02 | Phase 2 | Pending |
-| PSTA-03 | Phase 2 | Pending |
-| PSTA-04 | Phase 2 | Pending |
+| PSTA-02 | Phase 2 | Complete |
+| PSTA-03 | Phase 2 | Complete |
+| PSTA-04 | Phase 2 | Complete |
 | PREC-01 | Phase 2 | Pending |
-| PREC-02 | Phase 2 | Pending |
+| PREC-02 | Phase 2 | Complete |
 | TEAM-01 | Phase 3 | Pending |
 | TEAM-02 | Phase 3 | Pending |
 | TEAM-03 | Phase 3 | Pending |

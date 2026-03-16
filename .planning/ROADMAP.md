@@ -42,7 +42,7 @@ Plans:
   2. User can view aggregated stats per season/team, toggle between average and total, and see a totals row
   3. User can view a list of record achievements and click any record to open the associated match details
   4. User can tap a team name in the stats tab to open TeamDetails for that team
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 Plans:
 - [ ] 02-01-PLAN.md — Domain extensions, ViewModel state/handlers, navigation wiring
 - [ ] 02-02-PLAN.md — Game Logs/Stats/Records tab composables and PlayerDetailsScreen integration
@@ -88,7 +88,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Player Data Layer | 2/2 | Complete    | 2026-03-16 |
-| 2. PlayerDetails Screen | 0/2 | In progress | - |
+| 2. PlayerDetails Screen | 1/2 | In Progress|  |
 | 3. Team Data Layer | 0/TBD | Not started | - |
 | 4. TeamDetails Screen | 0/TBD | Not started | - |
 | 5. Navigation Integration | 0/TBD | Not started | - |
