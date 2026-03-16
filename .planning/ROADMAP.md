@@ -30,8 +30,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Each tab shows a loading state while its data is being fetched, confirming the repository calls are wired up
 **Plans:** 2/2 plans complete
 Plans:
-- [ ] 01-01-PLAN.md — Data layer: domain models, DTOs, service, repository
-- [ ] 01-02-PLAN.md — Presentation layer: use cases, ViewModel, screen, DI, navigation
+- [x] 01-01-PLAN.md — Data layer: domain models, DTOs, service, repository
+- [x] 01-02-PLAN.md — Presentation layer: use cases, ViewModel, screen, DI, navigation
 
 ### Phase 2: PlayerDetails Screen
 **Goal**: Users can open any player and explore their game logs, aggregated stats, and records across all seasons
@@ -42,7 +42,10 @@ Plans:
   2. User can view aggregated stats per season/team, toggle between average and total, and see a totals row
   3. User can view a list of record achievements and click any record to open the associated match details
   4. User can tap a team name in the stats tab to open TeamDetails for that team
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — Domain extensions, ViewModel state/handlers, navigation wiring
+- [ ] 02-02-PLAN.md — Game Logs/Stats/Records tab composables and PlayerDetailsScreen integration
 
 ### Phase 3: Team Data Layer
 **Goal**: The app can fetch, decode, and expose all team data needed by the TeamDetails screen
@@ -85,7 +88,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Player Data Layer | 2/2 | Complete    | 2026-03-16 |
-| 2. PlayerDetails Screen | 0/TBD | Not started | - |
+| 2. PlayerDetails Screen | 0/2 | In progress | - |
 | 3. Team Data Layer | 0/TBD | Not started | - |
 | 4. TeamDetails Screen | 0/TBD | Not started | - |
 | 5. Navigation Integration | 0/TBD | Not started | - |
