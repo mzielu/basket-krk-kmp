@@ -29,15 +29,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mzs.basket_krk.domain.model.PlayerDetails
+import com.mzs.basket_krk.domain.model.PlayerLogByTeam
+import com.mzs.basket_krk.domain.model.Season
+import com.mzs.basket_krk.domain.model.StatDisplayType
+import com.mzs.basket_krk.domain.model.StatOption
 import com.mzs.basket_krk.presentation.base.ui.ActionBar
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkImage
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
 import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
+import com.mzs.basket_krk.presentation.screens.playerdetails.components.PlayerGameLogsTab
+import com.mzs.basket_krk.presentation.screens.playerdetails.components.PlayerRecordsTab
+import com.mzs.basket_krk.presentation.screens.playerdetails.components.PlayerStatsTab
 
 @Composable
 fun PlayerDetailsScreen(
@@ -52,6 +58,10 @@ fun PlayerDetailsScreen(
         viewState = viewState,
         onRetry = viewModel::retry,
         onTabSelected = viewModel::onTabSelected,
+        onSeasonSelected = viewModel::onSeasonSelected,
+        onTeamSelected = viewModel::onTeamSelected,
+        onSortByStat = viewModel::onSortByStat,
+        onStatDisplayTypeChanged = viewModel::onStatDisplayTypeChanged,
         onNavigateBack = onNavigateBack,
         onNavigateToMatch = onNavigateToMatch,
         onNavigateToTeam = onNavigateToTeam,
@@ -63,6 +73,10 @@ fun PlayerDetailsContent(
     viewState: PlayerDetailsViewState,
     onRetry: () -> Unit,
     onTabSelected: (Int) -> Unit,
+    onSeasonSelected: (Season) -> Unit,
+    onTeamSelected: (PlayerLogByTeam) -> Unit,
+    onSortByStat: (StatOption) -> Unit,
+    onStatDisplayTypeChanged: (StatDisplayType) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToMatch: (Int) -> Unit,
     onNavigateToTeam: (Int) -> Unit,
@@ -91,6 +105,10 @@ fun PlayerDetailsContent(
                         details = details,
                         viewState = viewState,
                         onTabSelected = onTabSelected,
+                        onSeasonSelected = onSeasonSelected,
+                        onTeamSelected = onTeamSelected,
+                        onSortByStat = onSortByStat,
+                        onStatDisplayTypeChanged = onStatDisplayTypeChanged,
                         onNavigateToMatch = onNavigateToMatch,
                         onNavigateToTeam = onNavigateToTeam,
                     )
@@ -105,6 +123,10 @@ private fun PlayerDetailsBody(
     details: PlayerDetails,
     viewState: PlayerDetailsViewState,
     onTabSelected: (Int) -> Unit,
+    onSeasonSelected: (Season) -> Unit,
+    onTeamSelected: (PlayerLogByTeam) -> Unit,
+    onSortByStat: (StatOption) -> Unit,
+    onStatDisplayTypeChanged: (StatDisplayType) -> Unit,
     onNavigateToMatch: (Int) -> Unit,
     onNavigateToTeam: (Int) -> Unit,
 ) {
@@ -247,11 +269,20 @@ private fun PlayerDetailsBody(
                             error = viewState.gameLogs.error,
                             retryAction = null
                         )
-                        else -> Text(
-                            text = "Game Logs content coming in Phase 2",
-                            textAlign = TextAlign.Center,
-                            style = BasketKrkStyles.itemAdditionalInfo
-                        )
+                        else -> viewState.gameLogs.data?.let { playerLogList ->
+                            PlayerGameLogsTab(
+                                playerLogList = playerLogList,
+                                selectedTeam = viewState.selectedTeam,
+                                selectedSeason = viewState.selectedSeason,
+                                seasons = details.seasons,
+                                sortOption = viewState.sortOption,
+                                sortAscending = viewState.sortAscending,
+                                onSeasonSelected = onSeasonSelected,
+                                onTeamSelected = onTeamSelected,
+                                onSortByStat = onSortByStat,
+                                onMatchPress = onNavigateToMatch,
+                            )
+                        }
                     }
                 }
                 1 -> {
@@ -261,11 +292,14 @@ private fun PlayerDetailsBody(
                             error = viewState.stats.error,
                             retryAction = null
                         )
-                        else -> Text(
-                            text = "Stats content coming in Phase 2",
-                            textAlign = TextAlign.Center,
-                            style = BasketKrkStyles.itemAdditionalInfo
-                        )
+                        else -> viewState.stats.data?.let { statList ->
+                            PlayerStatsTab(
+                                playersStats = statList,
+                                statDisplayType = viewState.statDisplayType,
+                                onStatDisplayTypeChanged = onStatDisplayTypeChanged,
+                                onTeamPress = onNavigateToTeam,
+                            )
+                        }
                     }
                 }
                 else -> {
@@ -275,11 +309,12 @@ private fun PlayerDetailsBody(
                             error = viewState.records.error,
                             retryAction = null
                         )
-                        else -> Text(
-                            text = "Records content coming in Phase 2",
-                            textAlign = TextAlign.Center,
-                            style = BasketKrkStyles.itemAdditionalInfo
-                        )
+                        else -> viewState.records.data?.let { recordList ->
+                            PlayerRecordsTab(
+                                records = recordList,
+                                onRecordPress = onNavigateToMatch,
+                            )
+                        }
                     }
                 }
             }
