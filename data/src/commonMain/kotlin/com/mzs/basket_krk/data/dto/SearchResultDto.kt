@@ -2,6 +2,7 @@ package com.mzs.basket_krk.data.dto
 
 import com.mzs.basket_krk.data.serializer.SearchResultDtoSerializer
 import com.mzs.basket_krk.domain.model.SearchItem
+import com.mzs.basket_krk.domain.model.Team
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -46,4 +47,10 @@ fun TeamDto.toDomain(): SearchItem.Team = SearchItem.Team(
     id = id,
     name = name,
     logoPath = logo
+)
+
+fun TeamDto.toTeam(): Team = Team(
+    id = id,
+    name = name,
+    logoUrl = logo.orEmpty()
 )
