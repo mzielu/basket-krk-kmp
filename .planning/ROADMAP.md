@@ -12,7 +12,7 @@ This milestone completes the core deep-dive experience by migrating PlayerDetail
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Player Data Layer** - DTOs, Ktor endpoints, and repositories for all four player API endpoints
+- [x] **Phase 1: Player Data Layer** - DTOs, Ktor endpoints, and repositories for all four player API endpoints (completed 2026-03-16)
 - [ ] **Phase 2: PlayerDetails Screen** - Full three-tab PlayerDetails Compose screen with ViewModel and all interactions
 - [ ] **Phase 3: Team Data Layer** - DTOs, Ktor endpoints, and repositories for all four team API endpoints
 - [ ] **Phase 4: TeamDetails Screen** - Full three-tab TeamDetails Compose screen with ViewModel and all interactions
@@ -28,7 +28,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Player info header (name, current team, seasons played) renders correctly from live API data
   2. The PlayerDetails screen shell with three tabs opens without crashing when given a player ID
   3. Each tab shows a loading state while its data is being fetched, confirming the repository calls are wired up
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 01-01-PLAN.md — Data layer: domain models, DTOs, service, repository
 - [ ] 01-02-PLAN.md — Presentation layer: use cases, ViewModel, screen, DI, navigation
@@ -84,7 +84,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Player Data Layer | 1/2 | In Progress|  |
+| 1. Player Data Layer | 2/2 | Complete   | 2026-03-16 |
 | 2. PlayerDetails Screen | 0/TBD | Not started | - |
 | 3. Team Data Layer | 0/TBD | Not started | - |
 | 4. TeamDetails Screen | 0/TBD | Not started | - |

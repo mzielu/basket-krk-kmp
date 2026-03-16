@@ -10,7 +10,7 @@ Requirements for this milestone. Each maps to roadmap phases.
 ### Player Details — General
 
 - [x] **PLYR-01**: User can view player info header showing name, current team, and list of seasons played
-- [ ] **PLYR-02**: User can navigate between 3 tabs: Game Logs, Stats, Records
+- [x] **PLYR-02**: User can navigate between 3 tabs: Game Logs, Stats, Records
 
 ### Player Details — Game Logs
 
@@ -93,7 +93,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | PLYR-01 | Phase 1 | Complete |
-| PLYR-02 | Phase 1 | Pending |
+| PLYR-02 | Phase 1 | Complete |
 | PLOG-01 | Phase 2 | Pending |
 | PLOG-02 | Phase 2 | Pending |
 | PLOG-03 | Phase 2 | Pending |
