@@ -13,7 +13,7 @@ This milestone completes the core deep-dive experience by migrating PlayerDetail
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Player Data Layer** - DTOs, Ktor endpoints, and repositories for all four player API endpoints (completed 2026-03-16)
-- [ ] **Phase 2: PlayerDetails Screen** - Full three-tab PlayerDetails Compose screen with ViewModel and all interactions
+- [x] **Phase 2: PlayerDetails Screen** - Full three-tab PlayerDetails Compose screen with ViewModel and all interactions (completed 2026-03-16)
 - [ ] **Phase 3: Team Data Layer** - DTOs, Ktor endpoints, and repositories for all four team API endpoints
 - [ ] **Phase 4: TeamDetails Screen** - Full three-tab TeamDetails Compose screen with ViewModel and all interactions
 - [ ] **Phase 5: Navigation Integration** - Wire all click paths from existing screens into PlayerDetails and TeamDetails
@@ -42,7 +42,7 @@ Plans:
   2. User can view aggregated stats per season/team, toggle between average and total, and see a totals row
   3. User can view a list of record achievements and click any record to open the associated match details
   4. User can tap a team name in the stats tab to open TeamDetails for that team
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 02-01-PLAN.md — Domain extensions, ViewModel state/handlers, navigation wiring
 - [ ] 02-02-PLAN.md — Game Logs/Stats/Records tab composables and PlayerDetailsScreen integration
@@ -88,7 +88,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Player Data Layer | 2/2 | Complete    | 2026-03-16 |
-| 2. PlayerDetails Screen | 1/2 | In Progress|  |
+| 2. PlayerDetails Screen | 2/2 | Complete   | 2026-03-16 |
 | 3. Team Data Layer | 0/TBD | Not started | - |
 | 4. TeamDetails Screen | 0/TBD | Not started | - |
 | 5. Navigation Integration | 0/TBD | Not started | - |
