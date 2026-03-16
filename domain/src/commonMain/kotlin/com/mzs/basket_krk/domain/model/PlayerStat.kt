@@ -6,3 +6,13 @@ data class PlayerStat(
     val league: League,
     val stat: Stat
 )
+
+fun PlayerStat.toReadableStatOptionText(statOption: StatOption, statDisplayType: StatDisplayType): String {
+    return when (statOption) {
+        StatTeam -> team.name
+        StatLeague -> league.name
+        StatSeason -> season.toString()
+        else -> stat.getValueForGivenOption(statOption, statDisplayType)
+            ?.toReadableStatOptionText(statOption) ?: ""
+    }
+}

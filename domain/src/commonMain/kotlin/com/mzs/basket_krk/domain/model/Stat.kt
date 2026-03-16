@@ -110,3 +110,19 @@ private fun percentageField(made: Int, attempted: Int): Double {
 private fun isIntegerLike(value: Double): Boolean {
     return value % 1.0 == 0.0
 }
+
+fun Stat.getValueForGivenOptionWithSeasonsCount(
+    statOption: StatOption,
+    statDisplayType: StatDisplayType,
+    seasonCount: Int
+): Double? {
+    if (statOption == StatMatches) {
+        return m?.let {
+            when (statDisplayType) {
+                StatDisplayType.SUM -> it.toDouble()
+                StatDisplayType.AVG -> it.toDouble() / seasonCount
+            }
+        }
+    }
+    return getValueForGivenOption(statOption, statDisplayType)
+}
