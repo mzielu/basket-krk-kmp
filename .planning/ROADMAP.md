@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Player Data Layer** - DTOs, Ktor endpoints, and repositories for all four player API endpoints (completed 2026-03-16)
 - [x] **Phase 2: PlayerDetails Screen** - Full three-tab PlayerDetails Compose screen with ViewModel and all interactions (completed 2026-03-16)
-- [ ] **Phase 3: Team Data Layer** - DTOs, Ktor endpoints, and repositories for all four team API endpoints
+- [x] **Phase 3: Team Data Layer** - DTOs, Ktor endpoints, and repositories for all four team API endpoints (completed 2026-03-16)
 - [ ] **Phase 4: TeamDetails Screen** - Full three-tab TeamDetails Compose screen with ViewModel and all interactions
 - [ ] **Phase 5: Navigation Integration** - Wire all click paths from existing screens into PlayerDetails and TeamDetails
 
@@ -55,7 +55,7 @@ Plans:
   1. Team info header (name, logo, seasons played) renders correctly from live API data
   2. Team W-L record and point differential display for the selected season
   3. The TeamDetails screen shell with three tabs opens without crashing when given a team ID
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 03-01-PLAN.md — Data layer: domain models, DTOs, service, repository
 - [ ] 03-02-PLAN.md — Presentation layer: use cases, ViewModel, screen, DI, navigation
@@ -92,6 +92,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Player Data Layer | 2/2 | Complete    | 2026-03-16 |
 | 2. PlayerDetails Screen | 2/2 | Complete    | 2026-03-16 |
-| 3. Team Data Layer | 1/2 | In Progress|  |
+| 3. Team Data Layer | 2/2 | Complete   | 2026-03-16 |
 | 4. TeamDetails Screen | 0/TBD | Not started | - |
 | 5. Navigation Integration | 0/TBD | Not started | - |

@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-team-data-layer 03-01-PLAN.md
-last_updated: "2026-03-16T23:35:45.933Z"
+stopped_at: Completed 03-team-data-layer 03-02-PLAN.md
+last_updated: "2026-03-16T23:41:20.953Z"
 last_activity: 2026-03-16 — Completed plan 02 (PlayerDetailsScreen + use cases + DI + navigation)
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
   percent: 10
 ---
 
@@ -55,6 +55,7 @@ Progress: [█░░░░░░░░░] 10%
 | Phase 02-playerdetails-screen P01 | 8min | 2 tasks | 7 files |
 | Phase 02-playerdetails-screen P02 | 12min | 3 tasks | 6 files |
 | Phase 03-team-data-layer P01 | 2 | 3 tasks | 16 files |
+| Phase 03-team-data-layer P02 | 4min | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,8 @@ Recent decisions affecting current work:
 - [Phase 03-team-data-layer]: TeamRecord.league in TeamDetails is nullable (last_league API field can be null)
 - [Phase 03-team-data-layer]: PlayerInRecordDto uses fn/ln fields (full name parts) NOT PlayerShortDto — records API sends separate first/last name
 - [Phase 03-team-data-layer]: buildRecordCategory top-level function in TeamRecordRange.kt composites stat+range apiKey with underscore (e.g., pts_t for PTS All-Time)
+- [Phase 03-team-data-layer]: W-L/point differential stored as nullable fields in ViewState, populated when results load, shown as '-' before load
+- [Phase 03-team-data-layer]: Tab auto-fetch: init->fetchTeamDetails->on success auto-fetch tab 0 (Results); other tabs load lazily on selection with cache guard
 
 ### Pending Todos
 
@@ -91,6 +94,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T23:35:45.931Z
-Stopped at: Completed 03-team-data-layer 03-01-PLAN.md
+Last session: 2026-03-16T23:41:20.950Z
+Stopped at: Completed 03-team-data-layer 03-02-PLAN.md
 Resume file: None
