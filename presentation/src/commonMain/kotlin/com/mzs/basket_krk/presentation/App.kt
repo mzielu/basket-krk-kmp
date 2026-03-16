@@ -21,6 +21,8 @@ import com.mzs.basket_krk.presentation.screens.main.statistics.standings.Standin
 import com.mzs.basket_krk.presentation.screens.main.statistics.standings.StandingsViewModel
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsScreen
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
+import com.mzs.basket_krk.presentation.screens.playerdetails.PlayerDetailsScreen
+import com.mzs.basket_krk.presentation.screens.playerdetails.PlayerDetailsViewModel
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -48,7 +50,7 @@ fun App() {
                             navController.navigate(Screen.MatchDetails(matchId = it))
                         },
                         openPlayerDetails = {
-                            // TODO: implement player details navigation
+                            navController.navigate(Screen.PlayerDetails(playerId = it))
                         },
                         openTeamDetails = {
                             // TODO: implement team details navigation
@@ -74,11 +76,22 @@ fun App() {
                     )
                 }
 
+                composable<Screen.PlayerDetails> { backStackEntry ->
+                    val args = backStackEntry.toRoute<Screen.PlayerDetails>()
+                    val viewModel: PlayerDetailsViewModel = koinInject(
+                        parameters = { parametersOf(args.playerId) }
+                    )
+                    PlayerDetailsScreen(
+                        viewModel = viewModel,
+                        onNavigateBack = { navController.popBackStack() },
+                    )
+                }
+
                 composable<Screen.AllTimeLeaders> {
                     AllTimeLeadersScreen(
                         viewModel = koinViewModel<AllTimeLeadersViewModel>(),
                         openPlayerDetails = {
-                            //TODO: implement player details navigation
+                            navController.navigate(Screen.PlayerDetails(playerId = it))
                         },
                         onNavigateBack = { navController.popBackStack() },
                     )

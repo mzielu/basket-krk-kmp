@@ -10,6 +10,14 @@ import com.mzs.basket_krk.domain.usecase.GetLeaguesInfo
 import com.mzs.basket_krk.domain.usecase.GetLeaguesInfoUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatchDetails
 import com.mzs.basket_krk.domain.usecase.GetMatchDetailsUseCase
+import com.mzs.basket_krk.domain.usecase.GetPlayerDetails
+import com.mzs.basket_krk.domain.usecase.GetPlayerDetailsUseCase
+import com.mzs.basket_krk.domain.usecase.GetPlayerGameLogs
+import com.mzs.basket_krk.domain.usecase.GetPlayerGameLogsUseCase
+import com.mzs.basket_krk.domain.usecase.GetPlayerRecords
+import com.mzs.basket_krk.domain.usecase.GetPlayerRecordsUseCase
+import com.mzs.basket_krk.domain.usecase.GetPlayerStats
+import com.mzs.basket_krk.domain.usecase.GetPlayerStatsUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatches
 import com.mzs.basket_krk.domain.usecase.GetMatchesUseCase
 import com.mzs.basket_krk.domain.usecase.GetPlatform
@@ -33,6 +41,7 @@ import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.pa
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.pagination.BaseAllTimeLeadersPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.statistics.standings.StandingsViewModel
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
+import com.mzs.basket_krk.presentation.screens.playerdetails.PlayerDetailsViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -49,6 +58,10 @@ val presentationModule = module {
     single<GetLeagueDetails> { GetLeagueDetailsUseCase(get()) }
     single<GetLeaguesInfo> { GetLeaguesInfoUseCase(get()) }
     single<GetLeaguesForSeason> { GetLeaguesForSeasonUseCase(get()) }
+    single<GetPlayerDetails> { GetPlayerDetailsUseCase(get()) }
+    single<GetPlayerGameLogs> { GetPlayerGameLogsUseCase(get()) }
+    single<GetPlayerStats> { GetPlayerStatsUseCase(get()) }
+    single<GetPlayerRecords> { GetPlayerRecordsUseCase(get()) }
 
     // data source factories
     single<BaseMatchesPagingSourceFactory> { MatchesPagingSourceFactory(get()) }
@@ -59,6 +72,7 @@ val presentationModule = module {
     viewModelOf(::MainViewModel)
     viewModelOf(::MatchesViewModel)
     viewModel { (matchId: Int) -> MatchDetailsViewModel(matchId, get()) }
+    viewModel { (playerId: Int) -> PlayerDetailsViewModel(playerId, get(), get(), get(), get()) }
     viewModelOf(::SearchViewModel)
     viewModelOf(::MoreViewModel)
     viewModelOf(::AllTimeLeadersViewModel)
