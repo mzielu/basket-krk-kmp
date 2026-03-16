@@ -7,10 +7,14 @@ import co.touchlab.kermit.Logger
 import com.mzs.basket_krk.domain.base.onSuspendGeneralError
 import com.mzs.basket_krk.domain.base.onSuspendSuccess
 import com.mzs.basket_krk.domain.model.PlayerDetails
+import com.mzs.basket_krk.domain.model.PlayerLogByTeam
 import com.mzs.basket_krk.domain.model.PlayerLogList
 import com.mzs.basket_krk.domain.model.PlayerRecord
 import com.mzs.basket_krk.domain.model.PlayerStat
 import com.mzs.basket_krk.domain.model.Season
+import com.mzs.basket_krk.domain.model.StatDisplayType
+import com.mzs.basket_krk.domain.model.StatOption
+import com.mzs.basket_krk.domain.model.getValueForGivenOption
 import com.mzs.basket_krk.domain.usecase.GetPlayerDetails
 import com.mzs.basket_krk.domain.usecase.GetPlayerDetailsUseCase
 import com.mzs.basket_krk.domain.usecase.GetPlayerGameLogs
@@ -77,6 +81,56 @@ class PlayerDetailsViewModel(
         fetchPlayerDetails()
     }
 
+    fun onSeasonSelected(season: Season) {
+        _viewState.update { it.copy(selectedSeason = season, sortOption = null, selectedTeam = null) }
+        viewModelScope.launch {
+            _viewState.update { it.copy(gameLogs = it.gameLogs.loading()) }
+            getPlayerGameLogs(input = GetPlayerGameLogsUseCase.Input(playerId = playerId, seasonId = season.id))
+                .onSuspendSuccess { logs ->
+                    _viewState.update {
+                        it.copy(
+                            gameLogs = it.gameLogs.data(logs),
+                            selectedTeam = logs.data.firstOrNull()
+                        )
+                    }
+                }.onSuspendGeneralError { error ->
+                    Logger.e("Error when fetching player game logs", error)
+                    _viewState.update { it.copy(gameLogs = it.gameLogs.error(error)) }
+                }
+        }
+    }
+
+    fun onTeamSelected(playerLogByTeam: PlayerLogByTeam) {
+        _viewState.update { it.copy(selectedTeam = playerLogByTeam, sortOption = null) }
+    }
+
+    fun onSortByStat(statOption: StatOption) {
+        val currentSort = _viewState.value.sortOption
+        val currentAsc = _viewState.value.sortAscending
+        val newAscending = if (currentSort == statOption) !currentAsc else false
+        _viewState.update { state ->
+            val currentTeam = state.selectedTeam ?: return@update state
+            val sorted = currentTeam.logs.sortedWith(compareBy {
+                it.stat.getValueForGivenOption(statOption, StatDisplayType.SUM) ?: 0.0
+            }).let { if (!newAscending) it.reversed() else it }
+
+            val updatedTeam = currentTeam.copy(logs = sorted)
+            val updatedLogList = state.gameLogs.data?.let { logList ->
+                logList.copy(data = logList.data.map { if (it.team == currentTeam.team) updatedTeam else it })
+            }
+            state.copy(
+                sortOption = statOption,
+                sortAscending = newAscending,
+                selectedTeam = updatedTeam,
+                gameLogs = updatedLogList?.let { state.gameLogs.data(it) } ?: state.gameLogs
+            )
+        }
+    }
+
+    fun onStatDisplayTypeChanged(statDisplayType: StatDisplayType) {
+        _viewState.update { it.copy(statDisplayType = statDisplayType) }
+    }
+
     private fun fetchGameLogsIfNeeded(seasonId: Int) {
         val current = _viewState.value.gameLogs
         if (current.data != null && !current.isError) return
@@ -84,7 +138,12 @@ class PlayerDetailsViewModel(
             _viewState.update { it.copy(gameLogs = it.gameLogs.loading()) }
             getPlayerGameLogs(input = GetPlayerGameLogsUseCase.Input(playerId = playerId, seasonId = seasonId))
                 .onSuspendSuccess { logs ->
-                    _viewState.update { it.copy(gameLogs = it.gameLogs.data(logs)) }
+                    _viewState.update {
+                        it.copy(
+                            gameLogs = it.gameLogs.data(logs),
+                            selectedTeam = logs.data.firstOrNull()
+                        )
+                    }
                 }.onSuspendGeneralError { error ->
                     Logger.e("Error when fetching player game logs", error)
                     _viewState.update { it.copy(gameLogs = it.gameLogs.error(error)) }
@@ -129,5 +188,9 @@ data class PlayerDetailsViewState(
     val gameLogs: ViewStateData<PlayerLogList?> = ViewStateData(null),
     val stats: ViewStateData<List<PlayerStat>?> = ViewStateData(null),
     val records: ViewStateData<List<PlayerRecord>?> = ViewStateData(null),
-    val selectedSeason: Season? = null
+    val selectedSeason: Season? = null,
+    val selectedTeam: PlayerLogByTeam? = null,
+    val sortOption: StatOption? = null,
+    val sortAscending: Boolean = false,
+    val statDisplayType: StatDisplayType = StatDisplayType.SUM,
 )

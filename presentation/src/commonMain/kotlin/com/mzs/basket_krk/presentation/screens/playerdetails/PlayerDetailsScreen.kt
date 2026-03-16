@@ -43,6 +43,8 @@ import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
 fun PlayerDetailsScreen(
     viewModel: PlayerDetailsViewModel,
     onNavigateBack: () -> Unit,
+    onNavigateToMatch: (Int) -> Unit,
+    onNavigateToTeam: (Int) -> Unit,
 ) {
     val viewState by viewModel.viewState.collectAsState()
 
@@ -51,6 +53,8 @@ fun PlayerDetailsScreen(
         onRetry = viewModel::retry,
         onTabSelected = viewModel::onTabSelected,
         onNavigateBack = onNavigateBack,
+        onNavigateToMatch = onNavigateToMatch,
+        onNavigateToTeam = onNavigateToTeam,
     )
 }
 
@@ -60,6 +64,8 @@ fun PlayerDetailsContent(
     onRetry: () -> Unit,
     onTabSelected: (Int) -> Unit,
     onNavigateBack: () -> Unit,
+    onNavigateToMatch: (Int) -> Unit,
+    onNavigateToTeam: (Int) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
@@ -85,6 +91,8 @@ fun PlayerDetailsContent(
                         details = details,
                         viewState = viewState,
                         onTabSelected = onTabSelected,
+                        onNavigateToMatch = onNavigateToMatch,
+                        onNavigateToTeam = onNavigateToTeam,
                     )
                 }
             }
@@ -97,6 +105,8 @@ private fun PlayerDetailsBody(
     details: PlayerDetails,
     viewState: PlayerDetailsViewState,
     onTabSelected: (Int) -> Unit,
+    onNavigateToMatch: (Int) -> Unit,
+    onNavigateToTeam: (Int) -> Unit,
 ) {
     var selectedTabIndex by remember { mutableStateOf(0) }
 

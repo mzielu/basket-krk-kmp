@@ -84,6 +84,8 @@ fun App() {
                     PlayerDetailsScreen(
                         viewModel = viewModel,
                         onNavigateBack = { navController.popBackStack() },
+                        onNavigateToMatch = { navController.navigate(Screen.MatchDetails(matchId = it)) },
+                        onNavigateToTeam = { /* TODO Phase 3: navController.navigate(Screen.TeamDetails(teamId = it)) */ },
                     )
                 }
 
