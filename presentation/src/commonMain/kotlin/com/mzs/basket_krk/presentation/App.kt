@@ -23,6 +23,8 @@ import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsScreen
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
 import com.mzs.basket_krk.presentation.screens.playerdetails.PlayerDetailsScreen
 import com.mzs.basket_krk.presentation.screens.playerdetails.PlayerDetailsViewModel
+import com.mzs.basket_krk.presentation.screens.teamdetails.TeamDetailsScreen
+import com.mzs.basket_krk.presentation.screens.teamdetails.TeamDetailsViewModel
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -53,7 +55,7 @@ fun App() {
                             navController.navigate(Screen.PlayerDetails(playerId = it))
                         },
                         openTeamDetails = {
-                            // TODO: implement team details navigation
+                            navController.navigate(Screen.TeamDetails(teamId = it))
                         },
                         openAllTimeLeaders = {
                             navController.navigate(Screen.AllTimeLeaders)
@@ -85,7 +87,20 @@ fun App() {
                         viewModel = viewModel,
                         onNavigateBack = { navController.popBackStack() },
                         onNavigateToMatch = { navController.navigate(Screen.MatchDetails(matchId = it)) },
-                        onNavigateToTeam = { /* TODO Phase 3: navController.navigate(Screen.TeamDetails(teamId = it)) */ },
+                        onNavigateToTeam = { navController.navigate(Screen.TeamDetails(teamId = it)) },
+                    )
+                }
+
+                composable<Screen.TeamDetails> { backStackEntry ->
+                    val args = backStackEntry.toRoute<Screen.TeamDetails>()
+                    val viewModel: TeamDetailsViewModel = koinInject(
+                        parameters = { parametersOf(args.teamId) }
+                    )
+                    TeamDetailsScreen(
+                        viewModel = viewModel,
+                        onNavigateBack = { navController.popBackStack() },
+                        onNavigateToPlayer = { navController.navigate(Screen.PlayerDetails(playerId = it)) },
+                        onNavigateToMatch = { navController.navigate(Screen.MatchDetails(matchId = it)) },
                     )
                 }
 
