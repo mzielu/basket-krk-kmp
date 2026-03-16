@@ -14,7 +14,7 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 ### Player Details — Game Logs
 
-- [ ] **PLOG-01**: User can view game logs as a scrollable stat table with fixed player/opponent column and scrollable stat columns
+- [x] **PLOG-01**: User can view game logs as a scrollable stat table with fixed player/opponent column and scrollable stat columns
 - [x] **PLOG-02**: User can filter game logs by season using a dropdown selector
 - [x] **PLOG-03**: User can filter game logs by team (when player played for multiple teams in a season)
 - [x] **PLOG-04**: User can sort game logs by clicking any stat column header
@@ -22,21 +22,21 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 ### Player Details — Stats
 
-- [ ] **PSTA-01**: User can view aggregated stats per season/team/league in a scrollable stat table
+- [x] **PSTA-01**: User can view aggregated stats per season/team/league in a scrollable stat table
 - [x] **PSTA-02**: User can toggle between average and total stat display
 - [x] **PSTA-03**: User can see a totals row at the bottom of the stats table
 - [x] **PSTA-04**: User can click a team name in stats to navigate to TeamDetails
 
 ### Player Details — Records
 
-- [ ] **PREC-01**: User can view a list of player record achievements (type, value, times, date)
+- [x] **PREC-01**: User can view a list of player record achievements (type, value, times, date)
 - [x] **PREC-02**: User can click a record to navigate to the associated match
 
 ### Team Details — General
 
-- [ ] **TEAM-01**: User can view team info header showing name, logo, seasons played
-- [ ] **TEAM-02**: User can see team W-L record and point differential for selected season
-- [ ] **TEAM-03**: User can navigate between 3 tabs: Results, Roster, Records
+- [x] **TEAM-01**: User can view team info header showing name, logo, seasons played
+- [x] **TEAM-02**: User can see team W-L record and point differential for selected season
+- [x] **TEAM-03**: User can navigate between 3 tabs: Results, Roster, Records
 
 ### Team Details — Results
 
@@ -94,20 +94,20 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | PLYR-01 | Phase 1 | Complete |
 | PLYR-02 | Phase 1 | Complete |
-| PLOG-01 | Phase 2 | Pending |
+| PLOG-01 | Phase 2 | Complete |
 | PLOG-02 | Phase 2 | Complete |
 | PLOG-03 | Phase 2 | Complete |
 | PLOG-04 | Phase 2 | Complete |
 | PLOG-05 | Phase 2 | Complete |
-| PSTA-01 | Phase 2 | Pending |
+| PSTA-01 | Phase 2 | Complete |
 | PSTA-02 | Phase 2 | Complete |
 | PSTA-03 | Phase 2 | Complete |
 | PSTA-04 | Phase 2 | Complete |
-| PREC-01 | Phase 2 | Pending |
+| PREC-01 | Phase 2 | Complete |
 | PREC-02 | Phase 2 | Complete |
-| TEAM-01 | Phase 3 | Pending |
-| TEAM-02 | Phase 3 | Pending |
-| TEAM-03 | Phase 3 | Pending |
+| TEAM-01 | Phase 3 | Complete |
+| TEAM-02 | Phase 3 | Complete |
+| TEAM-03 | Phase 3 | Complete |
 | TRES-01 | Phase 4 | Pending |
 | TRES-02 | Phase 4 | Pending |
 | TRES-03 | Phase 4 | Pending |
