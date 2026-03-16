@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Phase 1 context gathered
-last_updated: "2026-03-16T15:53:44.056Z"
+stopped_at: Completed 01-player-data-layer/01-01-PLAN.md
+last_updated: "2026-03-16T21:58:54.875Z"
 last_activity: 2026-03-16 — Roadmap created, phases derived from 33 v1 requirements
 progress:
   total_phases: 5
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 2
+  completed_plans: 1
   percent: 0
 ---
 
@@ -50,6 +50,7 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 01-player-data-layer P01 | 18min | 3 tasks | 20 files |
 
 ## Accumulated Context
 
@@ -61,6 +62,9 @@ Recent decisions affecting current work:
 - Reuse MatchDetailsTeamTable for stat tables — avoids reimplementing synchronized scrolling
 - Follow existing MVVM+StateFlow pattern — consistency with MatchDetails, Standings, AllTimeLeaders
 - Use ViewStateData wrapper per tab — each tab loads independently, matching Flutter BLoC pattern
+- [Phase 01-player-data-layer]: Used toTeam() extension instead of standalone TeamDto.kt to avoid TeamDto redeclaration conflict with existing SearchResultDto.kt
+- [Phase 01-player-data-layer]: PlayerStat.season is Int (season number) not Season object, matching Flutter PlayerStatDto.s field semantics
+- [Phase 01-player-data-layer]: PlayerRecordsDto uses toTeam() and toIntOrNull() slash-split with zero-value filter matching Flutter PlayerRecordsDtoMapper
 
 ### Pending Todos
 
@@ -72,6 +76,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T15:53:44.053Z
-Stopped at: Phase 1 context gathered
-Resume file: .planning/phases/01-player-data-layer/01-CONTEXT.md
+Last session: 2026-03-16T21:58:54.873Z
+Stopped at: Completed 01-player-data-layer/01-01-PLAN.md
+Resume file: None

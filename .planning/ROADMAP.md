@@ -28,7 +28,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Player info header (name, current team, seasons played) renders correctly from live API data
   2. The PlayerDetails screen shell with three tabs opens without crashing when given a player ID
   3. Each tab shows a loading state while its data is being fetched, confirming the repository calls are wired up
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 Plans:
 - [ ] 01-01-PLAN.md — Data layer: domain models, DTOs, service, repository
 - [ ] 01-02-PLAN.md — Presentation layer: use cases, ViewModel, screen, DI, navigation
@@ -84,7 +84,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Player Data Layer | 0/2 | Planning complete | - |
+| 1. Player Data Layer | 1/2 | In Progress|  |
 | 2. PlayerDetails Screen | 0/TBD | Not started | - |
 | 3. Team Data Layer | 0/TBD | Not started | - |
 | 4. TeamDetails Screen | 0/TBD | Not started | - |
