@@ -30,7 +30,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.mzs.basket_krk.domain.model.Season
+import com.mzs.basket_krk.domain.model.StatDisplayType
+import com.mzs.basket_krk.domain.model.StatOption
 import com.mzs.basket_krk.domain.model.TeamDetails
+import com.mzs.basket_krk.domain.model.TeamRecordRange
+import com.mzs.basket_krk.domain.model.TeamRecordStatOption
 import com.mzs.basket_krk.presentation.base.ui.ActionBar
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkImage
@@ -55,6 +59,9 @@ fun TeamDetailsScreen(
         onRetry = viewModel::retry,
         onTabSelected = viewModel::onTabSelected,
         onSeasonSelected = viewModel::onSeasonSelected,
+        onRosterSortByStat = viewModel::onRosterSortByStat,
+        onRosterStatDisplayTypeChanged = viewModel::onRosterStatDisplayTypeChanged,
+        onRecordFilterChanged = viewModel::onRecordFilterChanged,
         onNavigateBack = onNavigateBack,
         onNavigateToPlayer = onNavigateToPlayer,
         onNavigateToMatch = onNavigateToMatch,
@@ -67,6 +74,9 @@ fun TeamDetailsContent(
     onRetry: () -> Unit,
     onTabSelected: (Int) -> Unit,
     onSeasonSelected: (Season) -> Unit,
+    onRosterSortByStat: (StatOption) -> Unit,
+    onRosterStatDisplayTypeChanged: (StatDisplayType) -> Unit,
+    onRecordFilterChanged: (TeamRecordStatOption, TeamRecordRange) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToPlayer: (Int) -> Unit,
     onNavigateToMatch: (Int) -> Unit,
@@ -94,6 +104,9 @@ fun TeamDetailsContent(
                         viewState = viewState,
                         onTabSelected = onTabSelected,
                         onSeasonSelected = onSeasonSelected,
+                        onRosterSortByStat = onRosterSortByStat,
+                        onRosterStatDisplayTypeChanged = onRosterStatDisplayTypeChanged,
+                        onRecordFilterChanged = onRecordFilterChanged,
                         onNavigateToPlayer = onNavigateToPlayer,
                         onNavigateToMatch = onNavigateToMatch,
                     )
@@ -109,6 +122,9 @@ private fun TeamDetailsBody(
     viewState: TeamDetailsViewState,
     onTabSelected: (Int) -> Unit,
     onSeasonSelected: (Season) -> Unit,
+    onRosterSortByStat: (StatOption) -> Unit,
+    onRosterStatDisplayTypeChanged: (StatDisplayType) -> Unit,
+    onRecordFilterChanged: (TeamRecordStatOption, TeamRecordRange) -> Unit,
     onNavigateToPlayer: (Int) -> Unit,
     onNavigateToMatch: (Int) -> Unit,
 ) {
@@ -250,6 +266,9 @@ private fun TeamDetailsBody(
                         else -> viewState.results.data?.let { resultList ->
                             TeamResultsTab(
                                 resultList = resultList,
+                                seasons = details.seasons,
+                                selectedSeason = viewState.selectedSeason,
+                                onSeasonSelected = onSeasonSelected,
                                 onMatchPress = onNavigateToMatch,
                             )
                         }
@@ -265,6 +284,14 @@ private fun TeamDetailsBody(
                         else -> viewState.roster.data?.let { roster ->
                             TeamRosterTab(
                                 roster = roster,
+                                seasons = details.seasons,
+                                selectedSeason = viewState.selectedSeason,
+                                statDisplayType = viewState.rosterStatDisplayType,
+                                sortOption = viewState.rosterSortOption,
+                                sortAscending = viewState.rosterSortAscending,
+                                onSeasonSelected = onSeasonSelected,
+                                onStatDisplayTypeChanged = onRosterStatDisplayTypeChanged,
+                                onSortByStat = onRosterSortByStat,
                                 onPlayerPress = onNavigateToPlayer,
                             )
                         }
@@ -280,6 +307,9 @@ private fun TeamDetailsBody(
                         else -> viewState.records.data?.let { records ->
                             TeamRecordsTab(
                                 records = records,
+                                selectedStatOption = viewState.selectedRecordStatOption,
+                                selectedRange = viewState.selectedRecordRange,
+                                onFilterChanged = onRecordFilterChanged,
                                 onPlayerPress = onNavigateToPlayer,
                                 onMatchPress = onNavigateToMatch,
                             )

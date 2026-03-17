@@ -17,10 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -42,6 +38,7 @@ import com.mzs.basket_krk.domain.model.toReadableStatOptionText
 import com.mzs.basket_krk.presentation.base.drawTopBottomBorder
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkStyles
+import com.mzs.basket_krk.presentation.base.ui.SortableTopRowCell
 import com.mzs.basket_krk.presentation.base.ui.StatCell
 import com.mzs.basket_krk.presentation.base.ui.TopRowCornerCell
 import com.mzs.basket_krk.presentation.screens.matchdetails.components.StatCellMapper
@@ -129,45 +126,6 @@ fun PlayerGameLogsTable(
                 .width(gameLogLeftColWidth)
                 .height(gameLogHeaderHeight)
         )
-    }
-}
-
-@Composable
-private fun SortableTopRowCell(
-    text: String,
-    width: Dp,
-    height: Dp,
-    roundedEnd: Boolean,
-    isSortActive: Boolean,
-    sortAscending: Boolean,
-    onClick: () -> Unit,
-) {
-    val shape = if (roundedEnd) {
-        RoundedCornerShape(topEnd = 10.dp)
-    } else {
-        RoundedCornerShape(0.dp)
-    }
-
-    Box(
-        modifier = Modifier
-            .width(width)
-            .height(height)
-            .clip(shape)
-            .background(BasketKrkColors.Main)
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = text, style = BasketKrkStyles.fixedRowText, maxLines = 1)
-            if (isSortActive) {
-                Icon(
-                    imageVector = if (sortAscending) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(12.dp)
-                )
-            }
-        }
     }
 }
 
