@@ -1,103 +1,30 @@
-# Roadmap: Basket KRK — PlayerDetails & TeamDetails Migration
+# Roadmap: Basket KRK
 
-## Overview
+## Milestones
 
-This milestone completes the core deep-dive experience by migrating PlayerDetails and TeamDetails from the Flutter app to KMP. The work proceeds feature by feature: build the player data layer and screen first, then the team data layer and screen, then wire all navigation entry points across the existing screens. Each phase delivers a coherent, independently verifiable capability on top of established MVVM + StateFlow patterns.
+- ✅ **v1.0 PlayerDetails & TeamDetails Migration** — Phases 1-5 (shipped 2026-03-17)
 
 ## Phases
 
-**Phase Numbering:**
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+<details>
+<summary>✅ v1.0 PlayerDetails & TeamDetails Migration (Phases 1-5) — SHIPPED 2026-03-17</summary>
 
-Decimal phases appear between their surrounding integers in numeric order.
+- [x] Phase 1: Player Data Layer (2/2 plans) — completed 2026-03-16
+- [x] Phase 2: PlayerDetails Screen (2/2 plans) — completed 2026-03-16
+- [x] Phase 3: Team Data Layer (2/2 plans) — completed 2026-03-16
+- [x] Phase 4: TeamDetails Screen (3/3 plans) — completed 2026-03-17
+- [x] Phase 5: Navigation Integration (1/1 plan) — completed 2026-03-17
 
-- [x] **Phase 1: Player Data Layer** - DTOs, Ktor endpoints, and repositories for all four player API endpoints (completed 2026-03-16)
-- [x] **Phase 2: PlayerDetails Screen** - Full three-tab PlayerDetails Compose screen with ViewModel and all interactions (completed 2026-03-16)
-- [x] **Phase 3: Team Data Layer** - DTOs, Ktor endpoints, and repositories for all four team API endpoints (completed 2026-03-16)
-- [x] **Phase 4: TeamDetails Screen** - Full three-tab TeamDetails Compose screen with ViewModel and all interactions (completed 2026-03-17)
-- [x] **Phase 5: Navigation Integration** - Wire all click paths from existing screens into PlayerDetails and TeamDetails (completed 2026-03-17)
+See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
 
-## Phase Details
-
-### Phase 1: Player Data Layer
-**Goal**: The app can fetch, decode, and expose all player data needed by the PlayerDetails screen
-**Depends on**: Nothing (first phase)
-**Requirements**: PLYR-01, PLYR-02
-**Success Criteria** (what must be TRUE):
-  1. Player info header (name, current team, seasons played) renders correctly from live API data
-  2. The PlayerDetails screen shell with three tabs opens without crashing when given a player ID
-  3. Each tab shows a loading state while its data is being fetched, confirming the repository calls are wired up
-**Plans:** 2/2 plans complete
-Plans:
-- [x] 01-01-PLAN.md — Data layer: domain models, DTOs, service, repository
-- [x] 01-02-PLAN.md — Presentation layer: use cases, ViewModel, screen, DI, navigation
-
-### Phase 2: PlayerDetails Screen
-**Goal**: Users can open any player and explore their game logs, aggregated stats, and records across all seasons
-**Depends on**: Phase 1
-**Requirements**: PLOG-01, PLOG-02, PLOG-03, PLOG-04, PLOG-05, PSTA-01, PSTA-02, PSTA-03, PSTA-04, PREC-01, PREC-02
-**Success Criteria** (what must be TRUE):
-  1. User can view game logs as a scrollable stat table, filter by season and team, sort by any column header
-  2. User can view aggregated stats per season/team, toggle between average and total, and see a totals row
-  3. User can view a list of record achievements and click any record to open the associated match details
-  4. User can tap a team name in the stats tab to open TeamDetails for that team
-**Plans:** 2/2 plans complete
-Plans:
-- [ ] 02-01-PLAN.md — Domain extensions, ViewModel state/handlers, navigation wiring
-- [ ] 02-02-PLAN.md — Game Logs/Stats/Records tab composables and PlayerDetailsScreen integration
-
-### Phase 3: Team Data Layer
-**Goal**: The app can fetch, decode, and expose all team data needed by the TeamDetails screen
-**Depends on**: Phase 2
-**Requirements**: TEAM-01, TEAM-02, TEAM-03
-**Success Criteria** (what must be TRUE):
-  1. Team info header (name, logo, seasons played) renders correctly from live API data
-  2. Team W-L record and point differential display for the selected season
-  3. The TeamDetails screen shell with three tabs opens without crashing when given a team ID
-**Plans:** 2/2 plans complete
-Plans:
-- [ ] 03-01-PLAN.md — Data layer: domain models, DTOs, service, repository
-- [ ] 03-02-PLAN.md — Presentation layer: use cases, ViewModel, screen, DI, navigation
-
-### Phase 4: TeamDetails Screen
-**Goal**: Users can open any team and browse their results, roster with stats, and team records
-**Depends on**: Phase 3
-**Requirements**: TRES-01, TRES-02, TRES-03, TROS-01, TROS-02, TROS-03, TROS-04, TROS-05, TREC-01, TREC-02, TREC-03, TREC-04
-**Success Criteria** (what must be TRUE):
-  1. User can view match results with date, opponent, score, and W/L status, and filter by season
-  2. User can view roster as a scrollable stat table, filter by season, toggle avg/total, sort by column, and tap a player to open PlayerDetails
-  3. User can view team records filtered by stat category (PTS, AST, REB, STL, BLK, EFF, FT, FG, 3FG) and range (All-Time, Season, Match)
-  4. User can tap a record entry to navigate to the associated player or match
-**Plans:** 3/3 plans complete
-Plans:
-- [ ] 04-01-PLAN.md — ViewModel extensions, shared composable extraction, tab signature wiring
-- [ ] 04-02-PLAN.md — Results tab (TeamResultsTab) and Records tab (TeamRecordsTab) implementations
-- [ ] 04-03-PLAN.md — Roster tab (TeamRosterTab) with synchronized scroll table (TeamRosterTable)
-
-### Phase 5: Navigation Integration
-**Goal**: Users can reach PlayerDetails and TeamDetails from every existing entry point in the app
-**Depends on**: Phase 4
-**Requirements**: NAV-01, NAV-02, NAV-03, NAV-04, NAV-05
-**Success Criteria** (what must be TRUE):
-  1. Tapping a player name in MatchDetails stat table opens that player's PlayerDetails screen
-  2. Tapping a team name in Standings opens that team's TeamDetails screen
-  3. Tapping a player entry in AllTimeLeaders opens that player's PlayerDetails screen
-  4. PlayerDetails and TeamDetails link to each other (player stat row links to team, team roster row links to player)
-  5. Selecting a player or team from search results opens their respective detail screen
-**Plans:** 1/1 plans complete
-Plans:
-- [ ] 05-01-PLAN.md — Wire MatchDetails and Standings navigation callbacks, verify all 5 entry points
+</details>
 
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
-
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Player Data Layer | 2/2 | Complete    | 2026-03-16 |
-| 2. PlayerDetails Screen | 2/2 | Complete    | 2026-03-16 |
-| 3. Team Data Layer | 2/2 | Complete    | 2026-03-16 |
-| 4. TeamDetails Screen | 3/3 | Complete    | 2026-03-17 |
-| 5. Navigation Integration | 1/1 | Complete    | 2026-03-17 |
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 1. Player Data Layer | v1.0 | 2/2 | Complete | 2026-03-16 |
+| 2. PlayerDetails Screen | v1.0 | 2/2 | Complete | 2026-03-16 |
+| 3. Team Data Layer | v1.0 | 2/2 | Complete | 2026-03-16 |
+| 4. TeamDetails Screen | v1.0 | 3/3 | Complete | 2026-03-17 |
+| 5. Navigation Integration | v1.0 | 1/1 | Complete | 2026-03-17 |
