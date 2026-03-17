@@ -69,7 +69,11 @@ Plans:
   2. User can view roster as a scrollable stat table, filter by season, toggle avg/total, sort by column, and tap a player to open PlayerDetails
   3. User can view team records filtered by stat category (PTS, AST, REB, STL, BLK, EFF, FT, FG, 3FG) and range (All-Time, Season, Match)
   4. User can tap a record entry to navigate to the associated player or match
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 04-01-PLAN.md — ViewModel extensions, shared composable extraction, tab signature wiring
+- [ ] 04-02-PLAN.md — Results tab (TeamResultsTab) and Records tab (TeamRecordsTab) implementations
+- [ ] 04-03-PLAN.md — Roster tab (TeamRosterTab) with synchronized scroll table (TeamRosterTable)
 
 ### Phase 5: Navigation Integration
 **Goal**: Users can reach PlayerDetails and TeamDetails from every existing entry point in the app
@@ -93,5 +97,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Player Data Layer | 2/2 | Complete    | 2026-03-16 |
 | 2. PlayerDetails Screen | 2/2 | Complete    | 2026-03-16 |
 | 3. Team Data Layer | 2/2 | Complete    | 2026-03-16 |
-| 4. TeamDetails Screen | 0/TBD | Not started | - |
+| 4. TeamDetails Screen | 0/3 | Not started | - |
 | 5. Navigation Integration | 0/TBD | Not started | - |
