@@ -78,7 +78,7 @@ Each task was committed atomically:
 
 ## Deviations from Plan
 
-None - plan executed exactly as written.
+- **Team logo/name not clickable in PlayerDetails header** — discovered during human verification. Fixed by adding `.clickable { onNavigateToTeam(team.id) }` to team logo and name in PlayerDetailsScreen header. Commit: `f91f5ac`.
 
 ## Issues Encountered
 None - all changes straightforward, build clean on first attempt.
