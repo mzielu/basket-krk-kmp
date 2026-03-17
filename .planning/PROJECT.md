@@ -30,16 +30,20 @@ Users can drill into any player or team to see detailed game logs, statistics, a
 
 ### Active
 
-(None yet — next milestone will define new requirements)
+- [ ] Season Leaders screen with season/league/category filtering and player navigation
+- [ ] MoreScreen with all 9 items (Tournament Chooser, About Us, Donate, Premium, Terms, Privacy, Email, Facebook, Instagram)
+- [ ] Tournament Chooser screen for switching between tournaments
+- [ ] Premium/subscription screen with in-app purchase integration
+- [ ] Premium gating on All-Time Leaders pagination (page 3+)
 
 ### Out of Scope
 
 - iOS-specific UI customizations — using shared Compose UI for both platforms
-- Ads/monetization — defer to dedicated milestone
 - Firebase analytics/crashlytics — defer to infrastructure milestone
 - Offline caching — defer to future milestone
 - Pull-to-refresh — defer to enhancement milestone
 - Deep linking to player/team from external URLs — defer to future
+- Ad banners — defer to separate monetization phase
 
 ## Context
 
@@ -68,5 +72,16 @@ Users can drill into any player or team to see detailed game logs, statistics, a
 | Composite `cat` parameter for team records | `"{stat}_{range}"` format matching API | ✓ Good — enums with apiKey + displayName |
 | toTeam() extension on existing TeamDto | Avoid TeamDto redeclaration conflict with SearchResultDto | ✓ Good — clean resolution |
 
+## Current Milestone: v1.1 Season Leaders, More & Premium
+
+**Goal:** Add Season Leaders screen, complete MoreScreen with all navigation items including Tournament Chooser, and integrate premium subscription with in-app purchases.
+
+**Target features:**
+- Season Leaders with season/league/category filtering
+- Full MoreScreen (9 items: tournament chooser, external links, email, premium)
+- Tournament Chooser for switching between leagues
+- Premium subscription screen with platform-specific in-app purchase
+- Premium gating on All-Time Leaders pagination
+
 ---
-*Last updated: 2026-03-17 after v1.0 milestone*
+*Last updated: 2026-03-18 after v1.1 milestone start*
