@@ -41,22 +41,22 @@ Requirements for this milestone. Each maps to roadmap phases.
 ### Team Details — Results
 
 - [ ] **TRES-01**: User can view match results as a list showing date, opponent, score, W/L status
-- [ ] **TRES-02**: User can filter results by season using a dropdown selector
+- [x] **TRES-02**: User can filter results by season using a dropdown selector
 - [ ] **TRES-03**: User can click a result to navigate to match details
 
 ### Team Details — Roster
 
 - [ ] **TROS-01**: User can view team roster as a scrollable stat table with player names and stat columns
-- [ ] **TROS-02**: User can filter roster by season using a dropdown selector
-- [ ] **TROS-03**: User can toggle between average and total stat display
-- [ ] **TROS-04**: User can sort roster by clicking any stat column header
+- [x] **TROS-02**: User can filter roster by season using a dropdown selector
+- [x] **TROS-03**: User can toggle between average and total stat display
+- [x] **TROS-04**: User can sort roster by clicking any stat column header
 - [ ] **TROS-05**: User can click a player name to navigate to PlayerDetails
 
 ### Team Details — Records
 
 - [ ] **TREC-01**: User can view team records showing position, player name, value
-- [ ] **TREC-02**: User can filter records by stat category (PTS, AST, REB, STL, BLK, EFF, FT, FG, 3FG)
-- [ ] **TREC-03**: User can filter records by range (All-Time, Season, Match)
+- [x] **TREC-02**: User can filter records by stat category (PTS, AST, REB, STL, BLK, EFF, FT, FG, 3FG)
+- [x] **TREC-03**: User can filter records by range (All-Time, Season, Match)
 - [ ] **TREC-04**: User can click a record entry to navigate to the player or match
 
 ### Navigation Integration
@@ -109,16 +109,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TEAM-02 | Phase 3 | Complete |
 | TEAM-03 | Phase 3 | Complete |
 | TRES-01 | Phase 4 | Pending |
-| TRES-02 | Phase 4 | Pending |
+| TRES-02 | Phase 4 | Complete |
 | TRES-03 | Phase 4 | Pending |
 | TROS-01 | Phase 4 | Pending |
-| TROS-02 | Phase 4 | Pending |
-| TROS-03 | Phase 4 | Pending |
-| TROS-04 | Phase 4 | Pending |
+| TROS-02 | Phase 4 | Complete |
+| TROS-03 | Phase 4 | Complete |
+| TROS-04 | Phase 4 | Complete |
 | TROS-05 | Phase 4 | Pending |
 | TREC-01 | Phase 4 | Pending |
-| TREC-02 | Phase 4 | Pending |
-| TREC-03 | Phase 4 | Pending |
+| TREC-02 | Phase 4 | Complete |
+| TREC-03 | Phase 4 | Complete |
 | TREC-04 | Phase 4 | Pending |
 | NAV-01 | Phase 5 | Pending |
 | NAV-02 | Phase 5 | Pending |

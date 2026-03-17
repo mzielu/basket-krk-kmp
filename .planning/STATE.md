@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 4 context gathered
-last_updated: "2026-03-17T08:11:10.133Z"
-last_activity: 2026-03-16 — Completed plan 02 (PlayerDetailsScreen + use cases + DI + navigation)
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-17T09:07:51.092Z"
+last_activity: 2026-03-17 — Completed plan 01 (TeamDetailsScreen wiring: ViewModel roster state, shared composables, tab signatures)
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
-  percent: 10
+  total_plans: 9
+  completed_plans: 7
+  percent: 78
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-03-16)
 
 ## Current Position
 
-Phase: 1 of 5 (Player Data Layer)
-Plan: 2 of 2 in current phase (Phase 1 complete)
+Phase: 4 of 5 (TeamDetails Screen)
+Plan: 1 of 3 in current phase (Phase 4 in progress)
 Status: In progress
-Last activity: 2026-03-16 — Completed plan 02 (PlayerDetailsScreen + use cases + DI + navigation)
+Last activity: 2026-03-17 — Completed plan 01 (TeamDetailsScreen wiring: ViewModel roster state, shared composables, tab signatures)
 
-Progress: [█░░░░░░░░░] 10%
+Progress: [████████░░] 78%
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ Progress: [█░░░░░░░░░] 10%
 | Phase 02-playerdetails-screen P02 | 12min | 3 tasks | 6 files |
 | Phase 03-team-data-layer P01 | 2 | 3 tasks | 16 files |
 | Phase 03-team-data-layer P02 | 4min | 2 tasks | 12 files |
+| Phase 04-teamdetails-screen P01 | 15min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,9 @@ Recent decisions affecting current work:
 - [Phase 03-team-data-layer]: buildRecordCategory top-level function in TeamRecordRange.kt composites stat+range apiKey with underscore (e.g., pts_t for PTS All-Time)
 - [Phase 03-team-data-layer]: W-L/point differential stored as nullable fields in ViewState, populated when results load, shown as '-' before load
 - [Phase 03-team-data-layer]: Tab auto-fetch: init->fetchTeamDetails->on success auto-fetch tab 0 (Results); other tabs load lazily on selection with cache guard
+- [Phase 04-teamdetails-screen]: [Phase 04-teamdetails-screen P01]: StatDisplayTypeToggle and SortableTopRowCell extracted to base/ui as public composables — eliminates duplication between PlayerDetails and TeamDetails tabs
+- [Phase 04-teamdetails-screen]: [Phase 04-teamdetails-screen P01]: onRecordFilterChanged resets records=ViewStateData(null) before fetching — cache-invalidating pattern for filter changes
+- [Phase 04-teamdetails-screen]: [Phase 04-teamdetails-screen P01]: Season change resets rosterSortOption and rosterSortAscending — prevents stale sort arrows after season switch
 
 ### Pending Todos
 
@@ -94,6 +98,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T08:11:10.131Z
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-teamdetails-screen/04-CONTEXT.md
+Last session: 2026-03-17T09:07:51.090Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: None
