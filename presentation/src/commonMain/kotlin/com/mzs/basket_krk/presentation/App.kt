@@ -75,6 +75,8 @@ fun App() {
                     MatchDetailsScreen(
                         viewModel = viewModel,
                         onNavigateBack = { navController.popBackStack() },
+                        onNavigateToPlayer = { navController.navigate(Screen.PlayerDetails(playerId = it)) },
+                        onNavigateToTeam = { navController.navigate(Screen.TeamDetails(teamId = it)) },
                     )
                 }
 
@@ -118,6 +120,7 @@ fun App() {
                     StandingsScreen(
                         viewModel = koinViewModel<StandingsViewModel>(),
                         onNavigateBack = { navController.popBackStack() },
+                        onNavigateToTeam = { navController.navigate(Screen.TeamDetails(teamId = it)) },
                     )
                 }
             }

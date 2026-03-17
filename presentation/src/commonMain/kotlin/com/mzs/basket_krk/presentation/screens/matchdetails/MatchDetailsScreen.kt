@@ -73,6 +73,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun MatchDetailsScreen(
     viewModel: MatchDetailsViewModel,
     onNavigateBack: () -> Unit,
+    onNavigateToPlayer: (Int) -> Unit,
+    onNavigateToTeam: (Int) -> Unit,
 ) {
 
     val viewState by viewModel.viewState.collectAsState()
@@ -82,6 +84,8 @@ fun MatchDetailsScreen(
         onRetry = viewModel::retry,
         onSortByStat = viewModel::onSortByStat,
         onNavigateBack = onNavigateBack,
+        onNavigateToPlayer = onNavigateToPlayer,
+        onNavigateToTeam = onNavigateToTeam,
     )
 }
 
@@ -91,6 +95,8 @@ fun MatchDetailsContent(
     onRetry: () -> Unit,
     onSortByStat: (StatOption) -> Unit,
     onNavigateBack: () -> Unit,
+    onNavigateToPlayer: (Int) -> Unit,
+    onNavigateToTeam: (Int) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
@@ -112,18 +118,14 @@ fun MatchDetailsContent(
                     if (matchDetails.statsEmpty) {
                         ViewWithoutTable(
                             matchDetails = matchDetails,
-                            onOpenTeamDetails = {},
+                            onOpenTeamDetails = onNavigateToTeam,
                             middleText = matchDetails.resolveMiddleText()
                         )
                     } else {
                         ViewWithTable(
                             matchDetails = matchDetails,
-                            onOpenTeamDetails = {
-                                // TODO Handle team click
-                            },
-                            onOpenPlayerDetails = {
-                                // TODO Handle player click
-                            },
+                            onOpenTeamDetails = onNavigateToTeam,
+                            onOpenPlayerDetails = onNavigateToPlayer,
                             onStatClicked = onSortByStat
                         )
                     }
@@ -425,5 +427,7 @@ fun MatchDetailsContentPreview() {
         onRetry = {},
         onNavigateBack = {},
         onSortByStat = {},
+        onNavigateToPlayer = {},
+        onNavigateToTeam = {},
     )
 }

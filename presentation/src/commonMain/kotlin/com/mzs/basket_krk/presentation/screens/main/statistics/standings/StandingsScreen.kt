@@ -39,6 +39,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun StandingsScreen(
     viewModel: StandingsViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
+    onNavigateToTeam: (Int) -> Unit,
 ) {
     val viewState by viewModel.viewState.collectAsState()
 
@@ -48,6 +49,7 @@ fun StandingsScreen(
         onSeasonSelected = viewModel::onSeasonSelected,
         onRefresh = viewModel::onRefresh,
         onNavigateBack = onNavigateBack,
+        onNavigateToTeam = onNavigateToTeam,
     )
 }
 
@@ -58,6 +60,7 @@ fun StandingsContent(
     onSeasonSelected: (Season) -> Unit,
     onRefresh: () -> Unit,
     onNavigateBack: () -> Unit,
+    onNavigateToTeam: (Int) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
@@ -120,9 +123,7 @@ fun StandingsContent(
 
                                         CompetitionItem(
                                             competition = competition,
-                                            onOpenTeamDetails = {
-                                                //TODO: implement navigation to team details
-                                            },
+                                            onOpenTeamDetails = onNavigateToTeam,
                                             modifier = Modifier.padding(
                                                 horizontal = 8.dp,
                                                 vertical = 4.dp
@@ -157,6 +158,7 @@ fun StandingsContentPreview() {
         onRefresh = {},
         onSeasonSelected = {},
         onLeagueSelected = {},
-        onNavigateBack = {}
+        onNavigateBack = {},
+        onNavigateToTeam = {},
     )
 }
