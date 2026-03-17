@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-17T09:27:00.893Z"
+stopped_at: "Checkpoint: Task 2 human verify — all 5 NAV requirements wired, awaiting device/simulator verification"
+last_updated: "2026-03-17T09:53:59.700Z"
 last_activity: "2026-03-17 — Completed plan 01 (TeamDetailsScreen wiring: ViewModel roster state, shared composables, tab signatures)"
 progress:
   total_phases: 5
-  completed_phases: 4
-  total_plans: 9
-  completed_plans: 9
+  completed_phases: 5
+  total_plans: 10
+  completed_plans: 10
   percent: 78
 ---
 
@@ -59,6 +59,7 @@ Progress: [████████░░] 78%
 | Phase 04-teamdetails-screen P01 | 15min | 2 tasks | 9 files |
 | Phase 04-teamdetails-screen P02 | 10min | 2 tasks | 2 files |
 | Phase 04-teamdetails-screen P03 | 2min | 2 tasks | 2 files |
+| Phase 05-navigation-integration P01 | 5min | 1 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,7 @@ Recent decisions affecting current work:
 - [Phase 04-teamdetails-screen]: Cross-module nullable smart cast fix: assign record.matchId/record.ats to local vals before null-checking in KMP
 - [Phase 04-teamdetails-screen]: Roster totals row uses getValueForGivenOption (not getValueForGivenOptionWithSeasonsCount) — each PlayerWithStat.stat carries its own match count m, getSumStatFromStats produces correct sums
 - [Phase 04-teamdetails-screen]: rosterPlayerColWidth=120dp (wider than GameLogs 100dp) to accommodate player names with jersey numbers in parentheses
+- [Phase 05-navigation-integration]: onNavigateToPlayer and onNavigateToTeam threaded from MatchDetailsScreen through MatchDetailsContent to ViewWithoutTable/ViewWithTable using existing callback propagation pattern
 
 ### Pending Todos
 
@@ -104,6 +106,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T09:27:00.890Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-navigation-integration/05-CONTEXT.md
+Last session: 2026-03-17T09:53:59.697Z
+Stopped at: Checkpoint: Task 2 human verify — all 5 NAV requirements wired, awaiting device/simulator verification
+Resume file: None

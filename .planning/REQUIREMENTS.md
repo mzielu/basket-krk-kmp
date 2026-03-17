@@ -46,11 +46,11 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 ### Team Details — Roster
 
-- [ ] **TROS-01**: User can view team roster as a scrollable stat table with player names and stat columns
+- [x] **TROS-01**: User can view team roster as a scrollable stat table with player names and stat columns
 - [x] **TROS-02**: User can filter roster by season using a dropdown selector
 - [x] **TROS-03**: User can toggle between average and total stat display
 - [x] **TROS-04**: User can sort roster by clicking any stat column header
-- [ ] **TROS-05**: User can click a player name to navigate to PlayerDetails
+- [x] **TROS-05**: User can click a player name to navigate to PlayerDetails
 
 ### Team Details — Records
 
@@ -61,11 +61,11 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 ### Navigation Integration
 
-- [ ] **NAV-01**: User can navigate to PlayerDetails from MatchDetails (clicking player name in stat table)
-- [ ] **NAV-02**: User can navigate to TeamDetails from Standings (clicking team name)
-- [ ] **NAV-03**: User can navigate to PlayerDetails from AllTimeLeaders (clicking player entry)
-- [ ] **NAV-04**: User can navigate from PlayerDetails to TeamDetails and vice versa (cross-navigation)
-- [ ] **NAV-05**: User can navigate to PlayerDetails or TeamDetails from search results
+- [x] **NAV-01**: User can navigate to PlayerDetails from MatchDetails (clicking player name in stat table)
+- [x] **NAV-02**: User can navigate to TeamDetails from Standings (clicking team name)
+- [x] **NAV-03**: User can navigate to PlayerDetails from AllTimeLeaders (clicking player entry)
+- [x] **NAV-04**: User can navigate from PlayerDetails to TeamDetails and vice versa (cross-navigation)
+- [x] **NAV-05**: User can navigate to PlayerDetails or TeamDetails from search results
 
 ## v2 Requirements
 
@@ -111,20 +111,20 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TRES-01 | Phase 4 | Complete |
 | TRES-02 | Phase 4 | Complete |
 | TRES-03 | Phase 4 | Complete |
-| TROS-01 | Phase 4 | Pending |
+| TROS-01 | Phase 4 | Complete |
 | TROS-02 | Phase 4 | Complete |
 | TROS-03 | Phase 4 | Complete |
 | TROS-04 | Phase 4 | Complete |
-| TROS-05 | Phase 4 | Pending |
+| TROS-05 | Phase 4 | Complete |
 | TREC-01 | Phase 4 | Complete |
 | TREC-02 | Phase 4 | Complete |
 | TREC-03 | Phase 4 | Complete |
 | TREC-04 | Phase 4 | Complete |
-| NAV-01 | Phase 5 | Pending |
-| NAV-02 | Phase 5 | Pending |
-| NAV-03 | Phase 5 | Pending |
-| NAV-04 | Phase 5 | Pending |
-| NAV-05 | Phase 5 | Pending |
+| NAV-01 | Phase 5 | Complete |
+| NAV-02 | Phase 5 | Complete |
+| NAV-03 | Phase 5 | Complete |
+| NAV-04 | Phase 5 | Complete |
+| NAV-05 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 33 total

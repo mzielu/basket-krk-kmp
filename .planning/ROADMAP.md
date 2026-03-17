@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: PlayerDetails Screen** - Full three-tab PlayerDetails Compose screen with ViewModel and all interactions (completed 2026-03-16)
 - [x] **Phase 3: Team Data Layer** - DTOs, Ktor endpoints, and repositories for all four team API endpoints (completed 2026-03-16)
 - [x] **Phase 4: TeamDetails Screen** - Full three-tab TeamDetails Compose screen with ViewModel and all interactions (completed 2026-03-17)
-- [ ] **Phase 5: Navigation Integration** - Wire all click paths from existing screens into PlayerDetails and TeamDetails
+- [x] **Phase 5: Navigation Integration** - Wire all click paths from existing screens into PlayerDetails and TeamDetails (completed 2026-03-17)
 
 ## Phase Details
 
@@ -85,7 +85,7 @@ Plans:
   3. Tapping a player entry in AllTimeLeaders opens that player's PlayerDetails screen
   4. PlayerDetails and TeamDetails link to each other (player stat row links to team, team roster row links to player)
   5. Selecting a player or team from search results opens their respective detail screen
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
 - [ ] 05-01-PLAN.md — Wire MatchDetails and Standings navigation callbacks, verify all 5 entry points
 
@@ -100,4 +100,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. PlayerDetails Screen | 2/2 | Complete    | 2026-03-16 |
 | 3. Team Data Layer | 2/2 | Complete    | 2026-03-16 |
 | 4. TeamDetails Screen | 3/3 | Complete    | 2026-03-17 |
-| 5. Navigation Integration | 0/1 | Not started | - |
+| 5. Navigation Integration | 1/1 | Complete   | 2026-03-17 |
