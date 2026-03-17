@@ -8,7 +8,10 @@ import com.mzs.basket_krk.domain.base.onSuspendGeneralError
 import com.mzs.basket_krk.domain.base.onSuspendSuccess
 import com.mzs.basket_krk.domain.model.PlayerWithStat
 import com.mzs.basket_krk.domain.model.Season
+import com.mzs.basket_krk.domain.model.StatDisplayType
+import com.mzs.basket_krk.domain.model.StatOption
 import com.mzs.basket_krk.domain.model.TeamDetails
+import com.mzs.basket_krk.domain.model.getValueForGivenOption
 import com.mzs.basket_krk.domain.model.TeamRecord
 import com.mzs.basket_krk.domain.model.TeamRecordRange
 import com.mzs.basket_krk.domain.model.TeamRecordStatOption
@@ -90,11 +93,45 @@ class TeamDetailsViewModel(
                 results = ViewStateData(null),
                 roster = ViewStateData(null),
                 winsLosses = null,
-                pointDifferential = null
+                pointDifferential = null,
+                rosterSortOption = null,
+                rosterSortAscending = false
             )
         }
         // Re-fetch results for new season (reset cache)
         fetchResultsForSeason(season.id)
+    }
+
+    fun onRosterSortByStat(statOption: StatOption) {
+        val currentSort = _viewState.value.rosterSortOption
+        val currentAsc = _viewState.value.rosterSortAscending
+        val newAscending = if (currentSort == statOption) !currentAsc else false
+        _viewState.update { state ->
+            val roster = state.roster.data ?: return@update state
+            val sorted = roster.sortedWith(compareBy {
+                it.stat.getValueForGivenOption(statOption, StatDisplayType.SUM) ?: 0.0
+            }).let { if (!newAscending) it.reversed() else it }
+            state.copy(
+                rosterSortOption = statOption,
+                rosterSortAscending = newAscending,
+                roster = state.roster.data(sorted)
+            )
+        }
+    }
+
+    fun onRosterStatDisplayTypeChanged(type: StatDisplayType) {
+        _viewState.update { it.copy(rosterStatDisplayType = type) }
+    }
+
+    fun onRecordFilterChanged(stat: TeamRecordStatOption, range: TeamRecordRange) {
+        _viewState.update {
+            it.copy(
+                selectedRecordStatOption = stat,
+                selectedRecordRange = range,
+                records = ViewStateData(null)
+            )
+        }
+        fetchRecordsIfNeeded()
     }
 
     private fun fetchResultsIfNeeded(seasonId: Int) {
@@ -186,6 +223,9 @@ data class TeamDetailsViewState(
     val selectedSeason: Season? = null,
     val selectedRecordStatOption: TeamRecordStatOption = TeamRecordStatOption.PTS,
     val selectedRecordRange: TeamRecordRange = TeamRecordRange.ALL_TIME,
+    val rosterSortOption: StatOption? = null,
+    val rosterSortAscending: Boolean = false,
+    val rosterStatDisplayType: StatDisplayType = StatDisplayType.SUM,
     val winsLosses: Pair<Int, Int>? = null,
     val pointDifferential: Int? = null,
 )
