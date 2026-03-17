@@ -68,37 +68,37 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SLDR-01 | — | Pending |
-| SLDR-02 | — | Pending |
-| SLDR-03 | — | Pending |
-| SLDR-04 | — | Pending |
-| SLDR-05 | — | Pending |
-| SLDR-06 | — | Pending |
-| MORE-01 | — | Pending |
-| MORE-02 | — | Pending |
-| MORE-03 | — | Pending |
-| MORE-04 | — | Pending |
-| MORE-05 | — | Pending |
-| MORE-06 | — | Pending |
-| MORE-07 | — | Pending |
-| MORE-08 | — | Pending |
-| MORE-09 | — | Pending |
-| MORE-10 | — | Pending |
-| TRNT-01 | — | Pending |
-| TRNT-02 | — | Pending |
-| TRNT-03 | — | Pending |
-| PREM-01 | — | Pending |
-| PREM-02 | — | Pending |
-| PREM-03 | — | Pending |
-| PREM-04 | — | Pending |
-| PREM-05 | — | Pending |
-| PREM-06 | — | Pending |
+| SLDR-01 | Phase 6 | Pending |
+| SLDR-02 | Phase 6 | Pending |
+| SLDR-03 | Phase 6 | Pending |
+| SLDR-04 | Phase 6 | Pending |
+| SLDR-05 | Phase 6 | Pending |
+| SLDR-06 | Phase 6 | Pending |
+| MORE-01 | Phase 7 | Pending |
+| MORE-02 | Phase 7 | Pending |
+| MORE-03 | Phase 7 | Pending |
+| MORE-04 | Phase 7 | Pending |
+| MORE-05 | Phase 7 | Pending |
+| MORE-06 | Phase 7 | Pending |
+| MORE-07 | Phase 7 | Pending |
+| MORE-08 | Phase 7 | Pending |
+| MORE-09 | Phase 7 | Pending |
+| MORE-10 | Phase 7 | Pending |
+| TRNT-01 | Phase 7 | Pending |
+| TRNT-02 | Phase 7 | Pending |
+| TRNT-03 | Phase 7 | Pending |
+| PREM-01 | Phase 8 | Pending |
+| PREM-02 | Phase 8 | Pending |
+| PREM-03 | Phase 8 | Pending |
+| PREM-04 | Phase 8 | Pending |
+| PREM-05 | Phase 8 | Pending |
+| PREM-06 | Phase 8 | Pending |
 
 **Coverage:**
 - v1 requirements: 25 total
-- Mapped to phases: 0
-- Unmapped: 25
+- Mapped to phases: 25
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-18*
-*Last updated: 2026-03-18 after initial definition*
+*Last updated: 2026-03-18 after roadmap creation (Phases 6-8)*
