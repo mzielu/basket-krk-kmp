@@ -28,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.clickable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.mzs.basket_krk.domain.model.PlayerDetails
@@ -144,7 +145,9 @@ private fun PlayerDetailsBody(
                 BasketKrkImage(
                     logoUrl = team.logoUrl,
                     contentDescription = "${team.name} logo",
-                    modifier = Modifier.size(64.dp)
+                    modifier = Modifier
+                        .size(64.dp)
+                        .clickable { onNavigateToTeam(team.id) }
                 )
                 Spacer(modifier = Modifier.size(12.dp))
                 Column {
@@ -155,6 +158,7 @@ private fun PlayerDetailsBody(
                     Text(
                         text = team.name,
                         style = BasketKrkStyles.itemAdditionalInfo,
+                        modifier = Modifier.clickable { onNavigateToTeam(team.id) }
                     )
                     if (details.seasons.isNotEmpty()) {
                         Text(
