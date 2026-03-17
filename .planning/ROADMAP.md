@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Player Data Layer** - DTOs, Ktor endpoints, and repositories for all four player API endpoints (completed 2026-03-16)
 - [x] **Phase 2: PlayerDetails Screen** - Full three-tab PlayerDetails Compose screen with ViewModel and all interactions (completed 2026-03-16)
 - [x] **Phase 3: Team Data Layer** - DTOs, Ktor endpoints, and repositories for all four team API endpoints (completed 2026-03-16)
-- [ ] **Phase 4: TeamDetails Screen** - Full three-tab TeamDetails Compose screen with ViewModel and all interactions
+- [x] **Phase 4: TeamDetails Screen** - Full three-tab TeamDetails Compose screen with ViewModel and all interactions (completed 2026-03-17)
 - [ ] **Phase 5: Navigation Integration** - Wire all click paths from existing screens into PlayerDetails and TeamDetails
 
 ## Phase Details
@@ -69,7 +69,7 @@ Plans:
   2. User can view roster as a scrollable stat table, filter by season, toggle avg/total, sort by column, and tap a player to open PlayerDetails
   3. User can view team records filtered by stat category (PTS, AST, REB, STL, BLK, EFF, FT, FG, 3FG) and range (All-Time, Season, Match)
   4. User can tap a record entry to navigate to the associated player or match
-**Plans:** 1/3 plans executed
+**Plans:** 3/3 plans complete
 Plans:
 - [ ] 04-01-PLAN.md — ViewModel extensions, shared composable extraction, tab signature wiring
 - [ ] 04-02-PLAN.md — Results tab (TeamResultsTab) and Records tab (TeamRecordsTab) implementations
@@ -97,5 +97,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Player Data Layer | 2/2 | Complete    | 2026-03-16 |
 | 2. PlayerDetails Screen | 2/2 | Complete    | 2026-03-16 |
 | 3. Team Data Layer | 2/2 | Complete    | 2026-03-16 |
-| 4. TeamDetails Screen | 1/3 | In Progress|  |
+| 4. TeamDetails Screen | 3/3 | Complete   | 2026-03-17 |
 | 5. Navigation Integration | 0/TBD | Not started | - |

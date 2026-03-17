@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-03-17T09:07:51.092Z"
-last_activity: 2026-03-17 — Completed plan 01 (TeamDetailsScreen wiring: ViewModel roster state, shared composables, tab signatures)
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-03-17T09:13:00.649Z"
+last_activity: "2026-03-17 — Completed plan 01 (TeamDetailsScreen wiring: ViewModel roster state, shared composables, tab signatures)"
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 9
-  completed_plans: 7
+  completed_plans: 9
   percent: 78
 ---
 
@@ -57,6 +57,8 @@ Progress: [████████░░] 78%
 | Phase 03-team-data-layer P01 | 2 | 3 tasks | 16 files |
 | Phase 03-team-data-layer P02 | 4min | 2 tasks | 12 files |
 | Phase 04-teamdetails-screen P01 | 15min | 2 tasks | 9 files |
+| Phase 04-teamdetails-screen P02 | 10min | 2 tasks | 2 files |
+| Phase 04-teamdetails-screen P03 | 2min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -87,6 +89,10 @@ Recent decisions affecting current work:
 - [Phase 04-teamdetails-screen]: [Phase 04-teamdetails-screen P01]: StatDisplayTypeToggle and SortableTopRowCell extracted to base/ui as public composables — eliminates duplication between PlayerDetails and TeamDetails tabs
 - [Phase 04-teamdetails-screen]: [Phase 04-teamdetails-screen P01]: onRecordFilterChanged resets records=ViewStateData(null) before fetching — cache-invalidating pattern for filter changes
 - [Phase 04-teamdetails-screen]: [Phase 04-teamdetails-screen P01]: Season change resets rosterSortOption and rosterSortAscending — prevents stale sort arrows after season switch
+- [Phase 04-teamdetails-screen]: formatOneDecimal helper used instead of String.format for KMP common code compatibility in TeamRecordsTab suffix calculation
+- [Phase 04-teamdetails-screen]: Cross-module nullable smart cast fix: assign record.matchId/record.ats to local vals before null-checking in KMP
+- [Phase 04-teamdetails-screen]: Roster totals row uses getValueForGivenOption (not getValueForGivenOptionWithSeasonsCount) — each PlayerWithStat.stat carries its own match count m, getSumStatFromStats produces correct sums
+- [Phase 04-teamdetails-screen]: rosterPlayerColWidth=120dp (wider than GameLogs 100dp) to accommodate player names with jersey numbers in parentheses
 
 ### Pending Todos
 
@@ -98,6 +104,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T09:07:51.090Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-03-17T09:13:00.647Z
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
