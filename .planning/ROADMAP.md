@@ -39,11 +39,11 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
   2. User can switch season, league, and stat category via dropdowns and the list updates accordingly
   3. User can see shooting details (made/attempts) for FT%, FG%, 3FG% leaders and games played for counting stats
   4. User can tap any leader entry and land on the correct PlayerDetails screen
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 06-01: Season Leaders data layer (API endpoint, DTO, domain model, repository, use case)
-- [ ] 06-02: Season Leaders screen (ViewModel, UI, filtering, navigation wiring)
+- [ ] 06-01-PLAN.md — Use case and ViewModel with cascading filter state management
+- [ ] 06-02-PLAN.md — Screen UI, leader item component, navigation wiring, and DI registration
 
 ### Phase 7: More Screen & Tournament Chooser
 **Goal**: Users can access all secondary app functions from the More tab including tournament switching
