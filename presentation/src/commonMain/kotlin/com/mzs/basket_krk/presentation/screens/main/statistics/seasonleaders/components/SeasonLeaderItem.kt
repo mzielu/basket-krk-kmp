@@ -98,7 +98,7 @@ fun SeasonLeaderItem(
             // Value
             Box(contentAlignment = Alignment.Center) {
                 Text(
-                    text = "%.1f".format(leader.value),
+                    text = formatLeaderValue(leader.value),
                     style = BasketKrkStyles.competitionItemRow
                 )
             }
@@ -124,6 +124,17 @@ fun SeasonLeaderItem(
                 }
             }
         }
+    }
+}
+
+private fun formatLeaderValue(value: Double): String {
+    val rounded = kotlin.math.round(value * 10.0) / 10.0
+    return if (rounded == rounded.toInt().toDouble()) {
+        rounded.toInt().toString()
+    } else {
+        val intPart = rounded.toInt()
+        val frac = kotlin.math.abs((rounded - intPart) * 10).toInt()
+        "$intPart.$frac"
     }
 }
 

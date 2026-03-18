@@ -83,7 +83,7 @@ fun SeasonLeadersContent(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 DropdownFormField(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1.3f),
                     label = "Season",
                     options = viewState.seasons,
                     selectedOption = viewState.selectedSeason,
@@ -94,7 +94,7 @@ fun SeasonLeadersContent(
                 Spacer(modifier = Modifier.width(8.dp))
 
                 DropdownFormField(
-                    modifier = Modifier.weight(3f),
+                    modifier = Modifier.weight(2.7f),
                     label = "League",
                     options = viewState.leagues,
                     selectedOption = viewState.selectedLeague,
