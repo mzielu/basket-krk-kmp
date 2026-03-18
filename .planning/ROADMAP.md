@@ -24,7 +24,7 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
 
 **Milestone Goal:** Add Season Leaders screen, complete MoreScreen with Tournament Chooser, and integrate premium subscription with in-app purchases.
 
-- [ ] **Phase 6: Season Leaders** — Full data layer and screen with filtering and player navigation
+- [x] **Phase 6: Season Leaders** — Full data layer and screen with filtering and player navigation (completed 2026-03-18)
 - [ ] **Phase 7: More Screen & Tournament Chooser** — Complete MoreScreen with 9 items including Tournament Chooser sub-screen
 - [ ] **Phase 8: Premium** — In-app purchase integration, premium screen, and All-Time Leaders gating
 
@@ -39,7 +39,7 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
   2. User can switch season, league, and stat category via dropdowns and the list updates accordingly
   3. User can see shooting details (made/attempts) for FT%, FG%, 3FG% leaders and games played for counting stats
   4. User can tap any leader entry and land on the correct PlayerDetails screen
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] 06-01-PLAN.md — Use case and ViewModel with cascading filter state management
@@ -90,6 +90,6 @@ Phases execute in numeric order: 6 → 7 → 8
 | 3. Team Data Layer | v1.0 | 2/2 | Complete | 2026-03-16 |
 | 4. TeamDetails Screen | v1.0 | 3/3 | Complete | 2026-03-17 |
 | 5. Navigation Integration | v1.0 | 1/1 | Complete | 2026-03-17 |
-| 6. Season Leaders | 1/2 | In Progress|  | - |
+| 6. Season Leaders | 2/2 | Complete   | 2026-03-18 | - |
 | 7. More Screen & Tournament Chooser | v1.1 | 0/2 | Not started | - |
 | 8. Premium | v1.1 | 0/3 | Not started | - |
