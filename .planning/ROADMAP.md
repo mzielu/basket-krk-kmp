@@ -39,7 +39,7 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
   2. User can switch season, league, and stat category via dropdowns and the list updates accordingly
   3. User can see shooting details (made/attempts) for FT%, FG%, 3FG% leaders and games played for counting stats
   4. User can tap any leader entry and land on the correct PlayerDetails screen
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 06-01-PLAN.md — Use case and ViewModel with cascading filter state management
@@ -90,6 +90,6 @@ Phases execute in numeric order: 6 → 7 → 8
 | 3. Team Data Layer | v1.0 | 2/2 | Complete | 2026-03-16 |
 | 4. TeamDetails Screen | v1.0 | 3/3 | Complete | 2026-03-17 |
 | 5. Navigation Integration | v1.0 | 1/1 | Complete | 2026-03-17 |
-| 6. Season Leaders | v1.1 | 0/2 | Not started | - |
+| 6. Season Leaders | 1/2 | In Progress|  | - |
 | 7. More Screen & Tournament Chooser | v1.1 | 0/2 | Not started | - |
 | 8. Premium | v1.1 | 0/3 | Not started | - |

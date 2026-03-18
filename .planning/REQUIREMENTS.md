@@ -9,11 +9,11 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 ### Season Leaders
 
-- [ ] **SLDR-01**: User can view season leaders as a ranked list showing position, team logo, player name, and stat value
-- [ ] **SLDR-02**: User can filter season leaders by season using a dropdown selector
-- [ ] **SLDR-03**: User can filter season leaders by league using a dropdown selector (leagues update based on selected season)
-- [ ] **SLDR-04**: User can filter season leaders by stat category (PTS, AST, REB, STL, BLK, FT%, FG%, 3FG%)
-- [ ] **SLDR-05**: User can see additional info per leader (made/attempts for shooting stats, games played for others)
+- [x] **SLDR-01**: User can view season leaders as a ranked list showing position, team logo, player name, and stat value
+- [x] **SLDR-02**: User can filter season leaders by season using a dropdown selector
+- [x] **SLDR-03**: User can filter season leaders by league using a dropdown selector (leagues update based on selected season)
+- [x] **SLDR-04**: User can filter season leaders by stat category (PTS, AST, REB, STL, BLK, FT%, FG%, 3FG%)
+- [x] **SLDR-05**: User can see additional info per leader (made/attempts for shooting stats, games played for others)
 - [ ] **SLDR-06**: User can tap a leader entry to navigate to PlayerDetails
 
 ### More Screen
@@ -68,11 +68,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SLDR-01 | Phase 6 | Pending |
-| SLDR-02 | Phase 6 | Pending |
-| SLDR-03 | Phase 6 | Pending |
-| SLDR-04 | Phase 6 | Pending |
-| SLDR-05 | Phase 6 | Pending |
+| SLDR-01 | Phase 6 | Complete |
+| SLDR-02 | Phase 6 | Complete |
+| SLDR-03 | Phase 6 | Complete |
+| SLDR-04 | Phase 6 | Complete |
+| SLDR-05 | Phase 6 | Complete |
 | SLDR-06 | Phase 6 | Pending |
 | MORE-01 | Phase 7 | Pending |
 | MORE-02 | Phase 7 | Pending |
