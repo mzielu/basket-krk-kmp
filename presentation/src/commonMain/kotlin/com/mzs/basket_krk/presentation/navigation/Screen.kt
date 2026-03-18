@@ -20,6 +20,9 @@ sealed class Screen {
     data object Standings : Screen()
 
     @Serializable
+    data object SeasonLeaders : Screen()
+
+    @Serializable
     data class PlayerDetails(val playerId: Int) : Screen()
 
     @Serializable

@@ -42,6 +42,7 @@ fun MainScreen(
     openPlayerDetails: (Int) -> Unit,
     openAllTimeLeaders: () -> Unit,
     openTables: () -> Unit,
+    openLeagueLeaders: () -> Unit,
 ) {
     val selectedTab by viewModel.selectedTab.collectAsState()
 
@@ -58,7 +59,7 @@ fun MainScreen(
 
                 MainTab.STATS -> StatisticsScreen(
                     openTables = openTables,
-                    openLeagueLeaders = {},
+                    openLeagueLeaders = openLeagueLeaders,
                     openAllTimeLeaders = openAllTimeLeaders
                 )
 

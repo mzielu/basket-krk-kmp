@@ -17,6 +17,8 @@ import com.mzs.basket_krk.presentation.navigation.Screen
 import com.mzs.basket_krk.presentation.screens.main.MainScreen
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersScreen
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersViewModel
+import com.mzs.basket_krk.presentation.screens.main.statistics.seasonleaders.SeasonLeadersScreen
+import com.mzs.basket_krk.presentation.screens.main.statistics.seasonleaders.SeasonLeadersViewModel
 import com.mzs.basket_krk.presentation.screens.main.statistics.standings.StandingsScreen
 import com.mzs.basket_krk.presentation.screens.main.statistics.standings.StandingsViewModel
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsScreen
@@ -62,6 +64,9 @@ fun App() {
                         },
                         openTables = {
                             navController.navigate(Screen.Standings)
+                        },
+                        openLeagueLeaders = {
+                            navController.navigate(Screen.SeasonLeaders)
                         }
                     )
                 }
@@ -121,6 +126,14 @@ fun App() {
                         viewModel = koinViewModel<StandingsViewModel>(),
                         onNavigateBack = { navController.popBackStack() },
                         onNavigateToTeam = { navController.navigate(Screen.TeamDetails(teamId = it)) },
+                    )
+                }
+
+                composable<Screen.SeasonLeaders> {
+                    SeasonLeadersScreen(
+                        viewModel = koinViewModel<SeasonLeadersViewModel>(),
+                        onNavigateBack = { navController.popBackStack() },
+                        onNavigateToPlayer = { navController.navigate(Screen.PlayerDetails(playerId = it)) },
                     )
                 }
             }

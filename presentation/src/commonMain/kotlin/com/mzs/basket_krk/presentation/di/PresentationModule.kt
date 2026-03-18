@@ -4,6 +4,8 @@ import com.mzs.basket_krk.domain.usecase.GetAllTimeLeaders
 import com.mzs.basket_krk.domain.usecase.GetAllTimeLeadersUseCase
 import com.mzs.basket_krk.domain.usecase.GetLeagueDetails
 import com.mzs.basket_krk.domain.usecase.GetLeagueDetailsUseCase
+import com.mzs.basket_krk.domain.usecase.GetLeagueLeaders
+import com.mzs.basket_krk.domain.usecase.GetLeagueLeadersUseCase
 import com.mzs.basket_krk.domain.usecase.GetLeaguesForSeason
 import com.mzs.basket_krk.domain.usecase.GetLeaguesForSeasonUseCase
 import com.mzs.basket_krk.domain.usecase.GetLeaguesInfo
@@ -47,6 +49,7 @@ import com.mzs.basket_krk.presentation.screens.main.search.pagination.SearchItem
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersViewModel
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.pagination.AllTimeLeadersPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.pagination.BaseAllTimeLeadersPagingSourceFactory
+import com.mzs.basket_krk.presentation.screens.main.statistics.seasonleaders.SeasonLeadersViewModel
 import com.mzs.basket_krk.presentation.screens.main.statistics.standings.StandingsViewModel
 import com.mzs.basket_krk.presentation.screens.matchdetails.MatchDetailsViewModel
 import com.mzs.basket_krk.presentation.screens.playerdetails.PlayerDetailsViewModel
@@ -67,6 +70,7 @@ val presentationModule = module {
     single<GetLeagueDetails> { GetLeagueDetailsUseCase(get()) }
     single<GetLeaguesInfo> { GetLeaguesInfoUseCase(get()) }
     single<GetLeaguesForSeason> { GetLeaguesForSeasonUseCase(get()) }
+    single<GetLeagueLeaders> { GetLeagueLeadersUseCase(get()) }
     single<GetPlayerDetails> { GetPlayerDetailsUseCase(get()) }
     single<GetPlayerGameLogs> { GetPlayerGameLogsUseCase(get()) }
     single<GetPlayerStats> { GetPlayerStatsUseCase(get()) }
@@ -91,4 +95,5 @@ val presentationModule = module {
     viewModelOf(::MoreViewModel)
     viewModelOf(::AllTimeLeadersViewModel)
     viewModelOf(::StandingsViewModel)
+    viewModelOf(::SeasonLeadersViewModel)
 }
