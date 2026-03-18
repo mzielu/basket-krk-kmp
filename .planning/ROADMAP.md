@@ -90,6 +90,6 @@ Phases execute in numeric order: 6 → 7 → 8
 | 3. Team Data Layer | v1.0 | 2/2 | Complete | 2026-03-16 |
 | 4. TeamDetails Screen | v1.0 | 3/3 | Complete | 2026-03-17 |
 | 5. Navigation Integration | v1.0 | 1/1 | Complete | 2026-03-17 |
-| 6. Season Leaders | 2/2 | Complete   | 2026-03-18 | - |
+| 6. Season Leaders | 2/2 | Complete    | 2026-03-18 | - |
 | 7. More Screen & Tournament Chooser | v1.1 | 0/2 | Not started | - |
 | 8. Premium | v1.1 | 0/3 | Not started | - |
