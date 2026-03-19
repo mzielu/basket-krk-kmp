@@ -37,6 +37,7 @@ import basket_krk.presentation.generated.resources.more_write_to_us
 import com.mzs.basket_krk.domain.model.Platform
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.base.ui.NavigationItem
+import com.mzs.basket_krk.presentation.screens.main.more.MoreUrls
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -87,7 +88,7 @@ fun MoreContent(
             title = stringResource(Res.string.more_about_us),
             imageVector = Icons.Outlined.SmartToy,
             onClick = {
-                // TODO: Implement about us action
+                uriHandler.openUri(MoreUrls.ABOUT_US)
             }
         )
 
@@ -97,7 +98,7 @@ fun MoreContent(
             title = stringResource(Res.string.more_donate),
             imageVector = Icons.Outlined.Savings,
             onClick = {
-                // TODO: Implement about us action
+                uriHandler.openUri(MoreUrls.DONATE)
             }
         )
 
@@ -117,7 +118,7 @@ fun MoreContent(
             title = stringResource(Res.string.more_terms_of_use),
             imageVector = Icons.Outlined.DocumentScanner,
             onClick = {
-                // TODO: Implement about us action
+                uriHandler.openUri(MoreUrls.TERMS)
             }
         )
 
@@ -127,7 +128,7 @@ fun MoreContent(
             title = stringResource(Res.string.more_privacy_policy),
             imageVector = Icons.Outlined.Policy,
             onClick = {
-                // TODO: Implement about us action
+                uriHandler.openUri(MoreUrls.PRIVACY)
             }
         )
 
@@ -137,7 +138,6 @@ fun MoreContent(
             title = stringResource(Res.string.more_write_to_us),
             imageVector = Icons.Outlined.Mail,
             onClick = {
-                // TODO: Implement about us action
                 val mailto =
                     "mailto:kontakt@basketkrk.pl?subject=[${viewState.platform}] Mail from the app"
 
@@ -151,7 +151,7 @@ fun MoreContent(
             title = stringResource(Res.string.more_check_fb),
             imageVector = Icons.Outlined.Facebook,
             onClick = {
-                // TODO: Implement about us action
+                uriHandler.openUri(MoreUrls.FACEBOOK)
             }
         )
 
@@ -161,7 +161,7 @@ fun MoreContent(
             title = stringResource(Res.string.more_check_ig),
             imageVector = Icons.Outlined.PhotoCamera,
             onClick = {
-                // TODO: Implement about us action
+                uriHandler.openUri(MoreUrls.INSTAGRAM)
             }
         )
     }
