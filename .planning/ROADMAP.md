@@ -55,7 +55,7 @@ Plans:
   3. User can tap "Write to Us" and the email client opens pre-filled with the correct recipient and subject
   4. User can tap "Change Tournament", see a list of available tournaments, select one, and the app switches its active tournament context and reloads data
   5. User can tap "Buy Premium" and land on the Premium screen
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 07-01-PLAN.md — MoreScreen URL wiring, Premium placeholder, navigation routes and MainScreen callback threading
@@ -91,5 +91,5 @@ Phases execute in numeric order: 6 → 7 → 8
 | 4. TeamDetails Screen | v1.0 | 3/3 | Complete | 2026-03-17 |
 | 5. Navigation Integration | v1.0 | 1/1 | Complete | 2026-03-17 |
 | 6. Season Leaders | 2/2 | Complete    | 2026-03-18 | - |
-| 7. More Screen & Tournament Chooser | v1.1 | 0/2 | Planned | - |
+| 7. More Screen & Tournament Chooser | 1/2 | In Progress|  | - |
 | 8. Premium | v1.1 | 0/3 | Not started | - |

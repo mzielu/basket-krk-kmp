@@ -14,20 +14,20 @@ Requirements for this milestone. Each maps to roadmap phases.
 - [x] **SLDR-03**: User can filter season leaders by league using a dropdown selector (leagues update based on selected season)
 - [x] **SLDR-04**: User can filter season leaders by stat category (PTS, AST, REB, STL, BLK, FT%, FG%, 3FG%)
 - [x] **SLDR-05**: User can see additional info per leader (made/attempts for shooting stats, games played for others)
-- [ ] **SLDR-06**: User can tap a leader entry to navigate to PlayerDetails
+- [x] **SLDR-06**: User can tap a leader entry to navigate to PlayerDetails
 
 ### More Screen
 
-- [ ] **MORE-01**: User can see a list of 9 navigation items in the More tab
-- [ ] **MORE-02**: User can tap "About Us" to open the about page in browser
-- [ ] **MORE-03**: User can tap "Donate" to open the donation page in browser
-- [ ] **MORE-04**: User can tap "Terms of Use" to open terms page in browser
-- [ ] **MORE-05**: User can tap "Privacy Policy" to open privacy page in browser
-- [ ] **MORE-06**: User can tap "Write to Us" to open email client with pre-filled recipient and subject
-- [ ] **MORE-07**: User can tap "Check Facebook" to open Facebook page in browser
-- [ ] **MORE-08**: User can tap "Check Instagram" to open Instagram profile in browser
-- [ ] **MORE-09**: User can tap "Change Tournament" to navigate to Tournament Chooser screen
-- [ ] **MORE-10**: User can tap "Buy Premium" to navigate to Premium screen
+- [x] **MORE-01**: User can see a list of 9 navigation items in the More tab
+- [x] **MORE-02**: User can tap "About Us" to open the about page in browser
+- [x] **MORE-03**: User can tap "Donate" to open the donation page in browser
+- [x] **MORE-04**: User can tap "Terms of Use" to open terms page in browser
+- [x] **MORE-05**: User can tap "Privacy Policy" to open privacy page in browser
+- [x] **MORE-06**: User can tap "Write to Us" to open email client with pre-filled recipient and subject
+- [x] **MORE-07**: User can tap "Check Facebook" to open Facebook page in browser
+- [x] **MORE-08**: User can tap "Check Instagram" to open Instagram profile in browser
+- [x] **MORE-09**: User can tap "Change Tournament" to navigate to Tournament Chooser screen
+- [x] **MORE-10**: User can tap "Buy Premium" to navigate to Premium screen
 
 ### Tournament Chooser
 
@@ -73,17 +73,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SLDR-03 | Phase 6 | Complete |
 | SLDR-04 | Phase 6 | Complete |
 | SLDR-05 | Phase 6 | Complete |
-| SLDR-06 | Phase 6 | Pending |
-| MORE-01 | Phase 7 | Pending |
-| MORE-02 | Phase 7 | Pending |
-| MORE-03 | Phase 7 | Pending |
-| MORE-04 | Phase 7 | Pending |
-| MORE-05 | Phase 7 | Pending |
-| MORE-06 | Phase 7 | Pending |
-| MORE-07 | Phase 7 | Pending |
-| MORE-08 | Phase 7 | Pending |
-| MORE-09 | Phase 7 | Pending |
-| MORE-10 | Phase 7 | Pending |
+| SLDR-06 | Phase 6 | Complete |
+| MORE-01 | Phase 7 | Complete |
+| MORE-02 | Phase 7 | Complete |
+| MORE-03 | Phase 7 | Complete |
+| MORE-04 | Phase 7 | Complete |
+| MORE-05 | Phase 7 | Complete |
+| MORE-06 | Phase 7 | Complete |
+| MORE-07 | Phase 7 | Complete |
+| MORE-08 | Phase 7 | Complete |
+| MORE-09 | Phase 7 | Complete |
+| MORE-10 | Phase 7 | Complete |
 | TRNT-01 | Phase 7 | Pending |
 | TRNT-02 | Phase 7 | Pending |
 | TRNT-03 | Phase 7 | Pending |

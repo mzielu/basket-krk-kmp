@@ -2,16 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Season Leaders, More & Premium
-status: planning
-stopped_at: Phase 7 planned (2 plans, verified)
-last_updated: "2026-03-19T18:58:34.575Z"
-last_activity: 2026-03-18 — v1.1 roadmap created (Phases 6-8)
+status: executing
+stopped_at: "Completed 07-01-PLAN.md"
+last_updated: "2026-03-19T19:19:12Z"
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 4
-  completed_plans: 2
-  percent: 59
+  completed_plans: 3
 ---
 
 # Project State
@@ -21,16 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-18)
 
 **Core value:** Users can drill into any player or team to see detailed game logs, statistics, and records
-**Current focus:** Phase 6 — Season Leaders
+**Current focus:** Phase 07 — More Screen & Tournament Chooser
 
 ## Current Position
 
-Phase: 6 of 8 (Season Leaders)
-Plan: 0 of 2 in current phase
-Status: Ready to plan
-Last activity: 2026-03-18 — v1.1 roadmap created (Phases 6-8)
-
-Progress: [███████████░░░░░░░░░] 59% (v1.0 shipped, v1.1 starting)
+Phase: 07 (More Screen & Tournament Chooser) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -52,6 +46,7 @@ Progress: [███████████░░░░░░░░░] 59% (v1
 *v1.1 metrics will accumulate during execution*
 | Phase 06-season-leaders P01 | 1 | 2 tasks | 2 files |
 | Phase 06-season-leaders P02 | 8 | 2 tasks | 6 files |
+| Phase 07-more P01 | 8min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -70,6 +65,8 @@ Key decisions from v1.0 relevant to v1.1:
 - [Phase 06-season-leaders]: No direct fetchLeaders in fetchInitData — reactive collector fires when selectedLeague is set, keeping trigger logic in one place
 - [Phase 06-season-leaders]: SeasonLeaderItem additional info is data-driven via null checks on made/ats (not category enum) — backend populates made+ats for shooting categories
 - [Phase 06-season-leaders]: Category dropdown uses LeagueStatLeaderOption.entries directly as static list — no VM state needed for options
+- [Phase 07-more P01]: Screen.TournamentChooser composable entry is a placeholder Box — Plan 02 will replace it with real TournamentChooserScreen
+- [Phase 07-more P01]: PremiumScreen is a placeholder (Coming soon) — full premium feature deferred to Phase 08
 
 ### Pending Todos
 
@@ -82,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T18:58:34.573Z
-Stopped at: Phase 7 planned (2 plans, verified)
-Resume file: .planning/phases/07-more-screen-tournament-chooser/07-01-PLAN.md
+Last session: 2026-03-19T19:19:12Z
+Stopped at: Completed 07-01-PLAN.md
+Resume file: .planning/phases/07-more-screen-tournament-chooser/07-02-PLAN.md
