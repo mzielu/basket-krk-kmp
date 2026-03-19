@@ -27,12 +27,12 @@ Users can drill into any player or team to see detailed game logs, statistics, a
 - ✓ Team records: filtered by range and stat category — v1.0
 - ✓ Full navigation integration: all existing screens link to PlayerDetails/TeamDetails — v1.0
 - ✓ Search results navigate to PlayerDetails/TeamDetails — v1.0
+- ✓ Season Leaders screen with season/league/category filtering and player navigation — v1.1 Phase 6
+- ✓ MoreScreen with all 9 items (Tournament Chooser, About Us, Donate, Premium, Terms, Privacy, Email, Facebook, Instagram) — v1.1 Phase 7
+- ✓ Tournament Chooser screen for switching between tournaments — v1.1 Phase 7
 
 ### Active
 
-- [ ] Season Leaders screen with season/league/category filtering and player navigation
-- [ ] MoreScreen with all 9 items (Tournament Chooser, About Us, Donate, Premium, Terms, Privacy, Email, Facebook, Instagram)
-- [ ] Tournament Chooser screen for switching between tournaments
 - [ ] Premium/subscription screen with in-app purchase integration
 - [ ] Premium gating on All-Time Leaders pagination (page 3+)
 
@@ -51,8 +51,9 @@ Users can drill into any player or team to see detailed game logs, statistics, a
 - **Tech stack**: KMP 2.2.21, Compose Multiplatform 1.9.3, Ktor 3.3.3, Koin 4.1.1, Arrow 2.2.0, Coil 3.3.0
 - **API**: Backend at http://130.61.230.255:8000/ — 12 endpoints integrated (4 player, 4 team, 4 existing)
 - **Architecture**: Clean Architecture (domain/data/presentation) with MVVM + StateFlow
-- **Shared components**: `MatchDetailsTeamTable`, `StatDisplayTypeToggle`, `SortableTopRowCell`, `DropdownFormField`, `ViewStateData`
-- **Source of truth**: Flutter app at `~/Documents/Development/flutter/basket_krk` — KMP now has feature parity on PlayerDetails, TeamDetails, and navigation
+- **Shared components**: `MatchDetailsTeamTable`, `StatDisplayTypeToggle`, `SortableTopRowCell`, `DropdownFormField`, `ViewStateData`, `NavigationItem`
+- **New in v1.1**: `TournamentProvider` (multiplatform-settings persistence), `MoreConstants` (URL constants), dynamic `TRNMT` HTTP header
+- **Source of truth**: Flutter app at `~/Documents/Development/flutter/basket_krk` — KMP now has feature parity on PlayerDetails, TeamDetails, navigation, Season Leaders, MoreScreen, and Tournament Chooser
 
 ## Constraints
 
@@ -84,4 +85,4 @@ Users can drill into any player or team to see detailed game logs, statistics, a
 - Premium gating on All-Time Leaders pagination
 
 ---
-*Last updated: 2026-03-18 after v1.1 milestone start*
+*Last updated: 2026-03-19 after Phase 7 (More Screen & Tournament Chooser) complete*
