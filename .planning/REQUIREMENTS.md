@@ -31,9 +31,9 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 ### Tournament Chooser
 
-- [ ] **TRNT-01**: User can see a list of available tournaments
-- [ ] **TRNT-02**: User can select a tournament to switch the active tournament
-- [ ] **TRNT-03**: App updates the API tournament header after switching and reloads data
+- [x] **TRNT-01**: User can see a list of available tournaments
+- [x] **TRNT-02**: User can select a tournament to switch the active tournament
+- [x] **TRNT-03**: App updates the API tournament header after switching and reloads data
 
 ### Premium
 
@@ -84,9 +84,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MORE-08 | Phase 7 | Complete |
 | MORE-09 | Phase 7 | Complete |
 | MORE-10 | Phase 7 | Complete |
-| TRNT-01 | Phase 7 | Pending |
-| TRNT-02 | Phase 7 | Pending |
-| TRNT-03 | Phase 7 | Pending |
+| TRNT-01 | Phase 7 | Complete |
+| TRNT-02 | Phase 7 | Complete |
+| TRNT-03 | Phase 7 | Complete |
 | PREM-01 | Phase 8 | Pending |
 | PREM-02 | Phase 8 | Pending |
 | PREM-03 | Phase 8 | Pending |
@@ -101,4 +101,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-18*
-*Last updated: 2026-03-18 after roadmap creation (Phases 6-8)*
+*Last updated: 2026-03-19 after Phase 07 Plan 02 completion (TRNT-01, TRNT-02, TRNT-03 complete)*

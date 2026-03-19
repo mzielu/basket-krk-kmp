@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Season Leaders, More & Premium
 status: executing
-stopped_at: "Completed 07-01-PLAN.md"
-last_updated: "2026-03-19T19:19:12Z"
+stopped_at: "Completed 07-02-PLAN.md"
+last_updated: "2026-03-19T19:45:00Z"
 progress:
   total_phases: 3
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
 ---
 
 # Project State
@@ -23,8 +23,8 @@ See: .planning/PROJECT.md (updated 2026-03-18)
 
 ## Current Position
 
-Phase: 07 (More Screen & Tournament Chooser) — EXECUTING
-Plan: 2 of 2
+Phase: 07 (More Screen & Tournament Chooser) — COMPLETE
+Plan: 2 of 2 (complete)
 
 ## Performance Metrics
 
@@ -47,6 +47,7 @@ Plan: 2 of 2
 | Phase 06-season-leaders P01 | 1 | 2 tasks | 2 files |
 | Phase 06-season-leaders P02 | 8 | 2 tasks | 6 files |
 | Phase 07-more P01 | 8min | 2 tasks | 6 files |
+| Phase 07-more P02 | 20min | 2 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -67,6 +68,9 @@ Key decisions from v1.0 relevant to v1.1:
 - [Phase 06-season-leaders]: Category dropdown uses LeagueStatLeaderOption.entries directly as static list — no VM state needed for options
 - [Phase 07-more P01]: Screen.TournamentChooser composable entry is a placeholder Box — Plan 02 will replace it with real TournamentChooserScreen
 - [Phase 07-more P01]: PremiumScreen is a placeholder (Coming soon) — full premium feature deferred to Phase 08
+- [Phase 07-more P02]: TournamentRepository uses non-suspend functions — Settings API (SharedPreferences/NSUserDefaults) is synchronous
+- [Phase 07-more P02]: HttpClientFactory reads tournament at construction time; full app restart via popUpTo(0)+inclusive=true recreates Koin singleton with fresh TRNMT header
+- [Phase 07-more P02]: MutableSharedFlow(extraBufferCapacity=1) used for RestartApp effect to prevent event loss
 
 ### Pending Todos
 
@@ -75,10 +79,9 @@ None yet.
 ### Blockers/Concerns
 
 - [Phase 8]: Premium requires platform-specific billing (BillingClient on Android, StoreKit on iOS) — expect KMP expect/actual setup
-- [Phase 7]: Tournament Chooser needs API endpoint investigation before planning
 
 ## Session Continuity
 
-Last session: 2026-03-19T19:19:12Z
-Stopped at: Completed 07-01-PLAN.md
-Resume file: .planning/phases/07-more-screen-tournament-chooser/07-02-PLAN.md
+Last session: 2026-03-19T19:45:00Z
+Stopped at: Completed 07-02-PLAN.md (Phase 07 complete)
+Resume file: .planning/phases/08-premium/ (next phase)
