@@ -28,6 +28,10 @@ import com.mzs.basket_krk.domain.usecase.GetTeamResults
 import com.mzs.basket_krk.domain.usecase.GetTeamResultsUseCase
 import com.mzs.basket_krk.domain.usecase.GetTeamRoster
 import com.mzs.basket_krk.domain.usecase.GetTeamRosterUseCase
+import com.mzs.basket_krk.domain.usecase.GetCurrentTournament
+import com.mzs.basket_krk.domain.usecase.GetCurrentTournamentUseCase
+import com.mzs.basket_krk.domain.usecase.SetCurrentTournament
+import com.mzs.basket_krk.domain.usecase.SetCurrentTournamentUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatches
 import com.mzs.basket_krk.domain.usecase.GetMatchesUseCase
 import com.mzs.basket_krk.domain.usecase.GetPlatform
@@ -43,6 +47,7 @@ import com.mzs.basket_krk.presentation.screens.main.matches.MatchesViewModel
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.BaseMatchesPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.MatchesPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.more.MoreViewModel
+import com.mzs.basket_krk.presentation.screens.tournamentchooser.TournamentChooserViewModel
 import com.mzs.basket_krk.presentation.screens.main.search.SearchViewModel
 import com.mzs.basket_krk.presentation.screens.main.search.pagination.BaseSearchItemsPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.search.pagination.SearchItemsPagingSourceFactory
@@ -79,6 +84,8 @@ val presentationModule = module {
     single<GetTeamResults> { GetTeamResultsUseCase(get()) }
     single<GetTeamRoster> { GetTeamRosterUseCase(get()) }
     single<GetTeamRecords> { GetTeamRecordsUseCase(get()) }
+    single<GetCurrentTournament> { GetCurrentTournamentUseCase(get()) }
+    single<SetCurrentTournament> { SetCurrentTournamentUseCase(get()) }
 
     // data source factories
     single<BaseMatchesPagingSourceFactory> { MatchesPagingSourceFactory(get()) }
@@ -96,4 +103,5 @@ val presentationModule = module {
     viewModelOf(::AllTimeLeadersViewModel)
     viewModelOf(::StandingsViewModel)
     viewModelOf(::SeasonLeadersViewModel)
+    viewModelOf(::TournamentChooserViewModel)
 }

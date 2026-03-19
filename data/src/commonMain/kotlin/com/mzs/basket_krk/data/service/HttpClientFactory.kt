@@ -1,6 +1,7 @@
 package com.mzs.basket_krk.data.service
 
 import com.mzs.basket_krk.data.dto.ErrorDto
+import com.mzs.basket_krk.data.tournament.TournamentProvider
 import com.mzs.basket_krk.domain.model.Failure
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -18,7 +19,7 @@ import kotlinx.serialization.json.Json
 
 expect fun platformEngine(): HttpClientEngine
 
-class HttpClientFactory {
+class HttpClientFactory(private val tournamentProvider: TournamentProvider) {
     fun create(): HttpClient = HttpClient(platformEngine()) {
         install(ContentNegotiation) {
             json(Json { ignoreUnknownKeys = true })
@@ -26,7 +27,7 @@ class HttpClientFactory {
 
         defaultRequest {
             contentType(ContentType.Application.Json)
-            header("TRNMT", "mba")
+            header("TRNMT", tournamentProvider.getCurrentKey())
             header("OS", "android")
             header("APP-VERSION", "100")
         }

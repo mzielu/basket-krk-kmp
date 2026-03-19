@@ -72,6 +72,9 @@ kotlin {
                 // arrow
                 implementation(libs.arrow.core)
 
+                // multiplatform-settings
+                implementation(libs.multiplatform.settings.no.arg)
+
                 // ktor
                 implementation("io.ktor:ktor-client-core:3.3.3")
                 implementation("io.ktor:ktor-client-content-negotiation:3.3.3")

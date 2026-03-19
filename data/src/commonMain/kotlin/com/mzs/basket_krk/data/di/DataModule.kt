@@ -1,6 +1,8 @@
 package com.mzs.basket_krk.data.di
 
 import com.mzs.basket_krk.data.repository.LeagueRepositoryImpl
+import com.mzs.basket_krk.data.repository.TournamentRepositoryImpl
+import com.mzs.basket_krk.data.tournament.TournamentProvider
 import com.mzs.basket_krk.data.repository.MatchRepositoryImpl
 import com.mzs.basket_krk.data.repository.PlayerRepositoryImpl
 import com.mzs.basket_krk.data.repository.SearchRepositoryImpl
@@ -15,6 +17,7 @@ import com.mzs.basket_krk.data.service.NetworkSearchService
 import com.mzs.basket_krk.data.service.NetworkSeasonService
 import com.mzs.basket_krk.data.service.NetworkTeamService
 import com.mzs.basket_krk.domain.repository.LeagueRepository
+import com.mzs.basket_krk.domain.repository.TournamentRepository
 import com.mzs.basket_krk.domain.repository.MatchRepository
 import com.mzs.basket_krk.domain.repository.PlayerRepository
 import com.mzs.basket_krk.domain.repository.SearchRepository
@@ -29,7 +32,9 @@ import com.mzs.basket_krk.domain.service.TeamService
 import org.koin.dsl.module
 
 val dataModule = module {
-    single { ApiService(client = HttpClientFactory().create()) }
+    single { TournamentProvider() }
+    single<TournamentRepository> { TournamentRepositoryImpl(get()) }
+    single { ApiService(client = HttpClientFactory(get()).create()) }
 
     // services
     single<SeasonService> { NetworkSeasonService(get()) }
