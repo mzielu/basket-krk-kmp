@@ -43,6 +43,8 @@ fun MainScreen(
     openAllTimeLeaders: () -> Unit,
     openTables: () -> Unit,
     openLeagueLeaders: () -> Unit,
+    openTournamentChooser: () -> Unit,
+    openPremium: () -> Unit,
 ) {
     val selectedTab by viewModel.selectedTab.collectAsState()
 
@@ -64,8 +66,8 @@ fun MainScreen(
                 )
 
                 MainTab.MORE -> MoreScreen(
-                    onOpenPayments = {},
-                    onOpenTournamentChooser = {}
+                    onOpenPayments = openPremium,
+                    onOpenTournamentChooser = openTournamentChooser,
                 )
             }
         },

@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.navigation.Screen
+import com.mzs.basket_krk.presentation.screens.premium.PremiumScreen
 import com.mzs.basket_krk.presentation.screens.main.MainScreen
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersScreen
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.AllTimeLeadersViewModel
@@ -67,7 +69,13 @@ fun App() {
                         },
                         openLeagueLeaders = {
                             navController.navigate(Screen.SeasonLeaders)
-                        }
+                        },
+                        openTournamentChooser = {
+                            navController.navigate(Screen.TournamentChooser)
+                        },
+                        openPremium = {
+                            navController.navigate(Screen.Premium)
+                        },
                     )
                 }
 
@@ -134,6 +142,23 @@ fun App() {
                         viewModel = koinViewModel<SeasonLeadersViewModel>(),
                         onNavigateBack = { navController.popBackStack() },
                         onNavigateToPlayer = { navController.navigate(Screen.PlayerDetails(playerId = it)) },
+                    )
+                }
+
+                composable<Screen.TournamentChooser> {
+                    // TournamentChooserScreen will be added in Plan 02
+                    // For now, placeholder to make route compilable
+                    Box(
+                        modifier = Modifier.fillMaxSize().background(BasketKrkColors.DefaultBackground),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("Tournament Chooser — loading in Plan 02")
+                    }
+                }
+
+                composable<Screen.Premium> {
+                    PremiumScreen(
+                        onNavigateBack = { navController.popBackStack() },
                     )
                 }
             }
