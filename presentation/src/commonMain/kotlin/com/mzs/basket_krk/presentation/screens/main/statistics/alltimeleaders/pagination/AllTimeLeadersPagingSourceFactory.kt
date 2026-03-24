@@ -6,20 +6,26 @@ import com.mzs.basket_krk.domain.usecase.GetAllTimeLeaders
 import com.mzs.basket_krk.presentation.base.BasePagingSource
 
 class AllTimeLeadersPagingSourceFactory(
-    private val getAllTimeLeaders: GetAllTimeLeaders
+    private val getAllTimeLeaders: GetAllTimeLeaders,
 ) : BaseAllTimeLeadersPagingSourceFactory {
     override fun create(
         pageSize: Int,
-        statOption: AllTimeStatLeaderOption
+        statOption: AllTimeStatLeaderOption,
+        isPremium: Boolean,
     ): BasePagingSource<AllTimeLeader> {
         return AllTimeLeadersPagingSource(
             pageSize = pageSize,
             statOption = statOption,
-            getAllTimeLeaders = getAllTimeLeaders
+            isPremium = isPremium,
+            getAllTimeLeaders = getAllTimeLeaders,
         )
     }
 }
 
 interface BaseAllTimeLeadersPagingSourceFactory {
-    fun create(pageSize: Int, statOption: AllTimeStatLeaderOption): BasePagingSource<AllTimeLeader>
+    fun create(
+        pageSize: Int,
+        statOption: AllTimeStatLeaderOption,
+        isPremium: Boolean,
+    ): BasePagingSource<AllTimeLeader>
 }
