@@ -71,10 +71,10 @@ Plans:
   3. User with active premium sees a green confirmation on the Premium screen and has no pagination restriction on All-Time Leaders
   4. User without premium sees a premium indicator instead of page 3+ content in All-Time Leaders
   5. User can tap "Manage subscription" and is taken to the platform's subscription management page
-**Plans:** 3 plans
+**Plans:** 1/3 plans executed
 
 Plans:
-- [ ] 08-01-PLAN.md — Premium data layer: InAppPurchaseService interface, Android/iOS platform implementations, use cases, and DI wiring
+- [x] 08-01-PLAN.md — Premium data layer: InAppPurchaseService interface, Android/iOS platform implementations, use cases, and DI wiring
 - [ ] 08-02-PLAN.md — Premium screen UI: PremiumViewModel, subscribe/active card states, legal text, replacing placeholder
 - [ ] 08-03-PLAN.md — All-Time Leaders premium gating: PagingSource page 3+ gate, PremiumIndicatorCard, navigation to Premium
 
@@ -92,4 +92,4 @@ Phases execute in numeric order: 6 → 7 → 8
 | 5. Navigation Integration | v1.0 | 1/1 | Complete | 2026-03-17 |
 | 6. Season Leaders | 2/2 | Complete    | 2026-03-18 | - |
 | 7. More Screen & Tournament Chooser | v1.1 | 2/2 | Complete | 2026-03-19 |
-| 8. Premium | v1.1 | 0/3 | Not started | - |
+| 8. Premium | v1.1 | 1/3 | In Progress|  |

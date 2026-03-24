@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Season Leaders, More & Premium
-status: unknown
-stopped_at: Phase 8 context gathered
-last_updated: "2026-03-24T11:09:12.275Z"
+status: Ready to execute
+stopped_at: Completed 08-01-PLAN.md
+last_updated: "2026-03-24T12:08:21.429Z"
 progress:
   total_phases: 3
   completed_phases: 2
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 7
+  completed_plans: 5
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-18)
 
 **Core value:** Users can drill into any player or team to see detailed game logs, statistics, and records
-**Current focus:** Phase 07 — More Screen & Tournament Chooser
+**Current focus:** Phase 08 — premium
 
 ## Current Position
 
-Phase: 07 (More Screen & Tournament Chooser) — COMPLETE
-Plan: 2 of 2 (complete)
+Phase: 08 (premium) — EXECUTING
+Plan: 2 of 3
 
 ## Performance Metrics
 
@@ -48,6 +48,7 @@ Plan: 2 of 2 (complete)
 | Phase 06-season-leaders P02 | 8 | 2 tasks | 6 files |
 | Phase 07-more P01 | 8min | 2 tasks | 6 files |
 | Phase 07-more P02 | 20min | 2 tasks | 13 files |
+| Phase 08-premium P01 | 3min | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,9 @@ Key decisions from v1.0 relevant to v1.1:
 - [Phase 07-more P02]: TournamentRepository uses non-suspend functions — Settings API (SharedPreferences/NSUserDefaults) is synchronous
 - [Phase 07-more P02]: HttpClientFactory reads tournament at construction time; full app restart via popUpTo(0)+inclusive=true recreates Koin singleton with fresh TRNMT header
 - [Phase 07-more P02]: MutableSharedFlow(extraBufferCapacity=1) used for RestartApp effect to prevent event loss
+- [Phase 08-01]: setActivity(Any?) default no-op on InAppPurchaseService avoids composeApp depending on data module
+- [Phase 08-01]: IosInAppPurchaseService uses StoreKit 1 (SKPaymentQueue/SKProductsRequest) due to StoreKit 2 cinterop complexity
+- [Phase 08-01]: BuySubscription uses SuspendInOutUseCase<String, Either<Failure,Unit>> to preserve purchase failure result
 
 ### Pending Todos
 
@@ -82,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T11:09:12.271Z
-Stopped at: Phase 8 context gathered
-Resume file: .planning/phases/08-premium/08-CONTEXT.md
+Last session: 2026-03-24T12:08:21.426Z
+Stopped at: Completed 08-01-PLAN.md
+Resume file: None
