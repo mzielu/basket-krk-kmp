@@ -95,6 +95,7 @@ kotlin {
                 // dependencies declared in commonMain.
 
                 implementation("io.ktor:ktor-client-okhttp:3.3.3")
+                implementation("com.android.billingclient:billing-ktx:7.1.1")
             }
         }
 

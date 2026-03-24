@@ -23,12 +23,18 @@ import com.mzs.basket_krk.domain.repository.PlayerRepository
 import com.mzs.basket_krk.domain.repository.SearchRepository
 import com.mzs.basket_krk.domain.repository.SeasonRepository
 import com.mzs.basket_krk.domain.repository.TeamRepository
+import com.mzs.basket_krk.data.service.createInAppPurchaseService
+import com.mzs.basket_krk.domain.service.InAppPurchaseService
 import com.mzs.basket_krk.domain.service.LeagueService
 import com.mzs.basket_krk.domain.service.MatchService
 import com.mzs.basket_krk.domain.service.PlayerService
 import com.mzs.basket_krk.domain.service.SearchService
 import com.mzs.basket_krk.domain.service.SeasonService
 import com.mzs.basket_krk.domain.service.TeamService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import org.koin.dsl.module
 
 val dataModule = module {
@@ -51,4 +57,12 @@ val dataModule = module {
     single<PlayerRepository> { PlayerRepositoryImpl(get()) }
     single<TeamService> { NetworkTeamService(get()) }
     single<TeamRepository> { TeamRepositoryImpl(get()) }
+
+    single<InAppPurchaseService>(createdAtStart = true) {
+        createInAppPurchaseService().also { service ->
+            CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+                service.initialize()
+            }
+        }
+    }
 }

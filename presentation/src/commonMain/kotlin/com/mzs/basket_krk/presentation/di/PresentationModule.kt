@@ -28,8 +28,14 @@ import com.mzs.basket_krk.domain.usecase.GetTeamResults
 import com.mzs.basket_krk.domain.usecase.GetTeamResultsUseCase
 import com.mzs.basket_krk.domain.usecase.GetTeamRoster
 import com.mzs.basket_krk.domain.usecase.GetTeamRosterUseCase
+import com.mzs.basket_krk.domain.usecase.BuySubscription
+import com.mzs.basket_krk.domain.usecase.BuySubscriptionUseCase
 import com.mzs.basket_krk.domain.usecase.GetCurrentTournament
 import com.mzs.basket_krk.domain.usecase.GetCurrentTournamentUseCase
+import com.mzs.basket_krk.domain.usecase.GetPremiumProducts
+import com.mzs.basket_krk.domain.usecase.GetPremiumProductsUseCase
+import com.mzs.basket_krk.domain.usecase.ObservePremiumActive
+import com.mzs.basket_krk.domain.usecase.ObservePremiumActiveUseCase
 import com.mzs.basket_krk.domain.usecase.SetCurrentTournament
 import com.mzs.basket_krk.domain.usecase.SetCurrentTournamentUseCase
 import com.mzs.basket_krk.domain.usecase.GetMatches
@@ -86,6 +92,9 @@ val presentationModule = module {
     single<GetTeamRecords> { GetTeamRecordsUseCase(get()) }
     single<GetCurrentTournament> { GetCurrentTournamentUseCase(get()) }
     single<SetCurrentTournament> { SetCurrentTournamentUseCase(get()) }
+    single<GetPremiumProducts> { GetPremiumProductsUseCase(get()) }
+    single<BuySubscription> { BuySubscriptionUseCase(get()) }
+    single<ObservePremiumActive> { ObservePremiumActiveUseCase(get()) }
 
     // data source factories
     single<BaseMatchesPagingSourceFactory> { MatchesPagingSourceFactory(get()) }
