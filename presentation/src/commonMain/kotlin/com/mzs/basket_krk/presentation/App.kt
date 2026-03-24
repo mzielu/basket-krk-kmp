@@ -15,6 +15,7 @@ import androidx.navigation.toRoute
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
 import com.mzs.basket_krk.presentation.navigation.Screen
 import com.mzs.basket_krk.presentation.screens.premium.PremiumScreen
+import com.mzs.basket_krk.presentation.screens.premium.PremiumViewModel
 import com.mzs.basket_krk.presentation.screens.tournamentchooser.TournamentChooserScreen
 import com.mzs.basket_krk.presentation.screens.tournamentchooser.TournamentChooserViewModel
 import com.mzs.basket_krk.presentation.screens.main.MainScreen
@@ -160,6 +161,7 @@ fun App() {
 
                 composable<Screen.Premium> {
                     PremiumScreen(
+                        viewModel = koinViewModel<PremiumViewModel>(),
                         onNavigateBack = { navController.popBackStack() },
                     )
                 }
