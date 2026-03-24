@@ -26,7 +26,7 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
 
 - [x] **Phase 6: Season Leaders** — Full data layer and screen with filtering and player navigation (completed 2026-03-18)
 - [x] **Phase 7: More Screen & Tournament Chooser** — Complete MoreScreen with 9 items including Tournament Chooser sub-screen (completed 2026-03-19)
-- [ ] **Phase 8: Premium** — In-app purchase integration, premium screen, and All-Time Leaders gating
+- [x] **Phase 8: Premium** — In-app purchase integration, premium screen, and All-Time Leaders gating (completed 2026-03-24)
 
 ## Phase Details
 
@@ -71,12 +71,12 @@ Plans:
   3. User with active premium sees a green confirmation on the Premium screen and has no pagination restriction on All-Time Leaders
   4. User without premium sees a premium indicator instead of page 3+ content in All-Time Leaders
   5. User can tap "Manage subscription" and is taken to the platform's subscription management page
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 - [x] 08-01-PLAN.md — Premium data layer: InAppPurchaseService interface, Android/iOS platform implementations, use cases, and DI wiring
 - [x] 08-02-PLAN.md — Premium screen UI: PremiumViewModel, subscribe/active card states, legal text, replacing placeholder
-- [ ] 08-03-PLAN.md — All-Time Leaders premium gating: PagingSource page 3+ gate, PremiumIndicatorCard, navigation to Premium
+- [x] 08-03-PLAN.md — All-Time Leaders premium gating: PagingSource page 3+ gate, PremiumIndicatorCard, navigation to Premium
 
 ## Progress
 
@@ -92,4 +92,4 @@ Phases execute in numeric order: 6 → 7 → 8
 | 5. Navigation Integration | v1.0 | 1/1 | Complete | 2026-03-17 |
 | 6. Season Leaders | 2/2 | Complete    | 2026-03-18 | - |
 | 7. More Screen & Tournament Chooser | v1.1 | 2/2 | Complete | 2026-03-19 |
-| 8. Premium | v1.1 | 2/3 | In Progress|  |
+| 8. Premium | v1.1 | 3/3 | Complete   | 2026-03-24 |

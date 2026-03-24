@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Season Leaders, More & Premium
-status: Ready to execute
-stopped_at: Completed 08-02-PLAN.md
-last_updated: "2026-03-24T12:13:18.197Z"
+status: Phase complete — ready for verification
+stopped_at: Completed 08-03-PLAN.md
+last_updated: "2026-03-24T12:14:17.272Z"
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 7
-  completed_plans: 6
+  completed_plans: 7
 ---
 
 # Project State
@@ -50,6 +50,7 @@ Plan: 3 of 3
 | Phase 07-more P02 | 20min | 2 tasks | 13 files |
 | Phase 08-premium P01 | 3min | 2 tasks | 12 files |
 | Phase 08-premium P02 | 2min | 2 tasks | 4 files |
+| Phase 08-premium P03 | 8 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,8 @@ Key decisions from v1.0 relevant to v1.1:
 - [Phase 08-01]: BuySubscription uses SuspendInOutUseCase<String, Either<Failure,Unit>> to preserve purchase failure result
 - [Phase 08-premium]: PremiumViewState.isPremiumActive defaults to true (generous default) — user sees active state before IAP status resolves
 - [Phase 08-premium]: subscriptionManagementUrl computed on PremiumViewState maps Platform enum to platform-specific subscription management URL
+- [Phase 08-premium]: PagingSource intercept at fetchData page >= 3 returns PageableData.empty() to signal end-of-pagination without exposing premium logic to BasePagingSource
+- [Phase 08-premium]: combine(statOptionFlow, isPremiumFlow) + distinctUntilChanged recreates Pager when either filter or premium state changes — handles premium upgrade mid-session
 
 ### Pending Todos
 
@@ -89,6 +92,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T12:13:18.194Z
-Stopped at: Completed 08-02-PLAN.md
+Last session: 2026-03-24T12:14:17.269Z
+Stopped at: Completed 08-03-PLAN.md
 Resume file: None
