@@ -97,8 +97,8 @@ kotlin {
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
 
-                implementation("io.ktor:ktor-client-okhttp:3.3.3")
-                implementation("com.android.billingclient:billing-ktx:7.1.1")
+                implementation("io.ktor:ktor-client-okhttp:3.4.1")
+                implementation("com.android.billingclient:billing-ktx:8.3.0")
             }
         }
 

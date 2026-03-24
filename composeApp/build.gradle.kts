@@ -22,6 +22,7 @@ kotlin {
         androidMain.dependencies {
             implementation(projects.shared)
             implementation(projects.presentation)
+            implementation(projects.domain)
 
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)

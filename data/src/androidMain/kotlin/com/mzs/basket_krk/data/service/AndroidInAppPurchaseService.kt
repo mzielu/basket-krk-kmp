@@ -12,11 +12,15 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
+import com.android.billingclient.api.acknowledgePurchase
+import com.android.billingclient.api.queryProductDetails
+import com.android.billingclient.api.queryPurchasesAsync
 import com.mzs.basket_krk.domain.model.Failure
 import com.mzs.basket_krk.domain.model.PremiumProduct
 import com.mzs.basket_krk.domain.service.InAppPurchaseService
@@ -68,9 +72,13 @@ class AndroidInAppPurchaseService(
 
     override suspend fun initialize() {
         Logger.d("InAppPurchaseService: initializing on Android...")
+        val pendingPurchasesParams = PendingPurchasesParams.newBuilder()
+            .enableOneTimeProducts()
+            .enablePrepaidPlans()
+            .build()
         val client = BillingClient.newBuilder(context)
             .setListener(purchasesUpdatedListener)
-            .enablePendingPurchases()
+            .enablePendingPurchases(pendingPurchasesParams)
             .build()
         billingClient = client
 
@@ -79,10 +87,10 @@ class AndroidInAppPurchaseService(
                 override fun onBillingSetupFinished(result: BillingResult) {
                     if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                         Logger.d("InAppPurchaseService: billing setup finished OK")
-                        if (continuation.isActive) continuation.resume(Unit) {}
+                        if (continuation.isActive) continuation.resume(Unit, null)
                     } else {
                         Logger.e("InAppPurchaseService: billing setup failed: ${result.debugMessage}")
-                        if (continuation.isActive) continuation.resume(Unit) {}
+                        if (continuation.isActive) continuation.resume(Unit, null)
                     }
                 }
 
