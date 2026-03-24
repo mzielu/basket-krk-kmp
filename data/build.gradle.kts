@@ -72,6 +72,9 @@ kotlin {
                 // arrow
                 implementation(libs.arrow.core)
 
+                // logging
+                implementation(libs.kermit)
+
                 // multiplatform-settings
                 implementation(libs.multiplatform.settings.no.arg)
 

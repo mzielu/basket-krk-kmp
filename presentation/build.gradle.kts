@@ -39,7 +39,7 @@ kotlin {
             // navigation
             implementation(libs.navigation.compose)
 
-            implementation("co.touchlab:kermit:2.0.8")
+            implementation(libs.kermit)
 
             // coil
             implementation(libs.coil.compose)

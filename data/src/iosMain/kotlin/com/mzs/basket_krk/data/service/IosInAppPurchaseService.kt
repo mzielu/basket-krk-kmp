@@ -1,6 +1,7 @@
 package com.mzs.basket_krk.data.service
 
 import arrow.core.Either
+import co.touchlab.kermit.Logger
 
 import com.mzs.basket_krk.domain.model.Failure
 import com.mzs.basket_krk.domain.model.PremiumProduct
@@ -60,17 +61,17 @@ class IosInAppPurchaseService : InAppPurchaseService {
             updatedTransactions.filterIsInstance<SKPaymentTransaction>().forEach { transaction ->
                 when (transaction.transactionState) {
                     SKPaymentTransactionStatePurchased -> {
-                        println("IosInAppPurchaseService: purchased!")
+                        Logger.d("IosInAppPurchaseService: purchased!")
                         _premiumActive.value = true
                         queue.finishTransaction(transaction)
                     }
                     SKPaymentTransactionStateRestored -> {
-                        println("IosInAppPurchaseService: restored!")
+                        Logger.d("IosInAppPurchaseService: restored!")
                         _premiumActive.value = true
                         queue.finishTransaction(transaction)
                     }
                     SKPaymentTransactionStateFailed -> {
-                        println("IosInAppPurchaseService: purchase failed: ${transaction.error?.localizedDescription}")
+                        Logger.e("IosInAppPurchaseService: purchase failed: ${transaction.error?.localizedDescription}")
                         queue.finishTransaction(transaction)
                     }
                     else -> { /* pending or deferred */ }
@@ -80,7 +81,7 @@ class IosInAppPurchaseService : InAppPurchaseService {
     }
 
     override suspend fun initialize() {
-        println("IosInAppPurchaseService: initializing...")
+        Logger.d("IosInAppPurchaseService: initializing...")
         SKPaymentQueue.defaultQueue().addTransactionObserver(paymentObserver)
         restorePurchases()
     }
@@ -93,9 +94,9 @@ class IosInAppPurchaseService : InAppPurchaseService {
             // Give a brief window for the observer to receive restored transactions.
             delay(2000)
             // If observer set it to true during delay, keep it. Otherwise mark as not premium.
-            println("IosInAppPurchaseService: restore window complete, premium=${_premiumActive.value}")
+            Logger.d("IosInAppPurchaseService: restore window complete, premium=${_premiumActive.value}")
         } catch (e: Exception) {
-            println("IosInAppPurchaseService: restore failed: $e")
+            Logger.e("IosInAppPurchaseService: restore failed: $e")
         }
     }
 
