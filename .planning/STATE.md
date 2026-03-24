@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Season Leaders, More & Premium
 status: Ready to execute
-stopped_at: Completed 08-01-PLAN.md
-last_updated: "2026-03-24T12:08:21.429Z"
+stopped_at: Completed 08-02-PLAN.md
+last_updated: "2026-03-24T12:13:18.197Z"
 progress:
   total_phases: 3
   completed_phases: 2
   total_plans: 7
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-18)
 ## Current Position
 
 Phase: 08 (premium) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Plan: 2 of 3
 | Phase 07-more P01 | 8min | 2 tasks | 6 files |
 | Phase 07-more P02 | 20min | 2 tasks | 13 files |
 | Phase 08-premium P01 | 3min | 2 tasks | 12 files |
+| Phase 08-premium P02 | 2min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -75,6 +76,8 @@ Key decisions from v1.0 relevant to v1.1:
 - [Phase 08-01]: setActivity(Any?) default no-op on InAppPurchaseService avoids composeApp depending on data module
 - [Phase 08-01]: IosInAppPurchaseService uses StoreKit 1 (SKPaymentQueue/SKProductsRequest) due to StoreKit 2 cinterop complexity
 - [Phase 08-01]: BuySubscription uses SuspendInOutUseCase<String, Either<Failure,Unit>> to preserve purchase failure result
+- [Phase 08-premium]: PremiumViewState.isPremiumActive defaults to true (generous default) — user sees active state before IAP status resolves
+- [Phase 08-premium]: subscriptionManagementUrl computed on PremiumViewState maps Platform enum to platform-specific subscription management URL
 
 ### Pending Todos
 
@@ -86,6 +89,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T12:08:21.426Z
-Stopped at: Completed 08-01-PLAN.md
+Last session: 2026-03-24T12:13:18.194Z
+Stopped at: Completed 08-02-PLAN.md
 Resume file: None
