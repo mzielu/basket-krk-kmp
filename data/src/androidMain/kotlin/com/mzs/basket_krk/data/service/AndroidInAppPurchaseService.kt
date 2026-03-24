@@ -24,6 +24,7 @@ import com.android.billingclient.api.queryPurchasesAsync
 import com.mzs.basket_krk.domain.model.Failure
 import com.mzs.basket_krk.domain.model.PremiumProduct
 import com.mzs.basket_krk.domain.service.InAppPurchaseService
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -55,6 +56,7 @@ class AndroidInAppPurchaseService(
     private var billingClient: BillingClient? = null
     private var cachedProductDetails: ProductDetails? = null
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+    private val initialized = CompletableDeferred<Unit>()
 
     private val purchasesUpdatedListener = PurchasesUpdatedListener { billingResult, purchases ->
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
@@ -101,6 +103,7 @@ class AndroidInAppPurchaseService(
         }
 
         restorePurchases()
+        initialized.complete(Unit)
     }
 
     private suspend fun restorePurchases() {
@@ -128,6 +131,7 @@ class AndroidInAppPurchaseService(
     }
 
     override suspend fun getProducts(): Either<Failure, List<PremiumProduct>> {
+        initialized.await()
         val client = billingClient
             ?: return Either.Left(Failure.UnknownError(Throwable("BillingClient not initialized")))
         return try {
@@ -161,6 +165,7 @@ class AndroidInAppPurchaseService(
     }
 
     override suspend fun buySubscription(productId: String): Either<Failure, Unit> {
+        initialized.await()
         val client = billingClient
             ?: return Either.Left(Failure.UnknownError(Throwable("BillingClient not initialized")))
         val currentActivity = activity

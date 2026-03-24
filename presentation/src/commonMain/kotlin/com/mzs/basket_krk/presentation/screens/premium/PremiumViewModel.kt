@@ -51,7 +51,7 @@ class PremiumViewModel(
                     Logger.e("Error fetching premium products", error)
                     _viewState.update {
                         it.copy(
-                            error = null,
+                            error = error as? Failure,
                             isLoading = false,
                         )
                     }
