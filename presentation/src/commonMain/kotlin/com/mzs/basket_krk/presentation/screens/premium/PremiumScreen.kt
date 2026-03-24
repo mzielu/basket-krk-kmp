@@ -93,16 +93,13 @@ fun PremiumScreen(
                     retryAction = viewModel::onRetry,
                 )
                 else -> {
-                    val product = viewState.product
-                    if (product != null) {
-                        PremiumContent(
-                            product = product,
-                            isPremiumActive = viewState.isPremiumActive,
-                            platform = viewState.platform,
-                            subscriptionManagementUrl = viewState.subscriptionManagementUrl,
-                            onSubscribeClick = viewModel::onBuyClick,
-                        )
-                    }
+                    PremiumContent(
+                        product = viewState.product,
+                        isPremiumActive = viewState.isPremiumActive,
+                        platform = viewState.platform,
+                        subscriptionManagementUrl = viewState.subscriptionManagementUrl,
+                        onSubscribeClick = viewModel::onBuyClick,
+                    )
                 }
             }
         }
@@ -111,7 +108,7 @@ fun PremiumScreen(
 
 @Composable
 private fun PremiumContent(
-    product: PremiumProduct,
+    product: PremiumProduct?,
     isPremiumActive: Boolean,
     platform: Platform,
     subscriptionManagementUrl: String,
@@ -148,7 +145,7 @@ private fun PremiumContent(
 @Composable
 private fun SubscriptionCard(
     isPremiumActive: Boolean,
-    product: PremiumProduct,
+    product: PremiumProduct?,
     onSubscribeClick: () -> Unit,
     onManageClick: () -> Unit,
 ) {
@@ -175,15 +172,18 @@ private fun SubscriptionCard(
                     textAlign = TextAlign.Center,
                     color = Color.Gray,
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = product.formattedPriceAndPeriod,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                )
+                if (product != null) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = product.formattedPriceAndPeriod,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                }
                 Spacer(modifier = Modifier.height(24.dp))
                 ElevatedButton(
                     onClick = onSubscribeClick,
+                    enabled = product != null,
                     colors = ButtonDefaults.elevatedButtonColors(
                         containerColor = Color.White,
                         contentColor = BasketKrkColors.MainDark,

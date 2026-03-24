@@ -40,6 +40,7 @@ class PremiumViewModel(
             _viewState.update { it.copy(isLoading = true, error = null) }
             getProducts()
                 .onSuspendSuccess { products ->
+                    Logger.d("Premium products loaded: ${products.size}")
                     _viewState.update {
                         it.copy(
                             product = products.firstOrNull(),
@@ -50,7 +51,7 @@ class PremiumViewModel(
                     Logger.e("Error fetching premium products", error)
                     _viewState.update {
                         it.copy(
-                            error = error as? Failure,
+                            error = null,
                             isLoading = false,
                         )
                     }
