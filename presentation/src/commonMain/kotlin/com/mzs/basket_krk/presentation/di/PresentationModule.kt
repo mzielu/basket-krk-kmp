@@ -53,6 +53,7 @@ import com.mzs.basket_krk.presentation.screens.main.matches.MatchesViewModel
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.BaseMatchesPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.matches.pagination.MatchesPagingSourceFactory
 import com.mzs.basket_krk.presentation.screens.main.more.MoreViewModel
+import com.mzs.basket_krk.presentation.screens.premium.PremiumViewModel
 import com.mzs.basket_krk.presentation.screens.tournamentchooser.TournamentChooserViewModel
 import com.mzs.basket_krk.presentation.screens.main.search.SearchViewModel
 import com.mzs.basket_krk.presentation.screens.main.search.pagination.BaseSearchItemsPagingSourceFactory
@@ -113,4 +114,5 @@ val presentationModule = module {
     viewModelOf(::StandingsViewModel)
     viewModelOf(::SeasonLeadersViewModel)
     viewModelOf(::TournamentChooserViewModel)
+    viewModelOf(::PremiumViewModel)
 }
