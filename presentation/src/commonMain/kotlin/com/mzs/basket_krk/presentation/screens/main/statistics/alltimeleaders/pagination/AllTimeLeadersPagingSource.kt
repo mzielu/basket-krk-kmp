@@ -11,14 +11,18 @@ import com.mzs.basket_krk.presentation.base.BasePagingSource
 class AllTimeLeadersPagingSource(
     private val pageSize: Int,
     private val statOption: AllTimeStatLeaderOption,
-    private val getAllTimeLeaders: GetAllTimeLeaders
+    private val isPremium: Boolean,
+    private val getAllTimeLeaders: GetAllTimeLeaders,
 ) : BasePagingSource<AllTimeLeader>() {
     override suspend fun fetchData(page: Int): Either<Throwable, PageableData<AllTimeLeader>> {
+        if (!isPremium && page >= 3) {
+            return Either.Right(PageableData.empty())
+        }
         return getAllTimeLeaders.invoke(
             GetAllTimeLeadersUseCase.Input(
                 statOption = statOption,
                 page = page,
-                pageSize = pageSize
+                pageSize = pageSize,
             )
         )
     }

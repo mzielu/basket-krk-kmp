@@ -58,6 +58,7 @@ import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
 import com.mzs.basket_krk.presentation.base.ui.PaginationErrorItem
 import com.mzs.basket_krk.presentation.base.ui.PaginationLoadingIndicator
 import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.components.LeaderItem
+import com.mzs.basket_krk.presentation.screens.main.statistics.alltimeleaders.components.PremiumIndicatorCard
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -69,6 +70,7 @@ fun AllTimeLeadersScreen(
     viewModel: AllTimeLeadersViewModel = koinViewModel(),
     openPlayerDetails: (Int) -> Unit,
     onNavigateBack: () -> Unit,
+    onNavigateToPremium: () -> Unit,
 ) {
     val viewState by viewModel.viewState.collectAsState()
     val leadersPagingItems = viewModel.pagingFlow.collectAsLazyPagingItems()
@@ -82,6 +84,7 @@ fun AllTimeLeadersScreen(
         onRefresh = viewModel::onRefresh,
         onStatOptionChanged = viewModel::onStatOptionChanged,
         onNavigateBack = onNavigateBack,
+        onNavigateToPremium = onNavigateToPremium,
     )
 }
 
@@ -93,6 +96,7 @@ fun AllTimeLeadersContent(
     onNavigateBack: () -> Unit,
     onRefresh: () -> Unit,
     onStatOptionChanged: (AllTimeStatLeaderOption) -> Unit,
+    onNavigateToPremium: () -> Unit,
 ) {
     val showRefresh = leadersPagingItems.loadState.refresh == LoadState.Loading
 
@@ -191,6 +195,19 @@ fun AllTimeLeadersContent(
                                                     isLoading -> item { PaginationLoadingIndicator() }
                                                 }
                                             }
+
+                                            // Premium indicator — show when not premium and pagination has reached the end
+                                            if (!viewState.isPremiumActive &&
+                                                leadersPagingItems.loadState.append.endOfPaginationReached &&
+                                                leadersPagingItems.itemCount > 0
+                                            ) {
+                                                item {
+                                                    PremiumIndicatorCard(
+                                                        onUpgradeClick = onNavigateToPremium,
+                                                        modifier = Modifier.padding(horizontal = 8.dp),
+                                                    )
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -233,5 +250,6 @@ fun AllTimeLeadersContentPreview() {
         leadersPagingItems = lazyPagingItems,
         onNavigateBack = {},
         onStatOptionChanged = {},
+        onNavigateToPremium = {},
     )
 }
