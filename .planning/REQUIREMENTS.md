@@ -38,10 +38,10 @@ Requirements for this milestone. Each maps to roadmap phases.
 ### Premium
 
 - [ ] **PREM-01**: User can view the Premium screen showing subscription options with price and duration
-- [ ] **PREM-02**: User can purchase a subscription via platform-specific in-app purchase (Google Play / App Store)
+- [x] **PREM-02**: User can purchase a subscription via platform-specific in-app purchase (Google Play / App Store)
 - [ ] **PREM-03**: User can see active premium status with green confirmation when subscribed
 - [ ] **PREM-04**: User can tap "Manage subscription" to open platform subscription management
-- [ ] **PREM-05**: Premium status is checked and observed across the app (premium active stream)
+- [x] **PREM-05**: Premium status is checked and observed across the app (premium active stream)
 - [ ] **PREM-06**: All-Time Leaders pagination is gated at page 3+ for non-premium users (shows premium indicator)
 
 ## Future Requirements
@@ -88,10 +88,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TRNT-02 | Phase 7 | Complete |
 | TRNT-03 | Phase 7 | Complete |
 | PREM-01 | Phase 8 | Pending |
-| PREM-02 | Phase 8 | Pending |
+| PREM-02 | Phase 8 | Complete |
 | PREM-03 | Phase 8 | Pending |
 | PREM-04 | Phase 8 | Pending |
-| PREM-05 | Phase 8 | Pending |
+| PREM-05 | Phase 8 | Complete |
 | PREM-06 | Phase 8 | Pending |
 
 **Coverage:**
