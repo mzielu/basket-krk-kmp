@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import arrow.core.Either
-import co.touchlab.kermit.Logger
+
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -66,7 +66,7 @@ class AndroidInAppPurchaseService(
     }
 
     override suspend fun initialize() {
-        Logger.d("InAppPurchaseService: initializing on Android...")
+        println("InAppPurchaseService: initializing on Android...")
         val client = BillingClient.newBuilder(context)
             .setListener(purchasesUpdatedListener)
             .enablePendingPurchases()
@@ -77,16 +77,16 @@ class AndroidInAppPurchaseService(
             client.startConnection(object : BillingClientStateListener {
                 override fun onBillingSetupFinished(result: BillingResult) {
                     if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                        Logger.d("InAppPurchaseService: billing setup finished OK")
+                        println("InAppPurchaseService: billing setup finished OK")
                         if (continuation.isActive) continuation.resume(Unit) {}
                     } else {
-                        Logger.e("InAppPurchaseService: billing setup failed: ${result.debugMessage}")
+                        println("InAppPurchaseService: billing setup failed: ${result.debugMessage}")
                         if (continuation.isActive) continuation.resume(Unit) {}
                     }
                 }
 
                 override fun onBillingServiceDisconnected() {
-                    Logger.d("InAppPurchaseService: billing service disconnected")
+                    println("InAppPurchaseService: billing service disconnected")
                 }
             })
         }
@@ -106,14 +106,14 @@ class AndroidInAppPurchaseService(
                     purchase.purchaseState == Purchase.PurchaseState.PURCHASED
             }
             _premiumActive.value = hasPremium
-            Logger.d("InAppPurchaseService: restore complete, premium=$hasPremium")
+            println("InAppPurchaseService: restore complete, premium=$hasPremium")
 
             // Acknowledge any unacknowledged purchases
             result.purchasesList
                 .filter { it.purchaseState == Purchase.PurchaseState.PURCHASED && !it.isAcknowledged }
                 .forEach { purchase -> acknowledgePurchase(purchase) }
         } catch (e: Exception) {
-            Logger.e("InAppPurchaseService: restore failed", e)
+            println("InAppPurchaseService: restore failed: $e")
             // On failure, keep generous default (true) — matches Flutter behavior
         }
     }
@@ -189,7 +189,7 @@ class AndroidInAppPurchaseService(
 
     private fun handlePurchase(purchase: Purchase) {
         if (purchase.products.contains(PREMIUM_PRODUCT_ID)) {
-            Logger.d("InAppPurchaseService: premium purchased!")
+            println("InAppPurchaseService: premium purchased!")
             _premiumActive.value = true
             if (!purchase.isAcknowledged) {
                 scope.launch { acknowledgePurchase(purchase) }
@@ -204,9 +204,9 @@ class AndroidInAppPurchaseService(
                 .setPurchaseToken(purchase.purchaseToken)
                 .build()
             client.acknowledgePurchase(params)
-            Logger.d("InAppPurchaseService: purchase acknowledged")
+            println("InAppPurchaseService: purchase acknowledged")
         } catch (e: Exception) {
-            Logger.e("InAppPurchaseService: acknowledge failed", e)
+            println("InAppPurchaseService: acknowledge failed: $e")
         }
     }
 
