@@ -127,6 +127,9 @@ fun App() {
                             navController.navigate(Screen.PlayerDetails(playerId = it))
                         },
                         onNavigateBack = { navController.popBackStack() },
+                        onNavigateToPremium = {
+                            navController.navigate(Screen.Premium)
+                        },
                     )
                 }
 
