@@ -45,8 +45,8 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor3)
 
-            implementation("androidx.paging:paging-compose:3.4.0-beta01")
-            implementation("androidx.paging:paging-common:3.4.0-beta01")
+            implementation(libs.paging.compose)
+            implementation(libs.paging.common)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
