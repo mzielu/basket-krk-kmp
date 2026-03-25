@@ -67,7 +67,7 @@ import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
 import com.mzs.basket_krk.presentation.navigation.getWebLink
 import com.mzs.basket_krk.presentation.screens.matchdetails.components.MatchDetailsTeamTable
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MatchDetailsScreen(

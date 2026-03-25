@@ -48,7 +48,7 @@ kotlin {
                 // Add KMP dependencies here
 
                 // compose
-                implementation(compose.runtime)
+                implementation(libs.compose.runtime)
 
                 // koin
                 implementation(libs.koin.core)

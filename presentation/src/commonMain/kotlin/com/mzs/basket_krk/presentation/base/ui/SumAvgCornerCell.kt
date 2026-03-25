@@ -16,7 +16,7 @@ import basket_krk.presentation.generated.resources.table_corner_avg
 import basket_krk.presentation.generated.resources.table_corner_tot
 import com.mzs.basket_krk.domain.model.StatDisplayType
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SumAvgCornerCell(

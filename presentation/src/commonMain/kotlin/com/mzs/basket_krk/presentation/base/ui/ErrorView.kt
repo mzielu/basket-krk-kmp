@@ -29,7 +29,7 @@ import basket_krk.presentation.generated.resources.error_try_again
 import basket_krk.presentation.generated.resources.error_update
 import com.mzs.basket_krk.domain.model.Failure
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ErrorView(

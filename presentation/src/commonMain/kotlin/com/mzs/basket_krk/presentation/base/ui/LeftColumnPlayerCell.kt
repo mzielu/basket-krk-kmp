@@ -15,7 +15,7 @@ import com.mzs.basket_krk.datautils.PlayerFakeData
 import com.mzs.basket_krk.datautils.StatFakeData
 import com.mzs.basket_krk.domain.model.PlayerWithStat
 import com.mzs.basket_krk.presentation.base.drawTopBottomBorder
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun LeftColumnPlayerCell(

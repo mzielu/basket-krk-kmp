@@ -30,7 +30,7 @@ import com.mzs.basket_krk.presentation.base.ui.EmptyView
 import com.mzs.basket_krk.presentation.base.ui.ErrorView
 import com.mzs.basket_krk.presentation.base.ui.FullScreenLoader
 import com.mzs.basket_krk.presentation.screens.main.statistics.seasonleaders.components.SeasonLeaderItem
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

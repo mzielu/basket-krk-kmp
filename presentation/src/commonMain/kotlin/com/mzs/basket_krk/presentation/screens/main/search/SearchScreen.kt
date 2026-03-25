@@ -46,7 +46,7 @@ import com.mzs.basket_krk.presentation.base.ui.PaginationErrorItem
 import com.mzs.basket_krk.presentation.base.ui.PaginationLoadingIndicator
 import com.mzs.basket_krk.presentation.screens.main.search.components.SearchListItem
 import kotlinx.coroutines.flow.MutableStateFlow
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
