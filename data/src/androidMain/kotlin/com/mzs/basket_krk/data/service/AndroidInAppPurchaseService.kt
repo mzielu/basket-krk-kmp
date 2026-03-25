@@ -109,11 +109,16 @@ class AndroidInAppPurchaseService(
     private suspend fun restorePurchases() {
         val client = billingClient ?: return
         try {
-            val params = QueryPurchasesParams.newBuilder()
-                .setProductType(BillingClient.ProductType.SUBS)
-                .build()
-            val result = client.queryPurchasesAsync(params)
-            val hasPremium = result.purchasesList.any { purchase ->
+            // Check both SUBS and INAPP — product type depends on Play Console config
+            val allPurchases = mutableListOf<Purchase>()
+            for (type in listOf(BillingClient.ProductType.SUBS, BillingClient.ProductType.INAPP)) {
+                val params = QueryPurchasesParams.newBuilder()
+                    .setProductType(type)
+                    .build()
+                val result = client.queryPurchasesAsync(params)
+                allPurchases.addAll(result.purchasesList)
+            }
+            val hasPremium = allPurchases.any { purchase ->
                 purchase.products.contains(PREMIUM_PRODUCT_ID) &&
                     purchase.purchaseState == Purchase.PurchaseState.PURCHASED
             }
@@ -121,7 +126,7 @@ class AndroidInAppPurchaseService(
             Logger.d("InAppPurchaseService: restore complete, premium=$hasPremium")
 
             // Acknowledge any unacknowledged purchases
-            result.purchasesList
+            allPurchases
                 .filter { it.purchaseState == Purchase.PurchaseState.PURCHASED && !it.isAcknowledged }
                 .forEach { purchase -> acknowledgePurchase(purchase) }
         } catch (e: Exception) {
@@ -135,32 +140,44 @@ class AndroidInAppPurchaseService(
         val client = billingClient
             ?: return Either.Left(Failure.UnknownError(Throwable("BillingClient not initialized")))
         return try {
-            val productList = listOf(
-                QueryProductDetailsParams.Product.newBuilder()
-                    .setProductId(PREMIUM_PRODUCT_ID)
-                    .setProductType(BillingClient.ProductType.SUBS)
-                    .build()
-            )
-            val params = QueryProductDetailsParams.newBuilder()
-                .setProductList(productList)
-                .build()
-            val result = client.queryProductDetails(params)
-            if (result.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                val products = result.productDetailsList?.map { details ->
-                    cachedProductDetails = details
-                    PremiumProduct(
-                        id = details.productId,
-                        formattedPriceAndPeriod = details.priceAndPeriod(),
-                    )
-                } ?: emptyList()
-                Either.Right(products)
+            // Try SUBS first, then INAPP — Flutter's in_app_purchase queries both types
+            val subsResult = queryProductsByType(client, BillingClient.ProductType.SUBS)
+            val products = if (subsResult.isNotEmpty()) {
+                subsResult
             } else {
-                Either.Left(
-                    Failure.UnknownError(Throwable("Product query failed: ${result.billingResult.debugMessage}"))
-                )
+                queryProductsByType(client, BillingClient.ProductType.INAPP)
             }
+            Either.Right(products)
         } catch (e: Exception) {
             Either.Left(Failure.UnknownError(e))
+        }
+    }
+
+    private suspend fun queryProductsByType(
+        client: BillingClient,
+        productType: String,
+    ): List<PremiumProduct> {
+        val productList = listOf(
+            QueryProductDetailsParams.Product.newBuilder()
+                .setProductId(PREMIUM_PRODUCT_ID)
+                .setProductType(productType)
+                .build()
+        )
+        val params = QueryProductDetailsParams.newBuilder()
+            .setProductList(productList)
+            .build()
+        val result = client.queryProductDetails(params)
+        Logger.d("InAppPurchaseService: query $productType result: ${result.billingResult.responseCode}, products: ${result.productDetailsList?.size}")
+        return if (result.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            result.productDetailsList?.map { details ->
+                cachedProductDetails = details
+                PremiumProduct(
+                    id = details.productId,
+                    formattedPriceAndPeriod = details.priceAndPeriod(),
+                )
+            } ?: emptyList()
+        } else {
+            emptyList()
         }
     }
 
