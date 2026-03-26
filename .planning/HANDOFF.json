@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-03-26T11:04:43.809Z",
+  "phase": "08",
+  "phase_name": "premium",
+  "phase_dir": ".planning/phases/08-premium",
+  "plan": 3,
+  "task": 2,
+  "total_tasks": 6,
+  "status": "paused",
+  "completed_tasks": [
+    {"id": 1, "name": "08-01 T1: Domain contracts", "status": "done", "commit": "be4a584"},
+    {"id": 2, "name": "08-01 T2: Platform implementations + DI", "status": "done", "commit": "82072d0"},
+    {"id": 3, "name": "08-02 T1: PremiumViewModel", "status": "done", "commit": "8d97a49"},
+    {"id": 4, "name": "08-02 T2: PremiumScreen UI", "status": "done", "commit": "5148b14"},
+    {"id": 5, "name": "08-03 T1: PagingSource gate + ViewModel", "status": "done", "commit": "50a788e"},
+    {"id": 6, "name": "08-03 T2: PremiumIndicatorCard + Screen", "status": "done", "commit": "6a2530a"}
+  ],
+  "remaining_tasks": [],
+  "blockers": [
+    {"description": "PremiumScreen shows disabled Subscribe button — products load empty. BillingClient connects OK but getProducts() returns no results despite Flutter app working with same product ID. applicationIdSuffix was removed but still needs testing after clean install.", "type": "technical", "workaround": "Uninstall old debug app (com.mzs.basket_krk.debug), reinstall as com.mzs.basket_krk"}
+  ],
+  "human_actions_pending": [
+    {"action": "Uninstall old debug app and reinstall to pick up new package name (no .debug suffix)", "context": "applicationIdSuffix was removed so BillingClient can find products registered under com.mzs.basket_krk", "blocking": true},
+    {"action": "Test Premium screen product loading after clean install", "context": "Verify subscription card shows price/period from Google Play", "blocking": true},
+    {"action": "Run 5 human UAT items from 08-HUMAN-UAT.md on device", "context": "Purchase flows, pagination gate, manage subscription link — all require real device/sandbox", "blocking": false}
+  ],
+  "decisions": [
+    {"decision": "Override D-06: use StoreKit 1 instead of StoreKit 2 for iOS", "rationale": "StoreKit 2 Swift async/await APIs are hard to bridge to Kotlin via cinterop", "phase": "08"},
+    {"decision": "Query both SUBS and INAPP product types", "rationale": "Flutter's in_app_purchase queries all types; Play Console product type unknown at code time", "phase": "08"},
+    {"decision": "CompletableDeferred for BillingClient readiness", "rationale": "getProducts() was racing against async initialize(); now awaits completion", "phase": "08"},
+    {"decision": "Remove applicationIdSuffix .debug", "rationale": "BillingClient queries products for running app's package name; Flutter has no suffix", "phase": "08"}
+  ],
+  "uncommitted_files": [
+    ".planning/phases/08-premium/08-VERIFICATION.md"
+  ],
+  "next_action": "Uninstall old debug app, reinstall, verify Premium screen shows subscription product with price. Then run 5 human UAT items.",
+  "context_notes": "All 3 plans executed successfully (6/6 tasks). Verification passed 10/10 must-haves. Post-execution bug fixing session resolved: missing coroutines dep, missing Kermit dep, BillingClient 8.x API changes, BillingClient init race condition, both SUBS+INAPP query, applicationIdSuffix mismatch. All deps migrated to version catalog. User also bumped multiple library versions. Core issue remaining: test that products actually load on clean install with correct package name."
+}
