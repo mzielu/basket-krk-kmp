@@ -29,6 +29,8 @@ kotlin {
 
             // koin
             implementation(libs.koin.androidx.compose)
+
+            implementation("com.avsystem.cemmobile:cem-sdk-android-debug:1.0.0-SNAPSHOT")
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)

@@ -51,6 +51,10 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+
+        androidMain.dependencies {
+            implementation("com.avsystem.cemmobile:cem-sdk-android-debug:1.0.0-SNAPSHOT")
+        }
     }
 }
 

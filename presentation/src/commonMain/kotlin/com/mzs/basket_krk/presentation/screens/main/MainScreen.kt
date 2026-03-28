@@ -20,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.text.style.TextAlign
 import com.mzs.basket_krk.presentation.base.ui.ActionBar
 import com.mzs.basket_krk.presentation.base.ui.BasketKrkColors
@@ -54,10 +55,7 @@ fun MainScreen(
         contentFactory = { tab ->
             when (tab) {
                 MainTab.MATCHES -> MatchesScreen(openMatchDetails = openMatchDetails)
-                MainTab.SEARCH -> SearchScreen(
-                    openTeamDetails = openTeamDetails,
-                    openPlayerDetails = openPlayerDetails
-                )
+                MainTab.SEARCH -> TestSDK()
 
                 MainTab.STATS -> StatisticsScreen(
                     openTables = openTables,
